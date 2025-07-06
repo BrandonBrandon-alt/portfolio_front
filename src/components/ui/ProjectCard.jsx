@@ -1,74 +1,91 @@
 import React from 'react';
-import { motion } from "framer-motion";
-import { FaExternalLinkAlt, FaCodeBranch } from "react-icons/fa";
+import { motion } from 'framer-motion';
+import { FaReact, FaNodeJs, FaDatabase, FaGitAlt } from 'react-icons/fa';
+import Button from './Button';
+import './ProjectCard.css';
+import {
+    SiPostgresql, SiTailwindcss, SiMongodb,
+    SiDjango, SiPython, SiJavascript
+} from 'react-icons/si';
+
+// Mapeo de tecnologías a íconos
+const techIcons = {
+    React: <FaReact className="text-cyan-400 text-2xl md:text-3xl" />,
+    Node: <FaNodeJs className="text-green-500 text-2xl md:text-3xl" />,
+    PostgreSQL: <SiPostgresql className="text-blue-400 text-2xl md:text-3xl" />,
+    MongoDB: <SiMongodb className="text-green-600 text-2xl md:text-3xl" />,
+    Django: <SiDjango className="text-green-800 text-2xl md:text-3xl" />,
+    Tailwind: <SiTailwindcss className="text-sky-400 text-2xl md:text-3xl" />,
+    Git: <FaGitAlt className="text-orange-500 text-2xl md:text-3xl" />,
+    SQL: <FaDatabase className="text-gray-300 text-2xl md:text-3xl" />,
+    Python: <SiPython className="text-yellow-300 text-2xl md:text-3xl" />,
+    Javascript: <SiJavascript className="text-yellow-300 text-2xl md:text-3xl" />,
+};
 
 const ProjectCard = ({ project }) => {
+    const techList = typeof project.technologies === 'string'
+        ? project.technologies.split(',').map(t => t.trim())
+        : project.technologies || [];
+
     return (
         <motion.div
-            className="relative bg-[var(--color-background)]/50 border border-[var(--color-accent-jedi-blue)]/30 rounded-2xl overflow-hidden p-6 shadow-lg backdrop-blur-md group transition-all duration-300 hover:shadow-[0_0_20px_var(--color-accent-jedi-blue)]"
-            whileHover={{ scale: 1.03 }}
+            className="project-card-enhanced relative rounded-lg overflow-hidden p-6 backdrop-blur-sm transform transition-all duration-300 ease-in-out group"
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            whileHover={{
+                scale: 1.03,
+                boxShadow: "0 0 30px rgba(0, 229, 255, 0.8), 0 0 50px rgba(0, 229, 255, 0.5)",
+                y: -5, // Lift effect
+            }}
         >
-            {/* Título */}
-            <motion.h3
-                className="text-2xl font-display text-[var(--color-accent-jedi-blue)] mb-2 group-hover:text-[var(--color-accent)] transition-colors duration-300"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 }}
-            >
-                {project.title || project.name}
-            </motion.h3>
+            <h3 className="text-2xl font-display text-accent-cyan mb-3">
+                {project.title}
+            </h3>
 
-            {/* Descripción */}
-            <motion.p
-                className="text-sm text-[var(--color-text-secondary)] mb-4 leading-relaxed"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-            >
-                {project.description}
-            </motion.p>
+            <p className="font-sans text-text-light mb-4">{project.description}</p>
 
-            {/* Tecnologías */}
-            <motion.div
-                className="mb-4 px-4 py-2 bg-white/5 border border-[var(--color-accent-jedi-green)]/30 rounded-lg text-sm"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 }}
-            >
-                <p className="text-[var(--color-accent-jedi-green)] font-semibold">Tecnologías:</p>
-                <p className="text-[var(--color-text-primary)] opacity-80">{project.technologies || project.tech_stack}</p>
-            </motion.div>
+            {/* Tecnologías visibles al fondo sin overlay */}
+            <div className="mt-6 border-t border-accent-cyan/30 pt-4 opacity-70 group-hover:opacity-100 transition-opacity duration-300">
+                <p className="text-sm text-accent-magenta mb-2 font-semibold">
+                    Tecnologías:
+                </p>
+                <div className="flex flex-wrap justify-start gap-3">
+                    {techList.map((tech, index) => (
+                        <div key={index} className="tooltip" title={tech}>
+                            {techIcons[tech] || (
+                                <span className="text-white text-sm">{tech}</span>
+                            )}
+                        </div>
+                    ))}
+                </div>
+            </div>
 
-            {/* Enlaces */}
-            <motion.div
-                className="flex justify-end gap-3 mt-6"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.4 }}
-            >
-                {(project.project_url || project.demo_url) && (
-                    <a
-                        href={project.project_url || project.demo_url}
+            {/* Botones holográficos con efecto escáner */}
+            <div className="flex justify-end gap-4 mt-6 relative z-20">
+                {project.project_url && (
+                    <Button
+                        as="a"
+                        href={project.project_url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-2 text-sm font-bold px-4 py-2 rounded-md border border-[var(--color-accent-magenta)] text-[var(--color-accent-magenta)] hover:bg-[var(--color-accent-magenta)] hover:text-[var(--color-background)] transition-all duration-300"
+                        className="border-[var(--color-accent-jedi-blue)] text-[var(--color-accent-jedi-blue)] hover:bg-[var(--color-accent-jedi-blue)] hover:text-[var(--color-background)] shadow-[0_0_15px_var(--color-accent-jedi-blue)] hover:shadow-[0_0_30px_var(--color-accent-jedi-blue)]"
                     >
-                        <FaExternalLinkAlt />
-                        Demo
-                    </a>
+                        Ver Demo
+                    </Button>
                 )}
-                {(project.repository_url || project.repo_url) && (
-                    <a
-                        href={project.repository_url || project.repo_url}
+                {project.repository_url && (
+                    <Button
+                        as="a"
+                        href={project.repository_url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-2 text-sm font-bold px-4 py-2 rounded-md border border-[var(--color-accent-jedi-blue)] text-[var(--color-accent-jedi-blue)] hover:bg-[var(--color-accent-jedi-blue)] hover:text-[var(--color-background)] transition-all duration-300"
+                        className="border-[var(--color-accent-jedi-green)] text-[var(--color-accent-jedi-green)] hover:bg-[var(--color-accent-jedi-green)] hover:text-[var(--color-background)] shadow-[0_0_15px_var(--color-accent-jedi-green)] hover:shadow-[0_0_30px_var(--color-accent-jedi-green)]"
                     >
-                        <FaCodeBranch />
-                        Código
-                    </a>
+                        Ver Código
+                    </Button>
                 )}
-            </motion.div>
+            </div>
         </motion.div>
     );
 };

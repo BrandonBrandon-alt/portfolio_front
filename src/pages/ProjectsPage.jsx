@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { motion } from 'framer-motion';
-import Carousel from '../components/Carousel';
+import ProjectCard from '../components/ui/ProjectCard';
 
 const ProjectsPage = () => {
     const [projects, setProjects] = useState([]);
@@ -70,7 +70,11 @@ const ProjectsPage = () => {
             </motion.h2>
 
             {projects.length > 0 ? (
-                <Carousel projects={projects} />
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {projects.map(project => (
+                        <ProjectCard key={project.id} project={project} />
+                    ))}
+                </div>
             ) : (
                 <motion.p
                     className="text-center font-sans text-[var(--color-text-muted)] text-lg mt-10"

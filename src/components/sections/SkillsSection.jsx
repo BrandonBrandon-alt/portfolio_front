@@ -54,12 +54,14 @@ const SkillsSection = () => {
             return (
                 <motion.div
                     key={index}
-                    className={`p-6 rounded-lg border-2 border-${skill.color}/50 bg-[var(--color-background)]/40 shadow-lg backdrop-blur-sm flex flex-col items-center justify-center hover:scale-105 transition-all duration-300`}
+                    className={`p-6 rounded-lg border-2 border-[var(--color-accent-jedi-blue)]/50 bg-[var(--color-background)]/40 shadow-lg backdrop-blur-sm flex flex-col items-center justify-center hover:scale-105 transition-all duration-300`}
                     variants={itemVariants}
                     whileHover={{
                       scale: 1.1,
                       rotate: 2,
-                      boxShadow: `0 0 20px rgba(0, 255, 255, 0.4)`,
+                      borderColor: index % 2 === 0 ? 'var(--color-accent-jedi-blue)' : 'var(--color-accent-jedi-green)',
+                      boxShadow: 'none', // Eliminar la sombra
+                      transition: { duration: 0.3, ease: "easeOut" }
                     }}
                 >
                   <motion.div

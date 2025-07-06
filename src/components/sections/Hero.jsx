@@ -3,6 +3,8 @@ import { motion } from 'framer-motion';
 import Particles from "@tsparticles/react";
 import { loadSlim } from "tsparticles-slim";
 import particlesOptions from "./particles-config";
+import Button from "../ui/Button";
+import "../../styles/HeroTextAnimation.css";
 
 const containerVariants = {
     hidden: { opacity: 0 },
@@ -52,12 +54,10 @@ const Hero = () => {
                 animate="visible"
             >
                 <motion.h1
-                    className="text-5xl md:text-7xl font-display text-[var(--color-text-primary)] mb-4 relative inline-block glitch lightsaber-underline drop-shadow-[0_0_15px_#0ff]"
+                    className="text-5xl md:text-7xl font-display text-[var(--color-text-primary)] mb-4 relative inline-block lightsaber-underline drop-shadow-[0_0_15px_#0ff] animated-text-ray"
                     variants={itemVariants}
                 >
-                    <span className="glitch__main">BRANDON MONTEALEGRE</span>
-                    <span className="glitch__clone">BRANDON MONTEALEGRE</span>
-                    <span className="glitch__clone">BRANDON MONTEALEGRE</span>
+                    BRANDON MONTEALEGRE
                 </motion.h1>
                 <motion.p
                     className="text-xl md:text-2xl font-sans text-[var(--color-text-primary)] mt-4 drop-shadow-[0_0_5px_#0ff]"
@@ -70,15 +70,12 @@ const Hero = () => {
                     className="mt-8 flex flex-col md:flex-row justify-center gap-4"
                     variants={itemVariants}
                 >
-                    <button className="font-sans font-bold py-3 px-6 border-2 border-[var(--color-accent-jedi-blue)] text-[var(--color-accent-jedi-blue)] rounded-md hover:bg-[var(--color-accent-jedi-blue)] hover:text-[var(--color-background)] transition-all duration-300 shadow-[0_0_10px_var(--color-accent-jedi-blue)] hover:shadow-[0_0_20px_var(--color-accent-jedi-blue)]">
+                    <Button>
                         Explorar Proyectos
-                    </button>
-                    <a
-                        href="mailto:tu-email@example.com"
-                        className="font-sans font-bold py-3 px-6 border-2 border-[var(--color-accent-jedi-green)] text-[var(--color-accent-jedi-green)] rounded-md hover:bg-[var(--color-accent-jedi-green)] hover:text-[var(--color-background)] transition-all duration-300 shadow-[0_0_10px_var(--color-accent-jedi-green)] hover:shadow-[0_0_20px_var(--color-accent-jedi-green)]"
-                    >
+                    </Button>
+                    <Button as="a" href="/contact" className="border-[var(--color-accent-jedi-green)] text-[var(--color-accent-jedi-green)] hover:bg-[var(--color-accent-jedi-green)] hover:text-[var(--color-background)] shadow-[0_0_10px_var(--color-accent-jedi-green)] hover:shadow-[0_0_20px_var(--color-accent-jedi-green)]">
                         Contactar
-                    </a>
+                    </Button>
                 </motion.div>
             </motion.div>
         </section>

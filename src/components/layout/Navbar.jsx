@@ -8,6 +8,7 @@ import {
     InformationCircleIcon,
     PhoneIcon
 } from '@heroicons/react/24/outline';
+import Button from '../ui/Button';
 
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -21,10 +22,30 @@ const Navbar = () => {
         },
     };
 
-    const linkVariants = {
-        hover: { scale: 1.08, backgroundColor: 'rgba(255,255,255,0.12)' },
-        tap: { scale: 0.97 },
+    const navListContainerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                delayChildren: 0.3, // Retraso antes de que los hijos comiencen a animarse
+                staggerChildren: 0.1, // Escalonar cada hijo por 0.1s
+            },
+        },
     };
+
+    const navListItemVariants = {
+        hidden: { y: -20, opacity: 0 },
+        visible: {
+            y: 0,
+            opacity: 1,
+            transition: {
+                type: "spring",
+                stiffness: 100,
+                damping: 10,
+            },
+        },
+    };
+
 
     const mobileMenuVariants = {
         hidden: { x: "100%" },
@@ -39,10 +60,17 @@ const Navbar = () => {
     };
 
     const getNavLinkClasses = ({ isActive }) => {
-        const baseClasses = "px-4 py-2 rounded-full text-sm font-semibold transition-all duration-300 flex items-center space-x-1 whitespace-nowrap focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent-jedi-blue)]/70 focus-visible:ring-offset-2";
-        const inactiveClasses = "text-[var(--color-text-primary)] hover:bg-[var(--color-accent-jedi-blue)]/10 hover:text-[var(--color-accent-jedi-blue)]";
-        const activeClasses = "bg-[var(--color-accent-jedi-blue)] text-[var(--color-background)] shadow-lg border-2 border-white/20 relative after:content-[''] after:block after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:w-6 after:h-1 after:rounded-full after:bg-white after:animate-navbar-indicator";
-        return `${baseClasses} ${isActive ? activeClasses : inactiveClasses}`;
+        // Base styles from the Button component
+        const baseButtonStyles = "inline-flex items-center justify-center font-sans font-bold py-2 px-6 rounded-md transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent-jedi-blue)]/70 focus-visible:ring-offset-2 text-base";
+
+        // Inactive state styles (from Button's default look)
+        const inactiveButtonStyles = "border-2 border-[var(--color-accent-jedi-blue)] text-[var(--color-accent-jedi-blue)] hover:bg-[var(--color-accent-jedi-green)] hover:text-[var(--color-background)] shadow-[0_0_15px_var(--color-accent-jedi-blue)] hover:shadow-[0_0_30px_var(--color-accent-jedi-green)]";
+
+        // Active state styles (from original NavLink, adjusted for new base)
+        const activeNavLinkStyles = "bg-[var(--color-accent-jedi-blue)] text-[var(--color-background)] shadow-lg border-2 border-white/20 relative after:content-[''] after:block after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-0 after:w-6 after:h-1 after:rounded-full after:bg-white after:animate-navbar-indicator";
+
+        // Combine base with active/inactive
+        return `${baseButtonStyles} ${isActive ? activeNavLinkStyles : inactiveButtonStyles}`;
     };
 
     return (
@@ -53,51 +81,76 @@ const Navbar = () => {
             variants={navVariants}
         >
             <div className="container mx-auto flex justify-between items-center py-3 px-4">
-                <NavLink to="/" className="text-[var(--color-accent-jedi-blue)] text-2xl font-bold hover:text-[var(--color-accent-sith-red)] transition duration-300 flex items-center space-x-3 drop-shadow-lg">
-                    <svg width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                            <linearGradient id="logo-gradient" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
-                                <stop stopColor="var(--color-accent-jedi-blue)" />
-                                <stop offset="1" stopColor="var(--color-accent-sith-red)" />
-                            </linearGradient>
-                            <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-                                <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur" />
-                                <feMerge>
-                                    <feMergeNode in="blur" />
-                                    <feMergeNode in="SourceGraphic" />
-                                </feMerge>
-                            </filter>
-                        </defs>
-                        <path d="M20 80 L50 20 L80 80 H65 L50 45 L35 80 H20Z" fill="url(#logo-gradient)" filter="url(#glow)" />
-                        <path d="M20 80 L50 20 L80 80 H65 L50 45 L35 80 H20Z" stroke="var(--color-text-primary)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                    <span className="leading-none">YEP/DEV</span>
+                <NavLink to="/" className="text-[var(--color-accent-jedi-blue)] text-2xl font-bold transition duration-300 flex items-center space-x-3 drop-shadow-lg">
+                    <motion.div
+                        whileHover={{ scale: 1.05, rotate: 5 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="flex items-center space-x-3"
+                    >
+                        <svg width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="logo-gradient" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+                                    <stop stopColor="var(--color-accent-jedi-blue)" />
+                                    <stop offset="1" stopColor="var(--color-accent-jedi-green)" />
+                                </linearGradient>
+                                <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+                                    <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur" />
+                                    <feMerge>
+                                        <feMergeNode in="blur" />
+                                        <feMergeNode in="SourceGraphic" />
+                                    </feMerge>
+                                </filter>
+                            </defs>
+                            <path d="M20 80 L50 20 L80 80 H65 L50 45 L35 80 H20Z" fill="url(#logo-gradient)" filter="url(#glow)" />
+                            <motion.path
+                                d="M20 80 L50 20 L80 80 H65 L50 45 L35 80 H20Z"
+                                stroke="url(#logo-gradient)"
+                                strokeWidth="3"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                filter="url(#glow)"
+                                initial={{ strokeDasharray: "50 200", strokeDashoffset: 250 }}
+                                animate={{ strokeDashoffset: -250 }}
+                                transition={{
+                                    duration: 2,
+                                    repeat: Infinity,
+                                    repeatType: "loop",
+                                    ease: "linear",
+                                }}
+                            />
+                        </svg>
+                        <span className="leading-none"> BRAN/DEV</span>
+                    </motion.div>
                 </NavLink>
 
                 <div className="md:hidden">
-                    <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="text-[var(--color-text-primary)] p-2 focus:outline-none hover:bg-[var(--color-accent-jedi-blue)]/10 rounded-full transition">
+                    <Button onClick={() => setIsMenuOpen(!isMenuOpen)} className="!p-2 !rounded-full !shadow-none !border-none text-[var(--color-text-primary)] hover:bg-[var(--color-accent-jedi-blue)]/10">
                         {isMenuOpen ? <XMarkIcon className="h-8 w-8" /> : <Bars3Icon className="h-8 w-8" />}
-                    </button>
+                    </Button>
                 </div>
 
-                <ul className="hidden md:flex items-center space-x-6">
+                <ul className="hidden md:flex items-center space-x-6"
+                    variants={navListContainerVariants}
+                    initial="hidden"
+                    animate="visible"
+                >
                     <li>
-                        <motion.div variants={linkVariants} whileHover="hover" whileTap="tap">
+                        <motion.div variants={navListItemVariants}>
                             <NavLink to="/" className={getNavLinkClasses} end><HomeIcon className="h-5 w-5 mr-1" />Home</NavLink>
                         </motion.div>
                     </li>
                     <li>
-                        <motion.div variants={linkVariants} whileHover="hover" whileTap="tap">
+                        <motion.div variants={navListItemVariants}>
                             <NavLink to="/projects" className={getNavLinkClasses}>Proyectos</NavLink>
                         </motion.div>
                     </li>
                     <li>
-                        <motion.div variants={linkVariants} whileHover="hover" whileTap="tap">
+                        <motion.div variants={navListItemVariants}>
                             <NavLink to="/about" className={getNavLinkClasses}><InformationCircleIcon className="h-5 w-5 mr-1" />Acerca de</NavLink>
                         </motion.div>
                     </li>
                     <li>
-                        <motion.div variants={linkVariants} whileHover="hover" whileTap="tap">
+                        <motion.div variants={navListItemVariants}>
                             <NavLink to="/contact" className={getNavLinkClasses}><PhoneIcon className="h-5 w-5 mr-1" />Contacto</NavLink>
                         </motion.div>
                     </li>
@@ -126,7 +179,7 @@ const Navbar = () => {
                                     <defs>
                                         <linearGradient id="logo-gradient-mobile" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
                                             <stop stopColor="var(--color-accent-jedi-blue)" />
-                                            <stop offset="1" stopColor="var(--color-accent-sith-red)" />
+                                            <stop offset="1" stopColor="var(--color-accent-jedi-green)" />
                                         </linearGradient>
                                         <filter id="glow-mobile" x="-50%" y="-50%" width="200%" height="200%">
                                             <feGaussianBlur in="SourceGraphic" stdDeviation="2" result="blur" />
@@ -137,19 +190,34 @@ const Navbar = () => {
                                         </filter>
                                     </defs>
                                     <path d="M20 80 L50 20 L80 80 H65 L50 45 L35 80 H20Z" fill="url(#logo-gradient-mobile)" filter="url(#glow-mobile)" />
-                                    <path d="M20 80 L50 20 L80 80 H65 L50 45 L35 80 H20Z" stroke="var(--color-text-primary)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                                    <motion.path
+                                        d="M20 80 L50 20 L80 80 H65 L50 45 L35 80 H20Z"
+                                        stroke="url(#logo-gradient-mobile)"
+                                        strokeWidth="2.5"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        filter="url(#glow-mobile)"
+                                        initial={{ strokeDasharray: "50 200", strokeDashoffset: 250 }}
+                                        animate={{ strokeDashoffset: -250 }}
+                                        transition={{
+                                            duration: 2,
+                                            repeat: Infinity,
+                                            repeatType: "loop",
+                                            ease: "linear",
+                                        }}
+                                    />
                                 </svg>
                                 <span className="text-xl font-bold text-[var(--color-accent-jedi-blue)]">YEP/DEV</span>
                             </div>
                             <div className="p-6">
                                 <div className="flex justify-between items-center mb-6">
                                     <h2 className="text-xl font-bold text-[var(--color-text-primary)]">Menú</h2>
-                                    <button
+                                    <Button
                                         onClick={() => setIsMenuOpen(false)}
-                                        className="text-[var(--color-text-primary)] hover:text-[var(--color-accent-jedi-blue)]"
+                                        className="!p-2 !rounded-full !shadow-none !border-none text-[var(--color-text-primary)] hover:text-[var(--color-accent-jedi-blue)]"
                                     >
                                         <XMarkIcon className="h-6 w-6" />
-                                    </button>
+                                    </Button>
                                 </div>
 
                                 <nav className="space-y-4">

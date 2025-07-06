@@ -64,13 +64,7 @@ h1, h2, h3, h4, h5, h6 {
   opacity: 1 !important;
 }
 
-/* Efecto Glitch para el texto */
-.glitch {
-  position: relative;
-  color: var(--color-text-light);
-  font-size: 3em; /* Ajusta según sea necesario */
-  animation: glitch-anim 2s infinite linear alternate-reverse;
-}
+
 
 .glitch__main {
   display: block;
@@ -148,4 +142,36 @@ h1, h2, h3, h4, h5, h6 {
   100% {
     width: 100%;
   }
+}
+
+/* Custom Toastify Styles */
+.Toastify__toast-container {
+  font-family: 'Roboto Flex', sans-serif; /* Use your app's font */
+}
+
+.Toastify__toast {
+  background: var(--color-background) !important; /* Dark background */
+  color: var(--color-text-primary) !important; /* Primary text color */
+  border: 1px solid var(--color-accent-jedi-blue) !important; /* Jedi blue border */
+  box-shadow: 0 0 15px var(--color-accent-jedi-blue) !important; /* Blue glow */
+  border-radius: 8px !important;
+}
+
+.Toastify__toast--success {
+  border-color: var(--color-accent-jedi-green) !important;
+  box-shadow: 0 0 15px var(--color-accent-jedi-green) !important;
+}
+
+.Toastify__toast--error {
+  border-color: var(--color-accent-sith-red) !important;
+  box-shadow: 0 0 15px var(--color-accent-sith-red) !important;
+}
+
+.Toastify__toast--loading {
+  border-color: var(--color-accent-yellow) !important;
+  box-shadow: 0 0 15px var(--color-accent-yellow) !important;
+}
+
+.Toastify__progress-bar {
+  background: linear-gradient(to right, var(--color-accent-jedi-blue), var(--color-accent-jedi-green)) !important; /* Gradient progress bar */
 }

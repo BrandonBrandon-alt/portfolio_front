@@ -1,24 +1,12 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { motion, useMotionValue } from 'framer-motion';
-import ProjectCard from './ui/ProjectCard';
+import Button from './ui/Button'; // Asegúrate de que Button esté disponible
 
-const Carousel = ({ projects }) => {
+const Carousel = ({ slides }) => {
   const carouselRef = useRef(null);
   const [width, setWidth] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(0);
   const x = useMotionValue(0);
-
-  const getSlideStyle = (index) => {
-    const currentDragOffset = x.get();
-    const slideWidth = carouselRef.current?.offsetWidth || 0;
-    if (slideWidth === 0) return { scale: 1, opacity: 1 };
-    const targetXForIndex = -index * slideWidth;
-    const diff = Math.abs(currentDragOffset - targetXForIndex);
-    const distanceFactor = Math.min(1, diff / slideWidth);
-    const scaleValue = 1 - (distanceFactor * 0.15);
-    const opacityValue = 1 - (distanceFactor * 0.4);
-    return { scale: scaleValue, opacity: opacityValue };
-  };
 
   useEffect(() => {
     const updateWidth = () => {
@@ -42,19 +30,19 @@ const Carousel = ({ projects }) => {
   };
 
   const goToNext = () => {
-    const nextIndex = (currentIndex + 1) % projects.length;
+    const nextIndex = (currentIndex + 1) % slides.length;
     goToSlide(nextIndex);
   };
 
   const goToPrev = () => {
-    const nextIndex = (currentIndex - 1 + projects.length) % projects.length;
+    const nextIndex = (currentIndex - 1 + slides.length) % slides.length;
     goToSlide(nextIndex);
   };
 
   useEffect(() => {
     const interval = setInterval(goToNext, 7000);
     return () => clearInterval(interval);
-  }, [currentIndex, projects.length]);
+  }, [currentIndex, slides.length]);
 
   return (
       <motion.div
@@ -76,36 +64,56 @@ const Carousel = ({ projects }) => {
               const slideWidth = carouselRef.current.offsetWidth;
               let targetIndex = currentIndex;
               if (velocity < -500) {
-                targetIndex = Math.min(projects.length - 1, currentIndex + 1);
+                targetIndex = Math.min(slides.length - 1, currentIndex + 1);
               } else if (velocity > 500) {
                 targetIndex = Math.max(0, currentIndex - 1);
               } else {
                 targetIndex = Math.round(currentOffset / -slideWidth);
-                targetIndex = Math.max(0, Math.min(projects.length - 1, targetIndex));
+                targetIndex = Math.max(0, Math.min(slides.length - 1, targetIndex));
               }
               goToSlide(targetIndex);
             }}
         >
-          {projects.map((project, index) => {
-            const { scale: slideScale, opacity: slideOpacity } = getSlideStyle(index);
-            const isActive = index === currentIndex;
-            return (
-                <motion.div
-                    key={project.id}
-                    className="flex-shrink-0 w-full px-8 flex items-center justify-center"
-                    style={{
-                      scale: slideScale,
-                      opacity: slideOpacity,
-                      zIndex: isActive ? 2 : 1,
-                    }}
-                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                >
-                  <div className="max-w-5xl w-full">
-                    <ProjectCard project={project} />
-                  </div>
-                </motion.div>
-            );
-          })}
+          {slides.map((slide, index) => (
+              <motion.div
+                  key={index}
+                  className="flex-shrink-0 w-full px-8 flex flex-col items-center justify-center text-center"
+                  style={{
+                    // No scaling/opacity effects for simpler CTA slides
+                    zIndex: index === currentIndex ? 2 : 1,
+                  }}
+                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
+              >
+                <div className="max-w-3xl w-full py-10">
+                  <h2 className="text-4xl md:text-5xl font-display text-[var(--color-text-primary)] mb-6 lightsaber-underline">
+                    {slide.title}
+                  </h2>
+                  <p className="text-lg md:text-xl font-sans text-[var(--color-text-primary)] mb-8 leading-relaxed">
+                    {slide.description}
+                  </p>
+                  {slide.button && (
+                      <Button
+                          as={slide.button.as || 'button'}
+                          href={slide.button.href}
+                          onClick={slide.button.onClick}
+                          className={slide.button.className}
+                      >
+                        {slide.button.text}
+                      </Button>
+                  )}
+                  {slide.secondaryButton && (
+                      <Button
+                          as={slide.secondaryButton.as || 'button'}
+                          href={slide.secondaryButton.href}
+                          onClick={slide.secondaryButton.onClick}
+                          className={slide.secondaryButton.className + ' ml-4'}
+                      >
+                        {slide.secondaryButton.text}
+                      </Button>
+                  )}
+                </div>
+              </motion.div>
+          ))}
         </motion.div>
 
         {/* Botones de navegación */}
@@ -126,7 +134,7 @@ const Carousel = ({ projects }) => {
 
         {/* Indicadores */}
         <div className="absolute bottom-6 left-0 right-0 flex justify-center space-x-4 z-20">
-          {projects.map((_, index) => (
+          {slides.map((_, index) => (
               <motion.button
                   key={index}
                   onClick={() => goToSlide(index)}
