@@ -1,0 +1,34 @@
+/* src/components/ui/ProjectCard.css */
+
+.project-card-enhanced {
+  position: relative;
+  overflow: hidden;
+  /* Asegura que el fondo sea ligeramente transparente para ver el patrón */
+  background: rgba(17, 24, 39, 0.6); /* bg-primary-dark/60 */
+  border: 1px solid rgba(0, 229, 255, 0.4); /* border-accent-cyan/40 */
+  box-shadow: 0 0 15px rgba(0, 229, 255, 0.3); /* Brillo inicial sutil */
+}
+
+.project-card-enhanced::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.05) 1px, transparent 0); /* Patrón de puntos sutil */
+  background-size: 10px 10px;
+  opacity: 0.5;
+  z-index: -1;
+}
+
+/* Animación de pulso para el borde/sombra (opcional, si se desea un efecto constante) */
+/* @keyframes pulse-border {
+  0% { box-shadow: 0 0 15px rgba(0, 229, 255, 0.3); }
+  50% { box-shadow: 0 0 25px rgba(0, 229, 255, 0.6); }
+  100% { box-shadow: 0 0 15px rgba(0, 229, 255, 0.3); }
+}
+
+.project-card-enhanced {
+  animation: pulse-border 4s infinite ease-in-out;
+} */

@@ -1,0 +1,41 @@
+/* src/pages/ContactOptionsPage.css */
+
+.contact-page-container {
+  position: relative;
+  overflow: hidden;
+  background: rgba(11, 12, 16, 0.7); /* Un poco más transparente que el fondo principal */
+  border: 1px solid var(--color-accent-jedi-blue)/20;
+  box-shadow: 0 0 30px var(--color-accent-jedi-blue)/20;
+  border-radius: 1.5rem; /* rounded-3xl */
+  margin-top: 2rem; /* Espacio desde el navbar */
+  margin-bottom: 2rem;
+}
+
+.contact-page-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.03) 1px, transparent 0); /* Patrón de puntos muy sutil */
+  background-size: 15px 15px;
+  opacity: 0.6;
+  z-index: -1;
+}
+
+.contact-intro-box {
+  background: var(--color-background)/60;
+  border: 1px solid var(--color-accent-jedi-green)/30;
+  border-radius: 0.75rem; /* rounded-lg */
+  padding: 1.5rem;
+  box-shadow: 0 0 15px var(--color-accent-jedi-green)/20;
+}
+
+.contact-divider {
+  width: 80%;
+  height: 2px;
+  background: linear-gradient(to right, transparent, var(--color-accent-jedi-blue), transparent);
+  margin: 2rem auto;
+  box-shadow: 0 0 10px var(--color-accent-jedi-blue);
+}
