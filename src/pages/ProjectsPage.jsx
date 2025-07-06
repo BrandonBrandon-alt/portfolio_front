@@ -1,0 +1,88 @@
+// src/pages/ProjectsPage.jsx
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { motion } from 'framer-motion';
+import Carousel from '../components/Carousel';
+
+const ProjectsPage = () => {
+    const [projects, setProjects] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        axios.get('http://127.0.0.1:8000/api/projects/')
+            .then(response => {
+                setProjects(response.data);
+                setLoading(false);
+            })
+            .catch(error => {
+                console.error("Error al obtener los proyectos:", error);
+                setLoading(false);
+            });
+    }, []);
+
+    const containerVariants = {
+        hidden: { opacity: 0, y: 40 },
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: {
+                duration: 0.8,
+                ease: "easeOut",
+                when: "beforeChildren",
+                staggerChildren: 0.3
+            },
+        },
+    };
+
+    const titleVariants = {
+        hidden: { opacity: 0, y: -30 },
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: {
+                duration: 0.6,
+                ease: "easeOut"
+            }
+        }
+    };
+
+    if (loading) {
+        return (
+            <div className="min-h-screen flex flex-col justify-center items-center text-[var(--color-accent-jedi-blue)] font-sans text-xl animate-pulse">
+                Cargando holocrones...
+            </div>
+        );
+    }
+
+    return (
+        <motion.section
+            id="proyectos"
+            className="py-24 px-4 container mx-auto"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+        >
+            <motion.h2
+                className="text-4xl md:text-5xl font-display text-center mb-16 lightsaber-underline text-[var(--color-text-primary)]"
+                variants={titleVariants}
+            >
+                Proyectos de la Galaxia
+            </motion.h2>
+
+            {projects.length > 0 ? (
+                <Carousel projects={projects} />
+            ) : (
+                <motion.p
+                    className="text-center font-sans text-[var(--color-text-muted)] text-lg mt-10"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.4 }}
+                >
+                    No se encontraron proyectos registrados en esta estrella.
+                </motion.p>
+            )}
+        </motion.section>
+    );
+};
+
+export default ProjectsPage;

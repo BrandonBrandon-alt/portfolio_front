@@ -1,0 +1,151 @@
+@import "tailwindcss";
+
+:root {
+  /* === Paleta Star Wars + Cyberpunk Neón === */
+
+  /* == Fondos == */
+  --color-background: #0b0c10; /* Negro profundo con leve matiz azulado */
+
+  /* == Texto == */
+  --color-text-primary: #E0F7FA; /* Cian claro, alto contraste sobre fondo oscuro */
+  --color-text-muted: #4c5c68;   /* Azul grisáceo, elegante y futurista */
+
+  /* == Acentos Lightsaber Cyberpunk == */
+  --color-accent-sith-red: #fff5f7;     /* Rojo Sith neón */
+  --color-accent-jedi-blue: #00f0ff;    /* Azul Jedi neón vibrante */
+  --color-accent-jedi-green: #00ff9f;   /* Verde Jedi brillante */
+  --color-accent-purple: #c600ff;       /* Púrpura Mace Windu + toque synthwave */
+  --color-accent-yellow: #faff00;       /* Amarillo de Rey o Jedi Sentinel */
+
+  /* == UI Complementarios == */
+  --color-ui-border: #1f2937;           /* Gris oscuro para bordes sutiles */
+  --color-ui-glow: #08f7fe;             /* Cian eléctrico para efectos de luz */
+}
+
+/* Tipografía y Fondo Global */
+body {
+  margin: 0;
+  font-family: 'Roboto Flex', sans-serif;
+  background-color: var(--color-background); /* Restaurado a tu color oscuro */
+  color: var(--color-text-primary); /* Color de texto base para fondos oscuros */
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Orbitron', sans-serif;
+}
+
+/* Tus animaciones personalizadas (estas están perfectas y no necesitan cambio) */
+@layer utilities {
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  .animate-fade-in-up { animation: fadeInUp 0.8s ease-out forwards; }
+  .animate-fade-in { animation: fadeIn 0.8s ease-out forwards; }
+}
+
+/* Estilos personalizados para Swiper (Carrusel) */
+.swiper-button-next,
+.swiper-button-prev {
+  color: var(--color-accent-jedi-blue) !important; /* Flechas de navegación en cian neón */
+}
+
+.swiper-pagination-bullet {
+  background: var(--color-text-muted) !important; /* Puntos de paginación en gris */
+  opacity: 0.6 !important;
+}
+
+.swiper-pagination-bullet-active {
+  background: var(--color-accent-jedi-blue) !important; /* Punto activo en magenta neón */
+  opacity: 1 !important;
+}
+
+/* Efecto Glitch para el texto */
+.glitch {
+  position: relative;
+  color: var(--color-text-light);
+  font-size: 3em; /* Ajusta según sea necesario */
+  animation: glitch-anim 2s infinite linear alternate-reverse;
+}
+
+.glitch__main {
+  display: block;
+}
+
+.glitch__clone {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+
+.glitch__clone:nth-child(1) {
+  color: var(--color-accent-jedi-blue);
+  animation: glitch-anim-1 2s infinite linear alternate-reverse;
+}
+
+.glitch__clone:nth-child(2) {
+  color: var(--color-accent-jedi-blue);
+  animation: glitch-anim-2 2s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim {
+  0% { transform: translate3d(0, 0, 0); }
+  20% { transform: translate3d(-5px, -5px, 0); }
+  40% { transform: translate3d(-5px, 5px, 0); }
+  60% { transform: translate3d(5px, -5px, 0); }
+  80% { transform: translate3d(5px, 5px, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+
+@keyframes glitch-anim-1 {
+  0% { clip: rect(10px, 9999px, 20px, 0); opacity: 0; }
+  20% { clip: rect(50px, 9999px, 60px, 0); opacity: 1; }
+  40% { clip: rect(80px, 9999px, 90px, 0); opacity: 0; }
+  60% { clip: rect(20px, 9999px, 30px, 0); opacity: 1; }
+  80% { clip: rect(70px, 9999px, 80px, 0); opacity: 0; }
+  100% { clip: rect(40px, 9999px, 50px, 0); opacity: 1; }
+}
+
+@keyframes glitch-anim-2 {
+  0% { clip: rect(30px, 9999px, 40px, 0); opacity: 0; }
+  20% { clip: rect(70px, 9999px, 80px, 0); opacity: 1; }
+  40% { clip: rect(10px, 9999px, 20px, 0); opacity: 0; }
+  60% { clip: rect(90px, 9999px, 100px, 0); opacity: 1; }
+  80% { clip: rect(50px, 9999px, 60px, 0); opacity: 0; }
+  100% { clip: rect(20px, 9999px, 30px, 0); opacity: 1; }
+}
+
+/* Efecto de subrayado tipo sable de luz */
+.lightsaber-underline {
+  position: relative;
+  display: inline-block; /* Asegura que el pseudo-elemento se posicione correctamente */
+}
+
+.lightsaber-underline::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -5px; /* Ajusta la distancia del subrayado al texto */
+  width: 0%;
+  height: 4px; /* Grosor del sable de luz */
+  background: linear-gradient(to right, var(--color-accent-jedi-blue), var(--color-accent-sith-red)); /* Degradado de neón */
+  box-shadow: 0 0 8px var(--color-accent-jedi-blue), 0 0 15px var(--color-accent-sith-red); /* Brillo neón */
+  animation: lightsaber-grow 1.5s ease-out forwards; /* Animación de crecimiento */
+  animation-delay: 1s; /* Retraso para que aparezca después del texto */
+}
+
+@keyframes lightsaber-grow {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
