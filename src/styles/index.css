@@ -7,11 +7,11 @@
   --color-background: #0b0c10; /* Negro profundo con leve matiz azulado */
 
   /* == Texto == */
-  --color-text-primary: #E0F7FA; /* Cian claro, alto contraste sobre fondo oscuro */
+  --color-text-primary: #ffffff; /* Cian claro, alto contraste sobre fondo oscuro */
   --color-text-muted: #4c5c68;   /* Azul grisáceo, elegante y futurista */
 
   /* == Acentos Lightsaber Cyberpunk == */
-  --color-accent-sith-red: #fff5f7;     /* Rojo Sith neón */
+  --color-accent-sith-red: #ff1342;     /* Rojo Sith neón */
   --color-accent-jedi-blue: #00f0ff;    /* Azul Jedi neón vibrante */
   --color-accent-jedi-green: #00ff9f;   /* Verde Jedi brillante */
   --color-accent-purple: #c600ff;       /* Púrpura Mace Windu + toque synthwave */
@@ -32,6 +32,30 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Orbitron', sans-serif;
+  font-weight: bold; /* Default bold for all headings */
+}
+
+h1 {
+  color: var(--color-text-primary); /* Default color for H1 */
+  /* Specific drop-shadow and animations like lightsaber-underline will be applied via classes */
+}
+
+h2 {
+  color: var(--color-accent-jedi-green);
+  text-shadow: 0 0 8px var(--color-accent-jedi-green);
+}
+
+h3 {
+  color: var(--color-accent-jedi-blue);
+  text-shadow: 0 0 5px var(--color-accent-jedi-blue);
+  border-bottom: 2px solid rgba(0, 240, 255, 0.5); /* Using rgba for --color-accent-jedi-blue/50 */
+  padding-bottom: 0.5rem; /* pb-2 */
+  display: inline-block;
+}
+
+h4, h5, h6 {
+  color: var(--color-text-primary);
+  font-weight: 600; /* semibold */
 }
 
 /* Tus animaciones personalizadas (estas están perfectas y no necesitan cambio) */
@@ -129,7 +153,7 @@ h1, h2, h3, h4, h5, h6 {
   bottom: -5px; /* Ajusta la distancia del subrayado al texto */
   width: 0%;
   height: 4px; /* Grosor del sable de luz */
-  background: linear-gradient(to right, var(--color-accent-jedi-blue), var(--color-accent-sith-red)); /* Degradado de neón */
+  background: linear-gradient(to right, var(--color-accent-jedi-blue), var(--color-text-primary)); /* Degradado de neón */
   box-shadow: 0 0 8px var(--color-accent-jedi-blue), 0 0 15px var(--color-accent-sith-red); /* Brillo neón */
   animation: lightsaber-grow 1.5s ease-out forwards; /* Animación de crecimiento */
   animation-delay: 1s; /* Retraso para que aparezca después del texto */

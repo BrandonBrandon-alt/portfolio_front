@@ -70,7 +70,7 @@ const Hero = () => {
                     className="mt-8 flex flex-col md:flex-row justify-center gap-4"
                     variants={itemVariants}
                 >
-                    <Button>
+                    <Button as="a" href="/projects" className="border-[var(--color-accent-jedi-blue)] text-[var(--color-accent-jedi-blue)] hover:bg-[var(--color-accent-jedi-blue)] hover:text-[var(--color-background)] shadow-[0_0_10px_var(--color-accent-jedi-green)] hover:shadow-[0_0_20px_var(--color-accent-jedi-green)]">
                         Explorar Proyectos
                     </Button>
                     <Button as="a" href="/contact" className="border-[var(--color-accent-jedi-green)] text-[var(--color-accent-jedi-green)] hover:bg-[var(--color-accent-jedi-green)] hover:text-[var(--color-background)] shadow-[0_0_10px_var(--color-accent-jedi-green)] hover:shadow-[0_0_20px_var(--color-accent-jedi-green)]">

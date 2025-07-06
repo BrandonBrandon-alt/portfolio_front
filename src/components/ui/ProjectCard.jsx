@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { FaReact, FaNodeJs, FaDatabase, FaGitAlt } from 'react-icons/fa';
 import Button from './Button';
 import './ProjectCard.css';
@@ -35,11 +36,11 @@ const ProjectCard = ({ project }) => {
             transition={{ duration: 0.6, ease: "easeOut" }}
             whileHover={{
                 scale: 1.03,
-                boxShadow: "0 0 30px rgba(0, 229, 255, 0.8), 0 0 50px rgba(0, 229, 255, 0.5)",
+                boxShadow: "0 0 30px var(--color-accent-jedi-blue), 0 0 50px var(--color-accent-jedi-green)",
                 y: -5, // Lift effect
             }}
         >
-            <h3 className="text-2xl font-display text-accent-cyan mb-3">
+            <h3 className="text-2xl font-display mb-3">
                 {project.title}
             </h3>
 
@@ -63,6 +64,13 @@ const ProjectCard = ({ project }) => {
 
             {/* Botones holográficos con efecto escáner */}
             <div className="flex justify-end gap-4 mt-6 relative z-20">
+                <Button
+                    as={Link}
+                    to={`/projects/${project.id}`}
+                    className="border-[var(--color-accent-sith-red)] text-[var(--color-accent-sith-red)] hover:bg-[var(--color-accent-sith-red)] hover:text-[var(--color-background)] shadow-[0_0_15px_var(--color-accent-sith-red)] hover:shadow-[0_0_30px_var(--color-accent-sith-red)]"
+                >
+                    Ver Detalles
+                </Button>
                 {project.project_url && (
                     <Button
                         as="a"

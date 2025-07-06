@@ -22,6 +22,7 @@ const Navbar = () => {
         },
     };
 
+
     const navListContainerVariants = {
         hidden: { opacity: 0 },
         visible: {
@@ -151,7 +152,7 @@ const Navbar = () => {
                     </li>
                     <li>
                         <motion.div variants={navListItemVariants}>
-                            <NavLink to="/contact" className={getNavLinkClasses}><PhoneIcon className="h-5 w-5 mr-1" />Contacto</NavLink>
+                            <NavLink to="/contact" className={getNavLinkClasses} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}><PhoneIcon className="h-5 w-5 mr-1" />Contacto</NavLink>
                         </motion.div>
                     </li>
                 </ul>
@@ -225,12 +226,12 @@ const Navbar = () => {
                                         <HomeIcon className="h-5 w-5 inline mr-2" /> Home
                                     </NavLink>
                                     <NavLink to="/projects" className="block py-2 text-[var(--color-text-primary)] hover:text-[var(--color-accent-jedi-blue)] transition duration-150" onClick={() => setIsMenuOpen(false)}>
-                                        Proyectos
+                                        <HomeIcon className="h-5 w-5 inline mr-2" /> Proyectos
                                     </NavLink>
                                     <NavLink to="/about" className="block py-2 text-[var(--color-text-primary)] hover:text-[var(--color-accent-jedi-blue)] transition duration-150" onClick={() => setIsMenuOpen(false)}>
                                         <InformationCircleIcon className="h-5 w-5 inline mr-2" /> Acerca de
                                     </NavLink>
-                                    <NavLink to="/contact" className="block py-2 text-[var(--color-text-primary)] hover:text-[var(--color-accent-jedi-blue)] transition duration-150" onClick={() => setIsMenuOpen(false)}>
+                                    <NavLink to="/contact" className="block py-2 text-[var(--color-text-primary)] hover:text-[var(--color-accent-jedi-green)] transition duration-150" onClick={() => setIsMenuOpen(false)}>
                                         <PhoneIcon className="h-5 w-5 inline mr-2" /> Contacto
                                     </NavLink>
                                 </nav>

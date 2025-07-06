@@ -85,7 +85,7 @@ const Carousel = ({ slides }) => {
                   transition={{ type: "spring", stiffness: 300, damping: 30 }}
               >
                 <div className="max-w-3xl w-full py-10">
-                  <h2 className="text-4xl md:text-5xl font-display text-[var(--color-text-primary)] mb-6 lightsaber-underline">
+                  <h2 className="text-4xl md:text-5xl font-display mb-6 lightsaber-underline">
                     {slide.title}
                   </h2>
                   <p className="text-lg md:text-xl font-sans text-[var(--color-text-primary)] mb-8 leading-relaxed">

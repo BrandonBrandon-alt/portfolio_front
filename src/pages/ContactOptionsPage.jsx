@@ -5,48 +5,68 @@ import Button from '../components/ui/Button';
 import { FaLinkedin, FaWhatsapp, FaEnvelope } from 'react-icons/fa'; // Importar iconos
 import { ChevronDoubleDownIcon } from '@heroicons/react/24/outline'; // Importar icono de flecha
 import './ContactOptionsPage.css'; // Importar el nuevo CSS
+import '../styles/HeroTextAnimation.css';
+
+const containerVariants = {
+  hidden: { opacity: 0, y: 50 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      delay: 0.2, // Retraso inicial para la página
+      duration: 0.8,
+      ease: "easeOut",
+      when: "beforeChildren",
+      staggerChildren: 0.3,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { y: 20, opacity: 0 },
+  visible: { opacity: 1, y: 0 },
+};
 
 const ContactOptionsPage = () => {
   return (
       <motion.div
           className="min-h-screen flex flex-col items-center py-16 px-4 md:px-8 lg:px-16"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
       >
         <motion.h1
-            className="text-5xl md:text-6xl font-display text-[var(--color-text-primary)] text-center mb-8 lightsaber-underline"
-            initial={{ opacity: 0, y: -30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
+            className="text-4xl md:text-5xl text-center mb-8 lightsaber-underline drop-shadow-[0_0_15px_#0ff] animated-text-ray"
+            variants={itemVariants}
         >
           Contáctame
         </motion.h1>
 
-        <div className="contact-page-container w-full max-w-5xl p-8 md:p-12">
-          <div className="contact-intro-box mb-10">
+        <motion.div className="contact-page-container w-full max-w-5xl p-8 md:p-12" variants={itemVariants}>
+          <motion.div className="contact-intro-box mb-10" variants={itemVariants}>
             <p className="text-lg md:text-xl font-sans text-[var(--color-text-primary)] text-center leading-relaxed">
               ¡Me encantaría saber de ti! Puedes contactarme a través del formulario o directamente por mis redes sociales y correo.
             </p>
-          </div>
+          </motion.div>
 
           {/* Formulario de Contacto */}
           <ContactFormSection />
 
-          <div className="contact-divider"></div> {/* Separador visual */}
+          <motion.div className="contact-divider" variants={itemVariants}></motion.div> {/* Separador visual */}
 
           <motion.div
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
               className="my-4 text-[var(--color-accent-jedi-blue)]"
+              variants={itemVariants}
           >
             <ChevronDoubleDownIcon className="h-8 w-8 mx-auto" />
             <p className="text-sm font-sans text-center mt-1">O encuéntrame aquí</p>
           </motion.div>
 
           {/* Sección de Medios de Comunicación */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full max-w-4xl mx-auto mb-8">
+          <motion.div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full max-w-4xl mx-auto mb-8" variants={itemVariants}>
             <Button
                 as="a"
                 href="https://www.linkedin.com/in/brandon-montealegre-acevedo-68bab0254/"
@@ -75,8 +95,8 @@ const ContactOptionsPage = () => {
             >
               Correo Electrónico
             </Button>
-          </div>
-        </div> {/* <- cierre de contact-page-container */}
+          </motion.div>
+        </motion.div> {/* <- cierre de contact-page-container */}
       </motion.div> // <- Cierre correcto de motion.div
   );
 };

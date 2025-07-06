@@ -10,7 +10,7 @@ const SkillsPage = () => {
       transition={{ duration: 0.6, ease: "easeOut" }}
       className="min-h-screen py-16 px-4 md:px-8 lg:px-16"
     >
-      <h1 className="text-5xl md:text-6xl font-display text-[var(--color-text-primary)] text-center mb-12 lightsaber-underline">
+      <h1 className="text-5xl md:text-6xl font-display text-center mb-12 lightsaber-underline">
         Mis Habilidades
       </h1>
       <SkillsSection />

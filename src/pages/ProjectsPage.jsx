@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { motion } from 'framer-motion';
 import ProjectCard from '../components/ui/ProjectCard';
+import ProjectCardSkeleton from '../components/ui/ProjectCardSkeleton';
 
 const ProjectsPage = () => {
     const [projects, setProjects] = useState([]);
@@ -48,9 +49,25 @@ const ProjectsPage = () => {
 
     if (loading) {
         return (
-            <div className="min-h-screen flex flex-col justify-center items-center text-[var(--color-accent-jedi-blue)] font-sans text-xl animate-pulse">
-                Cargando holocrones...
-            </div>
+            <motion.section
+                id="proyectos"
+                className="py-24 px-4 container mx-auto"
+                variants={containerVariants}
+                initial="hidden"
+                animate="visible"
+            >
+                <motion.h2
+                    className="text-4xl md:text-5xl font-display text-center mb-16 lightsaber-underline text-[var(--color-text-primary)]"
+                    variants={titleVariants}
+                >
+                    Proyectos de la Galaxia
+                </motion.h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {[...Array(6)].map((_, index) => (
+                        <ProjectCardSkeleton key={index} />
+                    ))}
+                </div>
+            </motion.section>
         );
     }
 

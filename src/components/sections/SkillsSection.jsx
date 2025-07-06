@@ -1,7 +1,16 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { SiDjango, SiMongodb, SiTailwindcss } from "react-icons/si";
-import { FaDatabase, FaGitAlt, FaNodeJs, FaPython, FaReact } from "react-icons/fa";
+import {
+  SiDjango,
+  SiJavascript,
+  SiJsonwebtokens,
+  SiMongodb, SiOracle,
+  SiPodman,
+  SiPostgresql,
+  SiPostman, SiSpringboot,
+  SiTailwindcss, SiVite
+} from "react-icons/si";
+import {FaAngular, FaDatabase, FaDocker, FaGitAlt, FaJava, FaNodeJs, FaPython, FaReact} from "react-icons/fa";
 
 const skills = [
   { name: 'React', icon: FaReact, color: 'cyan-400' },
@@ -12,6 +21,17 @@ const skills = [
   { name: 'MongoDB', icon: SiMongodb, color: 'green-600' },
   { name: 'SQL', icon: FaDatabase, color: 'gray-300' },
   { name: 'Git', icon: FaGitAlt, color: 'orange-500' },
+  { name: 'Java', icon: FaJava, color: 'red-500' },
+  { name: 'JavaScript', icon: SiJavascript, color: 'yellow-400' },
+  { name: 'PostgreSQL', icon: SiPostgresql, color: 'blue-500' },
+  { name: 'Docker', icon: FaDocker, color: 'blue-600' },
+  { name: 'Podman', icon: SiPodman, color: 'blue-400' },
+  { name: 'Postman', icon: SiPostman, color: 'orange-400' },
+  { name: 'Angular', icon: FaAngular, color: 'red-600' },
+  { name: 'JWT', icon: SiJsonwebtokens, color: 'gray-400' },
+  { name: 'Oracle', icon: SiOracle, color: 'red-700' },
+  { name: 'Spring Boot', icon: SiSpringboot, color: 'green-700' },
+  { name: 'Vite', icon: SiVite, color: 'purple-500' },
 ];
 
 const containerVariants = {
@@ -71,7 +91,7 @@ const SkillsSection = () => {
                   >
                     <IconComponent />
                   </motion.div>
-                  <h3 className="text-xl font-sans font-bold text-[var(--color-text-primary)]">{skill.name}</h3>
+                  <h3 className="text-xl font-sans font-bold">{skill.name}</h3>
                 </motion.div>
             );
           })}

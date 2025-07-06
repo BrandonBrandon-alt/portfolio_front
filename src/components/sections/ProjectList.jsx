@@ -24,7 +24,7 @@ const ProjectList = () => {
                         key={project.id}
                         className="bg-white/5 backdrop-blur-sm p-6 rounded-lg shadow-[0_0_10px_var(--color-accent-jedi-blue)] hover:shadow-[0_0_20px_var(--color-accent-jedi-blue)] transition-all border border-white/10"
                     >
-                        <h3 className="text-xl font-semibold mb-2 text-[var(--color-accent-jedi-blue)]">{project.title}</h3>
+                        <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
                         <p className="text-sm opacity-90 mb-2">{project.description}</p>
                         <p className="text-sm font-mono mb-4"><strong className="text-[var(--color-accent)]">Tecnologías:</strong> {project.technologies}</p>
                         <a

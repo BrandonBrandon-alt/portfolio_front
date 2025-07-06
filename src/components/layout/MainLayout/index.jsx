@@ -1,6 +1,7 @@
 import React from 'react';
 import Navbar from '../Navbar';
 import Footer from '../../ui/Footer';
+import BackToTopButton from '../../ui/BackToTopButton';
 
 const MainLayout = ({ children }) => {
   return (
@@ -10,6 +11,7 @@ const MainLayout = ({ children }) => {
         {children}
       </main>
       <Footer />
+      <BackToTopButton />
     </div>
   );
 };
