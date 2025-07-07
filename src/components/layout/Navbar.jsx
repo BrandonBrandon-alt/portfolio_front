@@ -74,7 +74,7 @@ const Navbar = () => {
 
     return (
         <motion.nav
-            className="navbar-hologram-effect bg-[var(--color-background)]/80 shadow-xl border-b border-[var(--color-accent-jedi-blue)]/30 sticky top-0 z-50 backdrop-blur-md"
+            className="navbar-hologram-effect bg-[var(--color-background)] text-[var(--color-text-primary)] border-b border-[var(--color-accent-jedi-blue)]/40 py-3 backdrop-blur-sm shadow-inner shadow-[var(--color-accent-jedi-blue)]/10 sticky top-0 z-50"
             initial="hidden"
             animate="visible"
             variants={navVariants}
@@ -166,7 +166,7 @@ const Navbar = () => {
                         onClick={() => setIsMenuOpen(false)}
                     >
                         <motion.div
-                            className="absolute right-0 top-0 h-full w-64 bg-[var(--color-background)] shadow-xl"
+                            className="absolute right-0 top-0 h-full w-3/4 max-w-sm bg-[var(--color-background)] shadow-xl"
                             variants={mobileMenuVariants}
                             initial="hidden"
                             animate="visible"
