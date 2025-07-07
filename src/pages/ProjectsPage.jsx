@@ -10,7 +10,7 @@ const ProjectsPage = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        axios.get('http://127.0.0.1:8000/api/projects/')
+        axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/projects/`)
             .then(response => {
                 setProjects(response.data);
                 setLoading(false);
