@@ -4,10 +4,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
     Bars3Icon,
     XMarkIcon,
-    HomeIcon,
-    InformationCircleIcon,
-    PhoneIcon
 } from '@heroicons/react/24/outline';
+import { FaSpaceShuttle, FaMicrochip, FaUserAstronaut, FaSatelliteDish } from 'react-icons/fa'; // Importar nuevos iconos
 import Button from '../ui/Button';
 
 const Navbar = () => {
@@ -76,7 +74,7 @@ const Navbar = () => {
 
     return (
         <motion.nav
-            className="bg-[var(--color-background)]/80 shadow-xl border-b border-[var(--color-accent-jedi-blue)]/30 sticky top-0 z-50 backdrop-blur-md"
+            className="navbar-hologram-effect bg-[var(--color-background)]/80 shadow-xl border-b border-[var(--color-accent-jedi-blue)]/30 sticky top-0 z-50 backdrop-blur-md"
             initial="hidden"
             animate="visible"
             variants={navVariants}
@@ -137,22 +135,22 @@ const Navbar = () => {
                 >
                     <li>
                         <motion.div variants={navListItemVariants}>
-                            <NavLink to="/" className={getNavLinkClasses} end><HomeIcon className="h-5 w-5 mr-1" />Home</NavLink>
+                            <NavLink to="/" className={getNavLinkClasses} end><FaSpaceShuttle className="h-5 w-5 mr-1" />Home</NavLink>
                         </motion.div>
                     </li>
                     <li>
                         <motion.div variants={navListItemVariants}>
-                            <NavLink to="/projects" className={getNavLinkClasses}>Proyectos</NavLink>
+                            <NavLink to="/projects" className={getNavLinkClasses}><FaMicrochip className="h-5 w-5 mr-1" />Proyectos</NavLink>
                         </motion.div>
                     </li>
                     <li>
                         <motion.div variants={navListItemVariants}>
-                            <NavLink to="/about" className={getNavLinkClasses}><InformationCircleIcon className="h-5 w-5 mr-1" />Acerca de</NavLink>
+                            <NavLink to="/about" className={getNavLinkClasses}><FaUserAstronaut className="h-5 w-5 mr-1" />Acerca de</NavLink>
                         </motion.div>
                     </li>
                     <li>
                         <motion.div variants={navListItemVariants}>
-                            <NavLink to="/contact" className={getNavLinkClasses} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}><PhoneIcon className="h-5 w-5 mr-1" />Contacto</NavLink>
+                            <NavLink to="/contact" className={getNavLinkClasses} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}><FaSatelliteDish className="h-5 w-5 mr-1" />Contacto</NavLink>
                         </motion.div>
                     </li>
                 </ul>
@@ -208,7 +206,7 @@ const Navbar = () => {
                                         }}
                                     />
                                 </svg>
-                                <span className="text-xl font-bold text-[var(--color-accent-jedi-blue)]">YEP/DEV</span>
+                                <span className="text-xl font-bold text-[var(--color-accent-jedi-blue)]">BRAN/DEV</span>
                             </div>
                             <div className="p-6">
                                 <div className="flex justify-between items-center mb-6">
@@ -223,16 +221,16 @@ const Navbar = () => {
 
                                 <nav className="space-y-4">
                                     <NavLink to="/" className="block py-2 text-[var(--color-text-primary)] hover:text-[var(--color-accent-jedi-blue)] transition duration-150" onClick={() => setIsMenuOpen(false)}>
-                                        <HomeIcon className="h-5 w-5 inline mr-2" /> Home
+                                        <FaSpaceShuttle className="h-5 w-5 inline mr-2" /> Home
                                     </NavLink>
                                     <NavLink to="/projects" className="block py-2 text-[var(--color-text-primary)] hover:text-[var(--color-accent-jedi-blue)] transition duration-150" onClick={() => setIsMenuOpen(false)}>
-                                        <HomeIcon className="h-5 w-5 inline mr-2" /> Proyectos
+                                        <FaMicrochip className="h-5 w-5 inline mr-2" /> Proyectos
                                     </NavLink>
                                     <NavLink to="/about" className="block py-2 text-[var(--color-text-primary)] hover:text-[var(--color-accent-jedi-blue)] transition duration-150" onClick={() => setIsMenuOpen(false)}>
-                                        <InformationCircleIcon className="h-5 w-5 inline mr-2" /> Acerca de
+                                        <FaUserAstronaut className="h-5 w-5 inline mr-2" /> Acerca de
                                     </NavLink>
                                     <NavLink to="/contact" className="block py-2 text-[var(--color-text-primary)] hover:text-[var(--color-accent-jedi-green)] transition duration-150" onClick={() => setIsMenuOpen(false)}>
-                                        <PhoneIcon className="h-5 w-5 inline mr-2" /> Contacto
+                                        <FaSatelliteDish className="h-5 w-5 inline mr-2" /> Contacto
                                     </NavLink>
                                 </nav>
                             </div>

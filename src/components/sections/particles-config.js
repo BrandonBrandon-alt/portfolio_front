@@ -85,9 +85,26 @@ const particlesOptions = {
     },
     shape: {
       type: "circle",
+      options: {
+        star: {
+          sides: 5,
+        },
+        polygon: {
+          sides: 5,
+        },
+        "hyperspace-line": {
+          length: 20,
+        },
+      },
     },
     size: {
       value: { min: 1, max: 3 },
+      animation: {
+        enable: false,
+        speed: 40,
+        minimumValue: 0.1,
+        sync: false,
+      },
     },
   },
   detectRetina: true,

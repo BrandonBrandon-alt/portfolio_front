@@ -48,14 +48,14 @@ const ProjectCard = ({ project }) => {
 
             {/* Tecnologías visibles al fondo sin overlay */}
             <div className="mt-6 border-t border-accent-cyan/30 pt-4 opacity-70 group-hover:opacity-100 transition-opacity duration-300">
-                <p className="text-sm text-accent-magenta mb-2 font-semibold">
-                    Tecnologías:
+                <p className="text-sm text-accent-magenta mb-2 font-semibold font-mono uppercase tracking-wider">
+                    // Tech Stack
                 </p>
                 <div className="flex flex-wrap justify-start gap-3">
                     {techList.map((tech, index) => (
                         <div key={index} className="tooltip" title={tech}>
                             {techIcons[tech] || (
-                                <span className="text-white text-sm">{tech}</span>
+                                <span className="text-white text-sm font-mono">{tech}</span>
                             )}
                         </div>
                     ))}

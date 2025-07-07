@@ -11,6 +11,7 @@ import {
   SiTailwindcss, SiVite
 } from "react-icons/si";
 import {FaAngular, FaDatabase, FaDocker, FaGitAlt, FaJava, FaNodeJs, FaPython, FaReact} from "react-icons/fa";
+import { containerVariants, itemVariants } from '../../styles/animations';
 
 const skills = [
   { name: 'React', icon: FaReact, color: 'cyan-400' },
@@ -34,29 +35,14 @@ const skills = [
   { name: 'Vite', icon: SiVite, color: 'purple-500' },
 ];
 
-const containerVariants = {
-  hidden: { opacity: 0, y: 50 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      delay: 0.5,
-      duration: 0.8,
-      ease: "easeOut",
-      staggerChildren: 0.1,
-    },
-  },
-};
+const SkillsSection = ({ isStandalonePage = false }) => {
+  const sectionClasses = isStandalonePage
+    ? "py-4 container mx-auto text-center"
+    : "py-20 px-4 container mx-auto text-center mt-12";
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0 },
-};
-
-const SkillsSection = () => {
   return (
       <motion.section
-          className="py-20 px-4 container mx-auto text-center mt-12"
+          className={sectionClasses}
           variants={containerVariants}
           initial="hidden"
           animate="visible"

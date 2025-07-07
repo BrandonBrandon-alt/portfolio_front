@@ -1,21 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { NavLink } from 'react-router-dom';
+import { containerVariants } from '../../styles/animations';
 
 const AboutTeaser = () => {
-  const containerVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        delay: 0.4,
-        duration: 0.8,
-        ease: "easeOut",
-      },
-    },
-  };
-
   return (
       <motion.section
           className="py-20 px-6 md:px-12 container mx-auto text-center bg-[var(--color-background)]/30 backdrop-blur-lg border border-[var(--color-accent-jedi-green)]/30 rounded-3xl shadow-[0_0_30px_var(--color-accent-jedi-blue)] mt-16 animate-fade-in-up"

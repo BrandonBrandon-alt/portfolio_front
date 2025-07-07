@@ -1,33 +1,7 @@
 import { Link } from 'react-router-dom';
 import '../styles/HeroTextAnimation.css';
 import { motion } from "framer-motion";
-
-const containerVariants = {
-  hidden: { opacity: 0, y: 50 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      delay: 0.2, // Retraso inicial para la página
-      duration: 0.8,
-      ease: "easeOut",
-      when: "beforeChildren",
-      staggerChildren: 0.3,
-    },
-  },
-};
-
-const itemVariants = {
-  hidden: { y: 20, opacity: 0 },
-  visible: {
-    y: 0,
-    opacity: 1,
-    transition: {
-      duration: 0.8,
-      ease: "easeOut",
-    },
-  },
-};
+import { containerVariants, itemVariants } from '../styles/animations';
 
 const AboutPage = () => {
   return (
@@ -48,14 +22,11 @@ const AboutPage = () => {
         className="mb-10 text-center md:text-left"
         variants={itemVariants}
       >
-        {/* Espacio para tu imagen */}
-        {/* <img src="/path/to/your/image.jpg" alt="Tu Nombre" className="w-48 h-48 rounded-full mx-auto mb-6 object-cover shadow-lg border-4 border-[var(--color-accent-jedi-blue)]" /> */}
-        
         <motion.p className="text-lg leading-relaxed text-[var(--color-text-primary)] mb-4" variants={itemVariants}>
-          ¡Hola! Soy [Tu Nombre], un desarrollador [Front-end/Full-stack/etc.] apasionado por transformar ideas creativas en soluciones digitales funcionales y estéticamente atractivas. Mi objetivo es construir experiencias de usuario intuitivas y de alto rendimiento que dejen una impresión duradera.
+          ¡Hola! Soy <strong>Brandon Montealegre</strong>, un desarrollador <strong>Full Stack</strong> apasionado por transformar ideas creativas en soluciones digitales funcionales y estéticamente atractivas. Mi objetivo es construir experiencias de usuario intuitivas y de alto rendimiento que dejen una impresión duradera.
         </motion.p>
         <motion.p className="text-lg leading-relaxed text-[var(--color-text-primary)]" variants={itemVariants}>
-          Con una sólida base en [menciona 1-2 tecnologías clave, ej. React y Node.js], me dedico a la mejora continua y a la exploración de nuevas herramientas y metodologías para mantenerme a la vanguardia en el dinámico mundo del desarrollo web.
+          Con una sólida base en <strong>React y Node.js</strong>, me dedico a la mejora continua y a la exploración de nuevas herramientas y metodologías para mantenerme a la vanguardia en el dinámico mundo del desarrollo web.
         </motion.p>
       </motion.section>
 
@@ -65,10 +36,10 @@ const AboutPage = () => {
       >
         <h2 className="text-3xl font-bold mb-6 text-center md:text-left">Mi Trayectoria</h2>
         <motion.p className="text-base leading-relaxed text-[var(--color-text-primary)] mb-4" variants={itemVariants}>
-          Mi viaje en el desarrollo comenzó con [menciona cómo empezaste, ej. la curiosidad por cómo funcionaban las aplicaciones web, un curso, un proyecto personal]. Desde entonces, he cultivado una profunda pasión por el código y el diseño, siempre buscando la manera más eficiente y elegante de resolver problemas.
+          Mi viaje en el desarrollo comenzó con la curiosidad por cómo funcionaban las aplicaciones web. Desde entonces, he cultivado una profunda pasión por el código y el diseño, siempre buscando la manera más eficiente y elegante de resolver problemas.
         </motion.p>
         <motion.p className="text-base leading-relaxed text-[var(--color-text-primary)]" variants={itemVariants}>
-          A lo largo de mi carrera, he tenido la oportunidad de trabajar en [menciona tipos de proyectos o entornos, ej. proyectos desafiantes que me han permitido crecer en el desarrollo de interfaces de usuario complejas y la optimización de rendimiento]. Cada experiencia ha sido una valiosa lección que ha moldeado mi enfoque hacia la creación de software robusto y escalable.
+          A lo largo de mi carrera, he tenido la oportunidad de trabajar en proyectos desafiantes que me han permitido crecer en el desarrollo de interfaces de usuario complejas y la optimización de rendimiento. Cada experiencia ha sido una valiosa lección que ha moldeado mi enfoque hacia la creación de software robusto y escalable.
         </motion.p>
       </motion.section>
 
@@ -78,7 +49,7 @@ const AboutPage = () => {
       >
         <h2 className="text-3xl font-bold mb-6 text-center md:text-left">Filosofía y Enfoque</h2>
         <motion.p className="text-base leading-relaxed text-[var(--color-text-primary)] mb-4" variants={itemVariants}>
-          Mi filosofía de trabajo se centra en la **calidad, la colaboración y la innovación**. Creo firmemente en escribir código limpio, modular y bien documentado que sea fácil de mantener y escalar. La comunicación efectiva y el trabajo en equipo son pilares fundamentales en cada proyecto en el que me involucro, buscando siempre la mejor solución en conjunto.
+          Mi filosofía de trabajo se centra en la <strong>calidad, la colaboración y la innovación</strong>. Creo firmemente en escribir código limpio, modular y bien documentado que sea fácil de mantener y escalar. La comunicación efectiva y el trabajo en equipo son pilares fundamentales en cada proyecto en el que me involucro, buscando siempre la mejor solución en conjunto.
         </motion.p>
         <motion.p className="text-base leading-relaxed text-[var(--color-text-primary)]" variants={itemVariants}>
           Me apasiona el diseño centrado en el usuario, asegurando que cada interacción sea intuitiva y agradable. Siempre estoy abierto a aprender nuevas tecnologías y a adaptarme a los requisitos cambiantes de los proyectos, manteniendo una mentalidad de crecimiento constante.
@@ -93,10 +64,11 @@ const AboutPage = () => {
         <motion.p className="text-base leading-relaxed text-[var(--color-text-primary)]" variants={itemVariants}>
           Mis principales habilidades incluyen:
           <ul className="list-disc list-inside mt-2 space-y-1">
-            <motion.li variants={itemVariants}>**Desarrollo Front-end:** [HTML5, CSS3, JavaScript (ES6+), React.js, Next.js, Tailwind CSS, Framer Motion]</motion.li>
-            <motion.li variants={itemVariants}>**Desarrollo Back-end (si aplica):** [Node.js, Express.js, Python, FastAPI, Bases de Datos (MongoDB, PostgreSQL)]</motion.li>
-            <motion.li variants={itemVariants}>**Herramientas y Metodologías:** [Git, GitHub, Metodologías Ágiles, Responsive Design, Optimización de Rendimiento]</motion.li>
-            <motion.li variants={itemVariants}>**Habilidades Blandas:** [Resolución de Problemas, Aprendizaje Rápido, Trabajo en Equipo, Comunicación Efectiva, Adaptabilidad]</motion.li>
+            <motion.li variants={itemVariants}>**Desarrollo Front-end:** HTML5, CSS3, JavaScript (ES6+), React.js, Angular, Tailwind CSS, Vite</motion.li>
+            <motion.li variants={itemVariants}>**Desarrollo Back-end:** Node.js, Python, Django, Java, Spring Boot, JWT</motion.li>
+            <motion.li variants={itemVariants}>**Bases de Datos:** MongoDB, PostgreSQL, Oracle, SQL</motion.li>
+            <motion.li variants={itemVariants}>**Herramientas y Metodologías:** Git, Docker, Podman, Postman, Metodologías Ágiles, Responsive Design, Optimización de Rendimiento</motion.li>
+            <motion.li variants={itemVariants}>**Habilidades Blandas:** Resolución de Problemas, Aprendizaje Rápido, Trabajo en Equipo, Comunicación Efectiva, Adaptabilidad</motion.li>
           </ul>
         </motion.p>
       </motion.section>

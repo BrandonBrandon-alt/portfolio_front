@@ -1,41 +1,80 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import Particles from "@tsparticles/react";
 import { loadSlim } from "tsparticles-slim";
 import particlesOptions from "./particles-config";
 import Button from "../ui/Button";
 import "../../styles/HeroTextAnimation.css";
-
-const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-        opacity: 1,
-        transition: {
-            staggerChildren: 0.3,
-        },
-    },
-};
-
-const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-        y: 0,
-        opacity: 1,
-        transition: {
-            duration: 0.8,
-            ease: "easeOut",
-        },
-    },
-};
+import { containerVariants, itemVariants } from '../../styles/animations';
 
 const Hero = () => {
+    const [particlesContainer, setParticlesContainer] = useState(null);
+    const [isHyperspace, setIsHyperspace] = useState(false);
+
     const particlesInit = useCallback(async engine => {
         await loadSlim(engine);
     }, []);
 
     const particlesLoaded = useCallback(async container => {
-        console.log(container);
+        setParticlesContainer(container);
     }, []);
+
+    const toggleHyperspace = useCallback((enable) => {
+        if (!particlesContainer) return;
+
+        particlesContainer.loadOptions({
+            particles: {
+                move: {
+                    speed: enable ? 200 : 3, // Mucho más rápido en hiperespacio
+                    direction: "none",
+                    random: true,
+                    straight: false,
+                    outModes: {
+                        default: "bounce",
+                    },
+                },
+                shape: {
+                    type: enable ? "line" : "circle", // Estirar a líneas en hiperespacio
+                },
+                size: {
+                    value: enable ? { min: 1, max: 5 } : { min: 1, max: 3 },
+                },
+                links: {
+                    enable: !enable, // Deshabilitar enlaces en hiperespacio
+                },
+                opacity: {
+                    value: enable ? 0.5 : 0.7,
+                },
+            },
+        });
+        setIsHyperspace(enable);
+    }, [particlesContainer]);
+
+    useEffect(() => {
+        // Activar hiperespacio al cargar la página por un corto tiempo
+        const timeout = setTimeout(() => {
+            toggleHyperspace(true);
+            setTimeout(() => toggleHyperspace(false), 1000); // Duración del efecto
+        }, 500); // Retraso inicial
+
+        return () => clearTimeout(timeout);
+    }, [toggleHyperspace]);
+
+    // Opcional: Activar hiperespacio al hacer scroll hacia arriba rápidamente
+    useEffect(() => {
+        let lastScrollY = window.scrollY;
+        const handleScroll = () => {
+            const currentScrollY = window.scrollY;
+            if (currentScrollY < lastScrollY && currentScrollY < 50 && !isHyperspace) { // Si sube y está cerca del top
+                toggleHyperspace(true);
+                setTimeout(() => toggleHyperspace(false), 1000);
+            }
+            lastScrollY = currentScrollY;
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, [isHyperspace, toggleHyperspace]);
 
     return (
         <section className="h-screen w-full flex flex-col justify-center items-center relative overflow-hidden bg-gradient-to-b from-black via-gray-900 to-[var(--color-background)]">

@@ -23,7 +23,12 @@ const socialLinks = [
 
 const Footer = ({ children }) => {
   return (
-      <footer className="bg-[var(--color-background)] text-[var(--color-text-primary)] border-t border-[var(--color-accent-jedi-blue)]/40 py-10 backdrop-blur-sm shadow-inner shadow-[var(--color-accent-jedi-blue)]/10">
+      <motion.footer
+          className="hologram-footer bg-[var(--color-background)] text-[var(--color-text-primary)] border-t border-[var(--color-accent-jedi-blue)]/40 py-10 backdrop-blur-sm shadow-inner shadow-[var(--color-accent-jedi-blue)]/10"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+      >
         <div className="container mx-auto px-4 flex flex-col md:flex-row md:justify-between gap-12 items-center md:items-start text-center md:text-left">
           {/* Contacto */}
           <div className="flex-1">
@@ -66,12 +71,14 @@ const Footer = ({ children }) => {
         </div>
 
         {/* Línea inferior */}
-        <div className="container mx-auto px-4 mt-8 border-t border-white/10 pt-4 text-center text-xs text-[var(--color-text-muted)] tracking-wide">
-          &copy; {new Date().getFullYear()} BRAN/DEV — Todos los derechos reservados.
+        <div className="container mx-auto px-4 mt-8 border-t border-white/10 pt-4 text-center text-xs text-[var(--color-text-muted)] tracking-wide flex flex-col items-center justify-center">
+          <p>&copy; {new Date().getFullYear()} BRAN/DEV - Galactic Solutions</p>
+          {/* Placeholder for Star Wars themed icon, e.g., a small R2-D2 or BB-8 SVG */}
+          {/* <img src="/path/to/your/star-wars-icon.svg" alt="Star Wars Icon" className="h-6 w-6 mt-2" /> */}
         </div>
 
         {children && <div className="mt-2 w-full">{children}</div>}
-      </footer>
+      </motion.footer>
   );
 };
 
