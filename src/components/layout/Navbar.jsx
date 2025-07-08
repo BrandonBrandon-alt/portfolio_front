@@ -118,7 +118,7 @@ const Navbar = () => {
                                 }}
                             />
                         </svg>
-                        <span className="leading-none"> BRAN/DEV</span>
+                        <span className="leading-none"> BRAN|DEV</span>
                     </motion.div>
                 </NavLink>
 
@@ -219,7 +219,7 @@ const Navbar = () => {
                                     </Button>
                                 </div>
 
-                                <nav className="space-y-4">
+                                <nav className="space-y-4 bg-red-500">
                                     <NavLink to="/" className="block py-2 text-[var(--color-text-primary)] hover:text-[var(--color-accent-jedi-blue)] transition duration-150" onClick={() => setIsMenuOpen(false)}>
                                         <FaSpaceShuttle className="h-5 w-5 inline mr-2" /> Home
                                     </NavLink>
