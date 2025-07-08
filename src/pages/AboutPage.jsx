@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import '../styles/HeroTextAnimation.css';
 import { motion } from "framer-motion";
 import { containerVariants, itemVariants } from '../styles/animations';
+import React from "react";
 
 const AboutPage = () => {
   return (
@@ -12,10 +13,10 @@ const AboutPage = () => {
       animate="visible"
     >
       <motion.h1
-        className="text-4xl md:text-5xl font-display text-center mb-8 relative inline-block lightsaber-underline animated-text-ray"
-        variants={itemVariants}
+          className="text-4xl md:text-5xl text-center mb-8 lightsaber-underline drop-shadow-[0_0_15px_#0ff] animated-text-ray"
+          variants={itemVariants}
       >
-        Acerca de Mí
+        ACERCA DE
       </motion.h1>
 
       <motion.section

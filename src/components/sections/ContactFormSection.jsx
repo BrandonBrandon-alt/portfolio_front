@@ -113,14 +113,14 @@ const ContactFormSection = () => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
     >
-      <motion.h1
-        className="text-5xl md:text-6xl font-display text-[var(--color-text-primary)] text-center mb-12 lightsaber-underline"
+      <motion.h2
+          className="text-4xl md:text-5xl font-display text-[var(--color-text-primary)] mb-6 lightsaber-underline"
         initial={{ opacity: 0, y: -30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
       >
         Contáctame
-      </motion.h1>
+      </motion.h2>
 
       <Form onSubmit={handleSubmit} className="w-full max-w-lg p-8 rounded-lg bg-[var(--color-background)]/70 border-2 border-[var(--color-accent-jedi-blue)]/40 shadow-xl shadow-[var(--color-accent-jedi-blue)]/20 space-y-6">
         {/* Campo Nombre */}

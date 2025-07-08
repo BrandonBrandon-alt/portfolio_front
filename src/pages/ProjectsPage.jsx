@@ -51,7 +51,7 @@ const ProjectsPage = () => {
         return (
             <motion.section
                 id="proyectos"
-                className="py-24 px-4 container mx-auto"
+                className="py-20 px-6 md:px-12 container mx-auto section-card-style"
                 variants={containerVariants}
                 initial="hidden"
                 animate="visible"
@@ -86,7 +86,7 @@ const ProjectsPage = () => {
                 Proyectos de la Galaxia
             </motion.h2>
             <motion.p
-                className="text-lg md:text-xl font-sans text-[var(--color-text-muted)] text-center max-w-3xl mx-auto mb-12"
+                className="text-lg md:text-xl font-sans text-[var(--color-text-primary)] text-center max-w-3xl mx-auto mb-12"
                 variants={titleVariants}
             >
                 Aquí encontrarás una selección de mis proyectos más destacados, cada uno representando un desafío superado y una oportunidad para aplicar tecnologías innovadoras. Explora las soluciones que he construido.

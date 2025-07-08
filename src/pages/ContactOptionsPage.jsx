@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import ContactFormSection from '../components/sections/ContactFormSection';
 import Button from '../components/ui/Button';
-import { FaLinkedin, FaWhatsapp, FaEnvelope } from 'react-icons/fa';
+import { FaLinkedin, FaWhatsapp, FaEnvelope, FaArrowDown } from 'react-icons/fa';
 import '../styles/HeroTextAnimation.css';
 import { containerVariants, itemVariants } from '../styles/animations';
 
@@ -33,6 +33,17 @@ const ContactOptionsPage = () => {
 
         {/* Formulario de Contacto */}
         <ContactFormSection />
+
+        {/* Indicador de scroll para más opciones */}
+        <motion.div
+          className="text-center my-8"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.5 }}
+        >
+          <p className="text-lg font-sans text-[var(--color-text-primary)] mb-2">O si prefieres...</p>
+          <FaArrowDown className="mx-auto text-4xl text-[var(--color-accent-jedi-blue)] animate-bounce" />
+        </motion.div>
 
         {/* Separador visual */}
         <motion.div
