@@ -5,7 +5,7 @@ import {
     Bars3Icon,
     XMarkIcon,
 } from '@heroicons/react/24/outline';
-import { FaSpaceShuttle, FaMicrochip, FaUserAstronaut, FaSatelliteDish } from 'react-icons/fa'; // Importar nuevos iconos
+import { FaSpaceShuttle, FaMicrochip, FaUserAstronaut, FaSatelliteDish, FaTools } from 'react-icons/fa'; // Importar nuevos iconos
 import Button from '../ui/Button';
 
 const Navbar = () => {
@@ -74,7 +74,7 @@ const Navbar = () => {
 
     return (
         <motion.nav
-            className="navbar-hologram-effect text-[var(--color-text-primary)] border-b border-[var(--color-accent-jedi-blue)]/40 py-3 backdrop-blur-sm shadow-inner shadow-[var(--color-accent-jedi-blue)]/10 sticky top-0 z-50"
+            className="hologram-effect text-[var(--color-text-primary)] border-b border-[var(--color-accent-jedi-blue)]/40 py-3 backdrop-blur-sm shadow-inner shadow-[var(--color-accent-jedi-blue)]/10 sticky top-0 z-50"
             initial="hidden"
             animate="visible"
             variants={navVariants}
@@ -118,7 +118,7 @@ const Navbar = () => {
                                 }}
                             />
                         </svg>
-                        <span className="leading-none"> BRAN|DEV</span>
+                        <span className="leading-none font-display text-[var(--color-accent-jedi-blue)] drop-shadow-[0_0_8px_var(--color-accent-jedi-blue)]"> BRAN|DEV</span>
                     </motion.div>
                 </NavLink>
 
@@ -141,6 +141,11 @@ const Navbar = () => {
                     <li>
                         <motion.div variants={navListItemVariants}>
                             <NavLink to="/projects" className={getNavLinkClasses}><FaMicrochip className="h-5 w-5 mr-1" />Proyectos</NavLink>
+                        </motion.div>
+                    </li>
+                    <li>
+                        <motion.div variants={navListItemVariants}>
+                            <NavLink to="/skills" className={getNavLinkClasses}><FaTools className="h-5 w-5 mr-1" />Habilidades</NavLink>
                         </motion.div>
                     </li>
                     <li>
@@ -225,6 +230,9 @@ const Navbar = () => {
                                     </NavLink>
                                     <NavLink to="/projects" className="block py-2 text-[var(--color-text-primary)] hover:text-[var(--color-accent-jedi-blue)] transition duration-150" onClick={() => setIsMenuOpen(false)}>
                                         <FaMicrochip className="h-5 w-5 inline mr-2" /> Proyectos
+                                    </NavLink>
+                                    <NavLink to="/skills" className="block py-2 text-[var(--color-text-primary)] hover:text-[var(--color-accent-jedi-blue)] transition duration-150" onClick={() => setIsMenuOpen(false)}>
+                                        <FaTools className="h-5 w-5 inline mr-2" /> Habilidades
                                     </NavLink>
                                     <NavLink to="/about" className="block py-2 text-[var(--color-text-primary)] hover:text-[var(--color-accent-jedi-blue)] transition duration-150" onClick={() => setIsMenuOpen(false)}>
                                         <FaUserAstronaut className="h-5 w-5 inline mr-2" /> Acerca de

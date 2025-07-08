@@ -5,6 +5,7 @@ import { loadSlim } from "tsparticles-slim";
 import particlesOptions from "./particles-config";
 import Button from "../ui/Button";
 import "../../styles/HeroTextAnimation.css";
+import { FaCode } from 'react-icons/fa'; // Importar nuevos iconos
 import { containerVariants, itemVariants } from '../../styles/animations';
 
 const Hero = () => {
@@ -96,13 +97,19 @@ const Hero = () => {
                     className="text-5xl md:text-7xl font-display text-[var(--color-text-primary)] mb-4 relative inline-block lightsaber-underline drop-shadow-[0_0_15px_#0ff] animated-text-ray"
                     variants={itemVariants}
                 >
-                    BRANDON MONTEALEGRE
+                    <FaCode className="inline-block mr-4 text-[var(--color-accent-jedi-green)]" /> BRANDON MONTEALEGRE
                 </motion.h1>
                 <motion.p
                     className="text-xl md:text-2xl font-sans text-[var(--color-text-primary)] mt-4 drop-shadow-[0_0_5px_#0ff]"
                     variants={itemVariants}
                 >
                     Desarrollador Full Stack | Creando Experiencias del Futuro
+                </motion.p>
+                <motion.p
+                    className="text-lg md:text-xl font-sans text-[var(--color-text-muted)] mt-2 max-w-2xl mx-auto"
+                    variants={itemVariants}
+                >
+                    Transformando ideas en soluciones digitales innovadoras con un enfoque en la eficiencia y la experiencia de usuario.
                 </motion.p>
 
                 <motion.div
