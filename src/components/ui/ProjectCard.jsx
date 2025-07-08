@@ -63,11 +63,11 @@ const ProjectCard = ({ project }) => {
             </div>
 
             {/* Botones holográficos con efecto escáner */}
-            <div className="flex justify-end gap-4 mt-6 relative z-20">
+            <div className="flex flex-col md:flex-row justify-end gap-3 md:gap-4 mt-6 relative z-20">
                 <Button
                     as={Link}
                     to={`/projects/${project.id}`}
-                    className="border-[var(--color-accent-sith-red)] text-[var(--color-accent-sith-red)] hover:bg-[var(--color-accent-sith-red)] hover:text-[var(--color-background)] shadow-[0_0_15px_var(--color-accent-sith-red)] hover:shadow-[0_0_30px_var(--color-accent-sith-red)]"
+                    className="w-full md:w-auto border-[var(--color-accent-sith-red)] text-[var(--color-accent-sith-red)] hover:bg-[var(--color-accent-sith-red)] hover:text-[var(--color-background)] shadow-[0_0_15px_var(--color-accent-sith-red)] hover:shadow-[0_0_30px_var(--color-accent-sith-red)]"
                 >
                     Ver Detalles
                 </Button>
@@ -77,7 +77,7 @@ const ProjectCard = ({ project }) => {
                         href={project.liveUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="border-[var(--color-accent-jedi-blue)] text-[var(--color-accent-jedi-blue)] hover:bg-[var(--color-accent-jedi-blue)] hover:text-[var(--color-background)] shadow-[0_0_15px_var(--color-accent-jedi-blue)] hover:shadow-[0_0_30px_var(--color-accent-jedi-blue)]"
+                        className="w-full md:w-auto border-[var(--color-accent-jedi-blue)] text-[var(--color-accent-jedi-blue)] hover:bg-[var(--color-accent-jedi-blue)] hover:text-[var(--color-background)] shadow-[0_0_15px_var(--color-accent-jedi-blue)] hover:shadow-[0_0_30px_var(--color-accent-jedi-blue)]"
                     >
                         Ver Demo
                     </Button>
@@ -88,7 +88,7 @@ const ProjectCard = ({ project }) => {
                         href={project.githubUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="border-[var(--color-accent-jedi-green)] text-[var(--color-accent-jedi-green)] hover:bg-[var(--color-accent-jedi-green)] hover:text-[var(--color-background)] shadow-[0_0_15px_var(--color-accent-jedi-green)] hover:shadow-[0_0_30px_var(--color-accent-jedi-green)]"
+                        className="w-full md:w-auto border-[var(--color-accent-jedi-green)] text-[var(--color-accent-jedi-green)] hover:bg-[var(--color-accent-jedi-green)] hover:text-[var(--color-background)] shadow-[0_0_15px_var(--color-accent-jedi-green)] hover:shadow-[0_0_30px_var(--color-accent-jedi-green)]"
                     >
                         Ver Repositorio Git
                     </Button>
