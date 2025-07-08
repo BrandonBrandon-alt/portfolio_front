@@ -133,10 +133,9 @@ const ContactFormSection = () => {
             placeholder="Tu Nombre"
             value={formData.name}
             onChange={handleChange}
-            className={`w-full p-3 rounded-md bg-[var(--color-background)]/60 border-2 ${errors.name ? 'border-red-500' : 'border-[var(--color-accent-jedi-blue)]/50'} text-[var(--color-text-primary)] placeholder-[var(--color-text-muted)] focus:outline-none focus:border-[var(--color-accent-jedi-green)] focus:ring-2 focus:ring-[var(--color-accent-jedi-green)]/50 transition-all duration-300 ease-in-out shadow-md`}
+            hasError={!!errors.name}
+            errorMessage={errors.name}
           />
-          {/* Mostrar mensaje de error */}
-          {errors.name && <p className="text-red-400 text-sm mt-1 text-left">{errors.name}</p>}
         </div>
 
         {/* Campo Correo Electrónico */}
@@ -149,9 +148,9 @@ const ContactFormSection = () => {
             placeholder="Tu Correo Electrónico"
             value={formData.email}
             onChange={handleChange}
-            className={`w-full p-3 rounded-md bg-[var(--color-background)]/60 border-2 ${errors.email ? 'border-red-500' : 'border-[var(--color-accent-jedi-blue)]/50'} text-[var(--color-text-primary)] placeholder-[var(--color-text-muted)] focus:outline-none focus:border-[var(--color-accent-jedi-green)] focus:ring-2 focus:ring-[var(--color-accent-jedi-green)]/50 transition-all duration-300 ease-in-out shadow-md`}
+            hasError={!!errors.email}
+            errorMessage={errors.email}
           />
-          {errors.email && <p className="text-red-400 text-sm mt-1 text-left">{errors.email}</p>}
         </div>
 
         {/* Campo Mensaje */}
@@ -164,9 +163,9 @@ const ContactFormSection = () => {
             value={formData.message}
             onChange={handleChange}
             rows="6"
-            className={`w-full p-3 rounded-md bg-[var(--color-background)]/60 border-2 ${errors.message ? 'border-red-500' : 'border-[var(--color-accent-jedi-blue)]/50'} text-[var(--color-text-primary)] placeholder-[var(--color-text-muted)] focus:outline-none focus:border-[var(--color-accent-jedi-green)] focus:ring-2 focus:ring-[var(--color-accent-jedi-green)]/50 transition-all duration-300 ease-in-out shadow-md`}
+            className={`w-full p-3 rounded-md bg-[var(--color-background)]/60 border-2 ${errors.message ? 'border-[var(--color-accent-sith-red)]' : 'border-[var(--color-accent-jedi-blue)]/50'} text-[var(--color-text-primary)] placeholder-[var(--color-text-muted)] focus:outline-none focus:border-[var(--color-accent-jedi-green)] focus:ring-2 focus:ring-[var(--color-accent-jedi-green)]/50 transition-all duration-300 ease-in-out shadow-md`}
           ></textarea>
-          {errors.message && <p className="text-red-400 text-sm mt-1 text-left">{errors.message}</p>}
+          {errors.message && <p className="text-[var(--color-accent-sith-red)] text-sm mt-1 text-left">{errors.message}</p>}
         </div>
         <Button type="submit" className="w-full border-[var(--color-accent-jedi-blue)] text-[var(--color-accent-jedi-blue)] hover:bg-[var(--color-accent-jedi-blue)] hover:text-[var(--color-background)] shadow-[0_0_10px_var(--color-accent-jedi-blue)] hover:shadow-[0_0_20px_var(--color-accent-jedi-blue)]">
           Enviar Mensaje

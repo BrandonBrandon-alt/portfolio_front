@@ -80,11 +80,17 @@ const ProjectsPage = () => {
             animate="visible"
         >
             <motion.h2
-                className="text-4xl md:text-5xl font-display text-center mb-16 lightsaber-underline text-[var(--color-text-primary)]"
+                className="text-4xl md:text-5xl font-display text-center mb-6 lightsaber-underline text-[var(--color-text-primary)]"
                 variants={titleVariants}
             >
                 Proyectos de la Galaxia
             </motion.h2>
+            <motion.p
+                className="text-lg md:text-xl font-sans text-[var(--color-text-muted)] text-center max-w-3xl mx-auto mb-12"
+                variants={titleVariants}
+            >
+                Aquí encontrarás una selección de mis proyectos más destacados, cada uno representando un desafío superado y una oportunidad para aplicar tecnologías innovadoras. Explora las soluciones que he construido.
+            </motion.p>
 
             {projects.length > 0 ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

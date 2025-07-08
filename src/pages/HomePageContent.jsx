@@ -38,14 +38,16 @@ const HomePageContent = () => {
   return (
     <>
       <Hero />
+      <div className="py-16">
         <Carousel slides={ctaSlides} />
-      <div className="py-10">
+      </div>
+      <div className="py-16">
         <AboutTeaser />
       </div>
-      <div className="py-10">
+      <div className="py-16">
         <SkillsSection />
       </div>
-      <div className="py-10">
+      <div className="py-16">
         <ProjectList />
       </div>
     </>
