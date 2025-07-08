@@ -1,19 +1,13 @@
 // src/ProjectList.jsx
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import projectsData from '../../data/projects.json';
 import ProjectCard from '../ui/ProjectCard'; // Import ProjectCard
 
 const ProjectList = () => {
     const [projects, setProjects] = useState([]);
 
     useEffect(() => {
-        axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/projects/`)
-            .then(response => {
-                setProjects(response.data);
-            })
-            .catch(error => {
-                console.error("Hubo un error al obtener los proyectos:", error);
-            });
+        setProjects(projectsData);
     }, []);
 
     return (

@@ -1,6 +1,6 @@
 // src/pages/ProjectsPage.jsx
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import projectsData from '../data/projects.json';
 import { motion } from 'framer-motion';
 import ProjectCard from '../components/ui/ProjectCard';
 import ProjectCardSkeleton from '../components/ui/ProjectCardSkeleton';
@@ -10,15 +10,13 @@ const ProjectsPage = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/projects/`)
-            .then(response => {
-                setProjects(response.data);
-                setLoading(false);
-            })
-            .catch(error => {
-                console.error("Error al obtener los proyectos:", error);
-                setLoading(false);
-            });
+        try {
+            setProjects(projectsData);
+            setLoading(false);
+        } catch (err) {
+            console.error("Error loading projects:", err);
+            setLoading(false);
+        }
     }, []);
 
     const containerVariants = {
@@ -83,7 +81,7 @@ const ProjectsPage = () => {
                 className="text-4xl md:text-5xl font-display text-center mb-6 lightsaber-underline text-[var(--color-text-primary)]"
                 variants={titleVariants}
             >
-                Proyectos de la Galaxia
+                HOLOCRONES DE PROYECTOS
             </motion.h2>
             <motion.p
                 className="text-lg md:text-xl font-sans text-[var(--color-text-primary)] text-center max-w-3xl mx-auto mb-12"
@@ -105,7 +103,7 @@ const ProjectsPage = () => {
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.4 }}
                 >
-                    No se encontraron proyectos registrados en esta estrella.
+                    No se encontraron proyectos registrados en este holocrón.
                 </motion.p>
             )}
         </motion.section>
