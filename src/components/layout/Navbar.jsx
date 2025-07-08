@@ -74,7 +74,7 @@ const Navbar = () => {
 
     return (
         <motion.nav
-            className="navbar-hologram-effect text-[var(--color-text-primary)] border-b border-[var(--color-accent-jedi-blue)]/40 py-3 backdrop-blur-sm shadow-inner shadow-[var(--color-accent-jedi-blue)]/10 sticky top-0 z-50"
+            className="hologram-effect text-[var(--color-text-primary)] border-b border-[var(--color-accent-jedi-blue)]/40 py-3 backdrop-blur-sm shadow-inner shadow-[var(--color-accent-jedi-blue)]/10 sticky top-0 z-50"
             initial="hidden"
             animate="visible"
             variants={navVariants}
@@ -118,7 +118,7 @@ const Navbar = () => {
                                 }}
                             />
                         </svg>
-                        <span className="leading-none"> BRAN|DEV</span>
+                        <span className="leading-none font-display text-[var(--color-accent-jedi-blue)] drop-shadow-[0_0_8px_var(--color-accent-jedi-blue)]"> BRAN|DEV</span>
                     </motion.div>
                 </NavLink>
 

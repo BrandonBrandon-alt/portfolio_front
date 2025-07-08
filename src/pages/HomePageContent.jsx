@@ -2,7 +2,8 @@ import React from 'react';
 import Hero from '../components/sections/Hero';
 import AboutTeaser from '../components/sections/AboutTeaser';
 import SkillsSection from '../components/sections/SkillsSection';
-import Carousel from '../components/Carousel'; // Import the Carousel component
+import ProjectList from '../components/sections/ProjectList'; // Import the ProjectList component
+import Carousel from '../components/ui/Carousel'; // Import the Carousel component
 
 const ctaSlides = [
   {
@@ -37,9 +38,18 @@ const HomePageContent = () => {
   return (
     <>
       <Hero />
-      <Carousel slides={ctaSlides} /> {/* Moved Carousel here */}
-      <AboutTeaser />
-      <SkillsSection />
+      <div className="py-10">
+        <Carousel slides={ctaSlides} />
+      </div>
+      <div className="py-10">
+        <AboutTeaser />
+      </div>
+      <div className="py-10">
+        <SkillsSection />
+      </div>
+      <div className="py-10">
+        <ProjectList />
+      </div>
     </>
   );
 };

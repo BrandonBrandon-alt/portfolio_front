@@ -1,9 +1,10 @@
 import React, { lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import ScrollToTop from './components/utils/ScrollToTop';
 
 // Importa tus componentes de layout y UI
 import MainLayout from './components/layout/MainLayout';
-import ErrorBoundary from './components/ErrorBoundary';
+import ErrorBoundary from './components/utils/ErrorBoundary.jsx';
 
 // --- LAZY LOADING PAGES ---
 const ProjectsPage = lazy(() => import('./pages/ProjectsPage'));
@@ -20,6 +21,7 @@ const NotFound = () => <div className="flex items-center justify-center min-h-[c
 function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <ErrorBoundary>
         <MainLayout>
           <Suspense fallback={<div className="flex items-center justify-center h-screen text-[var(--color-accent-jedi-blue)]">Cargando...</div>}> {/* Puedes usar un spinner aquí */}

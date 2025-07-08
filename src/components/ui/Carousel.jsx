@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { motion, useMotionValue } from 'framer-motion';
-import Button from './ui/Button'; // Asegúrate de que Button esté disponible
+import Button from './Button.jsx'; // Asegúrate de que Button esté disponible
 
 const Carousel = ({ slides }) => {
   const carouselRef = useRef(null);
