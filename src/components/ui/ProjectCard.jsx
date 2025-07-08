@@ -71,10 +71,10 @@ const ProjectCard = ({ project }) => {
                 >
                     Ver Detalles
                 </Button>
-                {project.project_url && (
+                {project.liveUrl && (
                     <Button
                         as="a"
-                        href={project.project_url}
+                        href={project.liveUrl}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="border-[var(--color-accent-jedi-blue)] text-[var(--color-accent-jedi-blue)] hover:bg-[var(--color-accent-jedi-blue)] hover:text-[var(--color-background)] shadow-[0_0_15px_var(--color-accent-jedi-blue)] hover:shadow-[0_0_30px_var(--color-accent-jedi-blue)]"
@@ -82,15 +82,15 @@ const ProjectCard = ({ project }) => {
                         Ver Demo
                     </Button>
                 )}
-                {project.repository_url && (
+                {project.githubUrl && (
                     <Button
                         as="a"
-                        href={project.repository_url}
+                        href={project.githubUrl}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="border-[var(--color-accent-jedi-green)] text-[var(--color-accent-jedi-green)] hover:bg-[var(--color-accent-jedi-green)] hover:text-[var(--color-background)] shadow-[0_0_15px_var(--color-accent-jedi-green)] hover:shadow-[0_0_30px_var(--color-accent-jedi-green)]"
                     >
-                        Ver Código
+                        Ver Repositorio Git
                     </Button>
                 )}
             </div>

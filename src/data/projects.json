@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "title": "Mi Primer Proyecto Web",
+    "description": "Una aplicación web sencilla para gestionar tareas diarias, construida con HTML, CSS y JavaScript puro. Demuestra habilidades básicas de manipulación del DOM y eventos.",
+    "imageUrl": "/images/project-task-app.png",
+    "technologies": ["HTML", "CSS", "JavaScript"],
+    "githubUrl": "https://github.com/tuusuario/mi-proyecto-tareas",
+    "liveUrl": "https://tuusuario.github.io/mi-proyecto-tareas/"
+  },
+  {
+    "id": 2,
+    "title": "E-commerce con React",
+    "description": "Plataforma de comercio electrónico desarrollada con React.js, utilizando Redux para la gestión del estado y Stripe para los pagos. Incluye autenticación de usuarios y carrito de compras.",
+    "imageUrl": "/images/project-ecommerce.jpg",
+    "technologies": ["React", "Redux", "Node.js", "Express", "MongoDB", "Stripe"],
+    "githubUrl": "https://github.com/tuusuario/ecommerce-react",
+    "liveUrl": "https://ecommerce-demo.vercel.app/"
+  },
+  {
+    "id": 3,
+    "title": "Blog Personal con Next.js",
+    "description": "Un blog personal moderno y rápido, construido con Next.js y Markdown. Permite escribir y publicar artículos fácilmente, con soporte para SEO y carga optimizada de imágenes.",
+    "imageUrl": "/images/project-blog.webp",
+    "technologies": ["Next.js", "React", "Markdown", "Tailwind CSS"],
+    "githubUrl": "https://github.com/tuusuario/personal-blog-nextjs",
+    "liveUrl": "https://tu-blog-personal.vercel.app/"
+  },
+  {
+    "id": 4,
+    "title": "E-commerce con React",
+    "description": "Plataforma de comercio electrónico desarrollada con React.js, utilizando Redux para la gestión del estado y Stripe para los pagos. Incluye autenticación de usuarios y carrito de compras.",
+    "imageUrl": "/images/project-ecommerce.jpg",
+    "technologies": ["React", "Redux", "Node.js", "Express", "MongoDB", "Stripe"],
+    "githubUrl": "https://github.com/tuusuario/ecommerce-react",
+    "liveUrl": "https://ecommerce-demo.vercel.app/"
+  }
+]
