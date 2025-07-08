@@ -208,7 +208,7 @@ const Navbar = () => {
                                 </svg>
                                 <span className="text-xl font-bold text-[var(--color-accent-jedi-blue)]">BRAN/DEV</span>
                             </div>
-                            <div className="p-6">
+                            <div className="p-6 overflow-y-auto">
                                 <div className="flex justify-between items-center mb-6">
                                     <h2 className="text-xl font-bold text-[var(--color-text-primary)]">Menú</h2>
                                     <Button
