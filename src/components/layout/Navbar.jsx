@@ -5,7 +5,7 @@ import {
     Bars3Icon,
     XMarkIcon,
 } from '@heroicons/react/24/outline';
-import { FaSpaceShuttle, FaMicrochip, FaUserAstronaut, FaSatelliteDish } from 'react-icons/fa'; // Importar nuevos iconos
+import { FaSpaceShuttle, FaMicrochip, FaUserAstronaut, FaSatelliteDish, FaTools } from 'react-icons/fa'; // Importar nuevos iconos
 import Button from '../ui/Button';
 
 const Navbar = () => {
@@ -145,6 +145,11 @@ const Navbar = () => {
                     </li>
                     <li>
                         <motion.div variants={navListItemVariants}>
+                            <NavLink to="/skills" className={getNavLinkClasses}><FaTools className="h-5 w-5 mr-1" />Habilidades</NavLink>
+                        </motion.div>
+                    </li>
+                    <li>
+                        <motion.div variants={navListItemVariants}>
                             <NavLink to="/about" className={getNavLinkClasses}><FaUserAstronaut className="h-5 w-5 mr-1" />Acerca de</NavLink>
                         </motion.div>
                     </li>
@@ -225,6 +230,9 @@ const Navbar = () => {
                                     </NavLink>
                                     <NavLink to="/projects" className="block py-2 text-[var(--color-text-primary)] hover:text-[var(--color-accent-jedi-blue)] transition duration-150" onClick={() => setIsMenuOpen(false)}>
                                         <FaMicrochip className="h-5 w-5 inline mr-2" /> Proyectos
+                                    </NavLink>
+                                    <NavLink to="/skills" className="block py-2 text-[var(--color-text-primary)] hover:text-[var(--color-accent-jedi-blue)] transition duration-150" onClick={() => setIsMenuOpen(false)}>
+                                        <FaTools className="h-5 w-5 inline mr-2" /> Habilidades
                                     </NavLink>
                                     <NavLink to="/about" className="block py-2 text-[var(--color-text-primary)] hover:text-[var(--color-accent-jedi-blue)] transition duration-150" onClick={() => setIsMenuOpen(false)}>
                                         <FaUserAstronaut className="h-5 w-5 inline mr-2" /> Acerca de

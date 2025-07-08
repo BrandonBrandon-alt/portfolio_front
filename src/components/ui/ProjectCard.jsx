@@ -30,7 +30,7 @@ const ProjectCard = ({ project }) => {
 
     return (
         <motion.div
-            className="project-card-enhanced relative rounded-lg overflow-hidden p-6 backdrop-blur-sm transform transition-all duration-300 ease-in-out group"
+            className="hologram-effect project-card-enhanced relative rounded-lg overflow-hidden p-6 backdrop-blur-sm transform transition-all duration-300 ease-in-out group"
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: "easeOut" }}

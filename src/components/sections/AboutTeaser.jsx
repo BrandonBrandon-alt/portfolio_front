@@ -6,7 +6,7 @@ import { containerVariants } from '../../styles/animations';
 const AboutTeaser = () => {
   return (
       <motion.section
-          className="py-20 px-6 md:px-12 container mx-auto text-center bg-[var(--color-background)]/30 backdrop-blur-lg border border-[var(--color-accent-jedi-green)]/30 rounded-3xl shadow-[0_0_30px_var(--color-accent-jedi-blue)] mt-16 animate-fade-in-up"
+          className="py-20 px-6 md:px-12 container mx-auto text-center section-card-style"
           variants={containerVariants}
           initial="hidden"
           animate="visible"

@@ -46,7 +46,7 @@ const Carousel = ({ slides }) => {
 
   return (
       <motion.div
-          className="relative container mx-auto mt-16 overflow-hidden rounded-3xl bg-[var(--color-background)]/30 backdrop-blur-lg border border-[var(--color-accent-jedi-green)]/30 shadow-[0_0_30px_var(--color-accent-jedi-blue)] py-8 px-6 md:px-12 animate-fade-in-up"
+          className="relative container mx-auto overflow-hidden section-card-style py-8 px-6 md:px-12"
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, type: 'spring', stiffness: 80 }}

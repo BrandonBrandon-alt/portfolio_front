@@ -38,9 +38,7 @@ const HomePageContent = () => {
   return (
     <>
       <Hero />
-      <div className="py-10">
         <Carousel slides={ctaSlides} />
-      </div>
       <div className="py-10">
         <AboutTeaser />
       </div>

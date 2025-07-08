@@ -66,6 +66,7 @@ const Footer = ({ children }) => {
               <li><Link to="/projects" className="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-jedi-blue)] transition">Proyectos</Link></li>
               <li><Link to="/about" className="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-jedi-blue)] transition">Acerca de</Link></li>
               <li><Link to="/contact" className="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-jedi-blue)] transition">Contacto</Link></li>
+              <li><Link to="/skills" className="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-jedi-blue)] transition">Habilidades</Link></li>
             </ul>
           </div>
         </div>

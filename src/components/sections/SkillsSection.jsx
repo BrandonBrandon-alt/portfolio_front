@@ -37,8 +37,8 @@ const skills = [
 
 const SkillsSection = ({ isStandalonePage = false }) => {
   const sectionClasses = isStandalonePage
-    ? "py-4 container mx-auto text-center"
-    : "py-20 px-4 container mx-auto text-center mt-12";
+    ? "py-20 px-4 container mx-auto text-center section-card-style"
+    : "py-20 px-4 container mx-auto text-center section-card-style";
 
   return (
       <motion.section
@@ -54,7 +54,7 @@ const SkillsSection = ({ isStandalonePage = false }) => {
           MATRIZ DE COMPETENCIAS
         </motion.h2>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 max-h-[500px] overflow-y-auto p-4">
           {skills.map((skill, index) => {
             const IconComponent = skill.icon;
             return (
