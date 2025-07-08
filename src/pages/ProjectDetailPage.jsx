@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import axios from 'axios';
+import projectsData from '../data/projects.json';
 import { motion } from 'framer-motion';
 import { ArrowLeftIcon } from '@heroicons/react/24/outline';
 
@@ -11,13 +11,17 @@ const ProjectDetailPage = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchProject = async () => {
+    const fetchProject = () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/projects/${id}/`);
-        setProject(response.data);
+        const foundProject = projectsData.find(p => p.id === parseInt(id));
+        if (foundProject) {
+          setProject(foundProject);
+        } else {
+          setError("Proyecto no encontrado.");
+        }
       } catch (err) {
-        console.error("Error fetching project details:", err);
-        setError("No se pudo cargar el proyecto. Por favor, inténtalo de nuevo más tarde.");
+        console.error("Error loading project details from JSON:", err);
+        setError("Error al cargar los detalles del proyecto.");
       } finally {
         setLoading(false);
       }
@@ -66,8 +70,8 @@ const ProjectDetailPage = () => {
       </h1>
 
       <div className="bg-[var(--color-background)]/70 p-8 rounded-lg shadow-xl border-2 border-[var(--color-accent-jedi-blue)]/40 space-y-6">
-        {project.image && (
-          <img src={project.image} alt={project.title} className="w-full h-auto rounded-md mb-6 shadow-lg" loading="lazy" />
+        {project.imageUrl && (
+          <img src={project.imageUrl} alt={project.title} className="w-full h-auto rounded-md mb-6 shadow-lg" loading="lazy" />
         )}
 
         <p className="text-lg leading-relaxed text-[var(--color-text-primary)]">
@@ -88,9 +92,9 @@ const ProjectDetailPage = () => {
         )}
 
         <div className="flex flex-wrap gap-4 justify-center md:justify-start">
-          {project.live_demo_url && (
+          {project.liveUrl && (
             <a
-              href={project.live_demo_url}
+              href={project.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="bg-[var(--color-accent-jedi-blue)] text-[var(--color-background)] py-3 px-6 rounded-md font-bold hover:bg-[var(--color-accent-jedi-green)] transition duration-300 shadow-lg"
@@ -98,9 +102,9 @@ const ProjectDetailPage = () => {
               Ver Demo en Vivo
             </a>
           )}
-          {project.github_url && (
+          {project.githubUrl && (
             <a
-              href={project.github_url}
+              href={project.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="border-2 border-[var(--color-accent-jedi-blue)] text-[var(--color-accent-jedi-blue)] py-3 px-6 rounded-md font-bold hover:bg-[var(--color-accent-jedi-blue)] hover:text-[var(--color-background)] transition duration-300 shadow-lg"
