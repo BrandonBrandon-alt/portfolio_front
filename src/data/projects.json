@@ -1,11 +1,11 @@
 [
   {
     "id": 1,
-    "title": "Mi Primer Proyecto Web",
+    "title": "Odontologic",
     "description": "Una aplicación web sencilla para gestionar tareas diarias, construida con HTML, CSS y JavaScript puro. Demuestra habilidades básicas de manipulación del DOM y eventos.",
     "imageUrl": "/images/project-task-app.png",
     "technologies": ["HTML", "CSS", "JavaScript"],
-    "githubUrl": "https://github.com/tuusuario/mi-proyecto-tareas",
+    "githubUrl": "https://github.com/CamiloCuenca/dental-management-system-backend.git",
     "liveUrl": "https://tuusuario.github.io/mi-proyecto-tareas/"
   },
   {

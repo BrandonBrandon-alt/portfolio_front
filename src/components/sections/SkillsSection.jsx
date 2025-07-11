@@ -1,14 +1,26 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import {
+  SiAxios,
+  SiCypress,
   SiDjango,
+  SiEslint,
+  SiGradle,
+  SiHibernate,
   SiJavascript,
   SiJsonwebtokens,
-  SiMongodb, SiOracle,
+  SiMongodb,
+  SiMysql,
+  SiOracle,
   SiPodman,
   SiPostgresql,
-  SiPostman, SiSpringboot,
-  SiTailwindcss, SiVite
+  SiPostman,
+  SiReactrouter,
+  SiSpringboot,
+  SiSpringsecurity,
+  SiTailwindcss,
+  SiVite,
+  SiVitest
 } from "react-icons/si";
 import {FaAngular, FaDatabase, FaDocker, FaGitAlt, FaJava, FaNodeJs, FaPython, FaReact} from "react-icons/fa";
 import { containerVariants, itemVariants } from '../../styles/animations';
@@ -33,7 +45,46 @@ const skills = [
   { name: 'Oracle', icon: SiOracle, color: 'red-700' },
   { name: 'Spring Boot', icon: SiSpringboot, color: 'green-700' },
   { name: 'Vite', icon: SiVite, color: 'purple-500' },
+  { name: 'Spring Security', icon: SiSpringsecurity, color: 'green-600' },
+  { name: 'JPA (Hibernate)', icon: SiHibernate, color: 'gray-500' },
+  { name: 'MySQL', icon: SiMysql, color: 'blue-700' },
+  { name: 'Gradle', icon: SiGradle, color: 'teal-500' },
+  { name: 'Vitest', icon: SiVitest, color: 'yellow-600' },
+  { name: 'Cypress', icon: SiCypress, color: 'teal-400' },
+  { name: 'ESLint', icon: SiEslint, color: 'indigo-500' },
+  { name: 'React Router', icon: SiReactrouter, color: 'red-500' },
+  { name: 'Axios', icon: SiAxios, color: 'purple-600' },
 ];
+
+// Tailwind CSS JIT compiler needs to see the full class names.
+const colorClasses = {
+  'cyan-400': 'text-cyan-400',
+  'green-500': 'text-green-500',
+  'yellow-300': 'text-yellow-300',
+  'green-800': 'text-green-800',
+  'sky-400': 'text-sky-400',
+  'green-600': 'text-green-600',
+  'gray-300': 'text-gray-300',
+  'orange-500': 'text-orange-500',
+  'red-500': 'text-red-500',
+  'yellow-400': 'text-yellow-400',
+  'blue-500': 'text-blue-500',
+  'blue-600': 'text-blue-600',
+  'blue-400': 'text-blue-400',
+  'orange-400': 'text-orange-400',
+  'red-600': 'text-red-600',
+  'gray-400': 'text-gray-400',
+  'red-700': 'text-red-700',
+  'green-700': 'text-green-700',
+  'purple-500': 'text-purple-500',
+  'gray-500': 'text-gray-500',
+  'blue-700': 'text-blue-700',
+  'teal-500': 'text-teal-500',
+  'yellow-600': 'text-yellow-600',
+  'teal-400': 'text-teal-400',
+  'indigo-500': 'text-indigo-500',
+  'purple-600': 'text-purple-600',
+};
 
 const SkillsSection = ({ isStandalonePage = false }) => {
   const sectionClasses = isStandalonePage
@@ -66,14 +117,14 @@ const SkillsSection = ({ isStandalonePage = false }) => {
                       scale: 1.1,
                       rotate: 2,
                       borderColor: index % 2 === 0 ? 'var(--color-accent-jedi-blue)' : 'var(--color-accent-jedi-green)',
-                      boxShadow: 'none', // Eliminar la sombra
+                      boxShadow: 'none',
                       transition: { duration: 0.3, ease: "easeOut" }
                     }}
                 >
                   <motion.div
                       animate={{ y: [0, -4, 0] }}
                       transition={{ repeat: Infinity, duration: 2 }}
-                      className={`text-5xl text-${skill.color} mb-4`}
+                      className={`text-5xl ${colorClasses[skill.color] || 'text-gray-300'} mb-4`}
                   >
                     <IconComponent />
                   </motion.div>

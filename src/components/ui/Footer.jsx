@@ -34,7 +34,7 @@ const Footer = ({ children }) => {
           <div className="flex-1">
             <h3 className="text-xl font-bold mb-2 text-[var(--color-accent-jedi-blue)]">Datos de contacto</h3>
             <p className="text-sm text-[var(--color-text-muted)] mb-1">Teléfono: <a href="tel:+573153033412" className="hover:text-[var(--color-accent-jedi-blue)] transition">+57 315 303 3412</a></p>
-            <p className="text-sm text-[var(--color-text-muted)] mb-1">Email: <a href="brandonmontealegre15@gmail.com" className="hover:text-[var(--color-accent-jedi-blue)] transition">brandonmontealegre15@gmail.com</a></p>
+            <p className="text-sm text-[var(--color-text-muted)] mb-1">Email: <a href="mailto:brandonmontealegre15@gmail.com" className="hover:text-[var(--color-accent-jedi-blue)] transition">brandonmontealegre15@gmail.com</a></p>
           </div>
 
           {/* Redes */}
