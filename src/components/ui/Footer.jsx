@@ -20,7 +20,7 @@ const socialLinks = [
     icon: <FaEnvelope className="w-5 h-5" />,
   },
   {
-    href: "https://github.com/Twolifelaw",
+    href: "https://github.com/BrandonDev-afk",
     label: "GitHub",
     icon: <FaGithub className="w-5 h-5" />,
   },
