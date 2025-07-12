@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import ContactFormSection from '../components/sections/ContactFormSection';
 import Button from '../components/ui/Button';
-import { FaLinkedin, FaWhatsapp, FaEnvelope, FaArrowDown } from 'react-icons/fa';
+import { FaLinkedin, FaWhatsapp, FaEnvelope, FaArrowDown, FaGithub } from 'react-icons/fa';
 import '../styles/HeroTextAnimation.css';
 import { containerVariants, itemVariants } from '../styles/animations';
 
@@ -94,6 +94,16 @@ const ContactOptionsPage = () => {
             icon={<FaEnvelope />}
           >
             Correo Electrónico
+          </Button>
+          <Button
+            as="a"
+            href="https://github.com/Twolifelaw"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-[#333] hover:bg-[#555] text-white shadow-[0_0_15px_#333] hover:shadow-[0_0_30px_#333]"
+            icon={<FaGithub />}
+          >
+            GitHub
           </Button>
         </motion.div>
       </motion.div>

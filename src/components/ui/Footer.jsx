@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { FaLinkedin, FaWhatsapp, FaEnvelope } from 'react-icons/fa';
+import { FaLinkedin, FaWhatsapp, FaEnvelope, FaGithub } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 
 const socialLinks = [
@@ -18,6 +18,11 @@ const socialLinks = [
     href: "mailto:brandonmontealegre15@gmail.com",
     label: "Correo Electrónico",
     icon: <FaEnvelope className="w-5 h-5" />,
+  },
+  {
+    href: "https://github.com/Twolifelaw",
+    label: "GitHub",
+    icon: <FaGithub className="w-5 h-5" />,
   },
 ];
 
