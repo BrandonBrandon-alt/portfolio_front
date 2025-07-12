@@ -15,14 +15,14 @@ import {
   SiPodman,
   SiPostgresql,
   SiPostman,
-  SiReactrouter,
+  SiReactrouter, SiSonarqube,
   SiSpringboot,
   SiSpringsecurity,
   SiTailwindcss,
   SiVite,
   SiVitest
 } from "react-icons/si";
-import {FaAngular, FaDatabase, FaDocker, FaGitAlt, FaJava, FaNodeJs, FaPython, FaReact} from "react-icons/fa";
+import {FaAngular, FaCss3, FaDatabase, FaDocker, FaGitAlt, FaJava, FaNodeJs, FaPython, FaReact} from "react-icons/fa";
 import { containerVariants, itemVariants } from '../../styles/animations';
 
 const skills = [
@@ -54,6 +54,8 @@ const skills = [
   { name: 'ESLint', icon: SiEslint, color: 'indigo-500' },
   { name: 'React Router', icon: SiReactrouter, color: 'red-500' },
   { name: 'Axios', icon: SiAxios, color: 'purple-600' },
+  { name: 'CSS', icon: FaCss3, color: 'blue-500' },
+  { name: 'SonarQube', icon: SiSonarqube, color: 'yellow-500' },
 ];
 
 // Tailwind CSS JIT compiler needs to see the full class names.

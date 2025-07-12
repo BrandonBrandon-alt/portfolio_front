@@ -6,6 +6,7 @@
     "imageUrl": "/images/project-task-app.png",
     "technologies": ["HTML", "CSS", "JavaScript"],
     "githubUrl": "https://github.com/CamiloCuenca/dental-management-system-backend.git",
+    "frontendUrl": "https://github.com/CamiloCuenca/dental-management-system-frontend.git",
     "liveUrl": "https://tuusuario.github.io/mi-proyecto-tareas/"
   },
   {
@@ -15,6 +16,7 @@
     "imageUrl": "/images/project-ecommerce.jpg",
     "technologies": ["React", "Redux", "Node.js", "Express", "MongoDB", "Stripe"],
     "githubUrl": "https://github.com/tuusuario/ecommerce-react",
+    "frontendUrl": "https://github.com/tuusuario/ecommerce-react-frontend",
     "liveUrl": "https://ecommerce-demo.vercel.app/"
   },
   {
@@ -24,6 +26,7 @@
     "imageUrl": "/images/project-blog.webp",
     "technologies": ["Next.js", "React", "Markdown", "Tailwind CSS"],
     "githubUrl": "https://github.com/tuusuario/personal-blog-nextjs",
+    "frontendUrl": "https://github.com/tuusuario/personal-blog-nextjs-frontend",
     "liveUrl": "https://tu-blog-personal.vercel.app/"
   },
   {
@@ -33,6 +36,7 @@
     "imageUrl": "/images/project-ecommerce.jpg",
     "technologies": ["React", "Redux", "Node.js", "Express", "MongoDB", "Stripe"],
     "githubUrl": "https://github.com/tuusuario/ecommerce-react",
+    "frontendUrl": "https://github.com/tuusuario/ecommerce-react-frontend",
     "liveUrl": "https://ecommerce-demo.vercel.app/"
   }
 ]
