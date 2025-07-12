@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { FaReact, FaNodeJs, FaDatabase, FaGitAlt } from 'react-icons/fa';
+import { FaReact, FaNodeJs, FaDatabase, FaGitAlt, FaGithub } from 'react-icons/fa';
 import Button from './Button';
 import './ProjectCard.css';
 import {
@@ -30,7 +30,7 @@ const ProjectCard = ({ project }) => {
 
     return (
         <motion.div
-            className="hologram-effect project-card-enhanced relative rounded-lg overflow-hidden p-6 backdrop-blur-sm transform transition-all duration-300 ease-in-out group"
+            className="hologram-effect project-card-enhanced relative rounded-lg overflow-hidden p-6 backdrop-blur-sm transform transition-all duration-300 ease-in-out group h-full"
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
@@ -63,7 +63,7 @@ const ProjectCard = ({ project }) => {
             </div>
 
             {/* Botones holográficos con efecto escáner */}
-            <div className="flex flex-col md:flex-row justify-end gap-3 md:gap-4 mt-6 relative z-20">
+            <div className="flex flex-col md:flex-row justify-center gap-3 md:gap-4 mt-6 relative z-20 flex-wrap">
                 <Button
                     as={Link}
                     to={`/projects/${project.id}`}
@@ -77,7 +77,7 @@ const ProjectCard = ({ project }) => {
                         href={project.liveUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-full md:w-auto border-[var(--color-accent-jedi-blue)] text-[var(--color-accent-jedi-blue)] hover:bg-[var(--color-accent-jedi-blue)] hover:text-[var(--color-background)] shadow-[0_0_15px_var(--color-accent-jedi-blue)] hover:shadow-[0_0_30px_var(--color-accent-jedi-blue)]"
+                        className="w-full md:w-fit border-[var(--color-accent-jedi-blue)] text-[var(--color-accent-jedi-blue)] hover:bg-[var(--color-accent-jedi-blue)] hover:text-[var(--color-background)] shadow-[0_0_15px_var(--color-accent-jedi-blue)] hover:shadow-[0_0_30px_var(--color-accent-jedi-blue)]"
                     >
                         Ver Demo
                     </Button>
@@ -89,8 +89,21 @@ const ProjectCard = ({ project }) => {
                         target="_blank"
                         rel="noopener noreferrer"
                         className="w-full md:w-auto border-[var(--color-accent-jedi-green)] text-[var(--color-accent-jedi-green)] hover:bg-[var(--color-accent-jedi-green)] hover:text-[var(--color-background)] shadow-[0_0_15px_var(--color-accent-jedi-green)] hover:shadow-[0_0_30px_var(--color-accent-jedi-green)]"
+                        icon={<FaGithub />}
                     >
-                        Ver Repositorio Git
+                        Ver Repositorio Backend
+                    </Button>
+                )}
+                {project.frontendUrl && (
+                    <Button
+                        as="a"
+                        href={project.frontendUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full md:w-fit border-[var(--color-accent-jedi-green)] text-[var(--color-accent-jedi-green)] hover:bg-[var(--color-accent-jedi-green)] hover:text-[var(--color-background)] shadow-[0_0_15px_var(--color-accent-jedi-green)] hover:shadow-[0_0_30px_var(--color-accent-jedi-green)]"
+                        icon={<FaGithub />}
+                    >
+                        Ver Repositorio Frontend
                     </Button>
                 )}
             </div>
