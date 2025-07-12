@@ -1,42 +1,39 @@
 [
   {
     "id": 1,
-    "title": "Odontologic",
-    "description": "Una aplicación web sencilla para gestionar tareas diarias, construida con HTML, CSS y JavaScript puro. Demuestra habilidades básicas de manipulación del DOM y eventos.",
+    "title": " Dental Management System ",
+    "description": "Sistema de gestión para clínicas odontológicas que permite la digitalización de historiales médicos, control de inventario y agendamiento automatizado de citas.",
     "imageUrl": "/images/project-task-app.png",
-    "technologies": ["HTML", "CSS", "JavaScript"],
+    "technologies": ["Java", "Javascript", "Junit", "JWT", ""],
     "githubUrl": "https://github.com/CamiloCuenca/dental-management-system-backend.git",
     "frontendUrl": "https://github.com/CamiloCuenca/dental-management-system-frontend.git",
-    "liveUrl": "https://tuusuario.github.io/mi-proyecto-tareas/"
+    "liveUrl": "https://dental-management-system-frontend.vercel.app/"
   },
   {
     "id": 2,
-    "title": "E-commerce con React",
-    "description": "Plataforma de comercio electrónico desarrollada con React.js, utilizando Redux para la gestión del estado y Stripe para los pagos. Incluye autenticación de usuarios y carrito de compras.",
+    "title": "UniEventos",
+    "description": "UniEventos es una plataforma de venta de entradas diseñada para ayudar a los usuarios a registrarse, gestionar y comprar boletos para eventos. El frontend proporciona una interfaz intuitiva y adaptable que permite interacciones fluidas del usuario con la plataforma. Este proyecto se centra en crear una experiencia fácil de usar, manteniendo una comunicación eficiente y segura con los servicios de backend.",
     "imageUrl": "/images/project-ecommerce.jpg",
     "technologies": ["React", "Redux", "Node.js", "Express", "MongoDB", "Stripe"],
-    "githubUrl": "https://github.com/tuusuario/ecommerce-react",
-    "frontendUrl": "https://github.com/tuusuario/ecommerce-react-frontend",
-    "liveUrl": "https://ecommerce-demo.vercel.app/"
+    "githubUrl": "https://github.com/CamiloCuenca/UniEventos_proyecto_final_Backend.git",
+    "frontendUrl": "https://github.com/CamiloCuenca/UniEventos_proyecto_final_Frontend.git",
+    "liveUrl": "https://app-frontend-unieventos-d7166.web.app/"
   },
   {
     "id": 3,
-    "title": "Blog Personal con Next.js",
-    "description": "Un blog personal moderno y rápido, construido con Next.js y Markdown. Permite escribir y publicar artículos fácilmente, con soporte para SEO y carga optimizada de imágenes.",
+    "title": "Exami",
+    "description": " Desarrollé el backend de un sistema integral para la gestión de exámenes académicos, diseñado para optimizar los procesos de evaluación en entornos educativos. Esta aplicación permite a los usuarios\n  autenticarse de forma segura, crear y administrar preguntas de examen con diferentes niveles de dificultad y categorías, ensamblar exámenes personalizados, registrar y consultar las notas obtenidas por\n  los estudiantes, y gestionar la información de usuarios y entidades académicas.",
     "imageUrl": "/images/project-blog.webp",
     "technologies": ["Next.js", "React", "Markdown", "Tailwind CSS"],
-    "githubUrl": "https://github.com/tuusuario/personal-blog-nextjs",
-    "frontendUrl": "https://github.com/tuusuario/personal-blog-nextjs-frontend",
-    "liveUrl": "https://tu-blog-personal.vercel.app/"
+    "githubUrl": "https://github.com/CamiloCuenca/Exami.git",
+    "frontendUrl": "https://github.com/CamiloCuenca/exami-front.git"
   },
   {
     "id": 4,
-    "title": "E-commerce con React",
-    "description": "Plataforma de comercio electrónico desarrollada con React.js, utilizando Redux para la gestión del estado y Stripe para los pagos. Incluye autenticación de usuarios y carrito de compras.",
+    "title": "Analizador Léxico para TypeScript",
+    "description": "Este proyecto desarrolla un analizador léxico completo en Python, específicamente diseñado para procesar código fuente de TypeScript y descomponerlo en sus componentes léxicos (tokens). Incorpora una\n  interfaz gráfica de usuario (GUI) desarrollada con PyQt5 que facilita la visualización interactiva del proceso de tokenización, siendo una herramienta ideal para el estudio de compiladores o como\n  componente base para herramientas de desarrollo de TypeScript.\n",
     "imageUrl": "/images/project-ecommerce.jpg",
-    "technologies": ["React", "Redux", "Node.js", "Express", "MongoDB", "Stripe"],
-    "githubUrl": "https://github.com/tuusuario/ecommerce-react",
-    "frontendUrl": "https://github.com/tuusuario/ecommerce-react-frontend",
-    "liveUrl": "https://ecommerce-demo.vercel.app/"
+    "technologies": ["Python","Tkinter", "Pytest"],
+    "githubUrl": "https://github.com/Twolifelaw/TLF_proyecto.git"
   }
 ]

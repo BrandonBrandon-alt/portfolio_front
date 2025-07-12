@@ -58,7 +58,7 @@ const ContactOptionsPage = () => {
             className="text-center mb-8"
             variants={itemVariants}
         >
-            <p className="text-lg font-sans text-[var(--color-text-primary)]">O encuéntrame aquí</p>
+            <p className="text-lg font-sans text-[var(--color-text-primary)]">Encuéntrame aquí</p>
         </motion.div>
 
 

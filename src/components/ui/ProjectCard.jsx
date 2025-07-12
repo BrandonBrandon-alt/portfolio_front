@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { FaReact, FaNodeJs, FaDatabase, FaGitAlt, FaGithub } from 'react-icons/fa';
+import { FaReact, FaNodeJs, FaDatabase, FaGitAlt, FaGithub, FaJava } from 'react-icons/fa';
 import Button from './Button';
 import './ProjectCard.css';
 import {
@@ -21,6 +21,9 @@ const techIcons = {
     SQL: <FaDatabase className="text-gray-300 text-2xl md:text-3xl" />,
     Python: <SiPython className="text-yellow-300 text-2xl md:text-3xl" />,
     Javascript: <SiJavascript className="text-yellow-300 text-2xl md:text-3xl" />,
+    Tkinter: <SiPython className="text-blue-500 text-2xl md:text-3xl" />,
+    Pytest: <SiPython className="text-purple-500 text-2xl md:text-3xl" />,
+    Java:<FaJava className="text-red-600 text-2xl md:text-3xl" />,
 };
 
 const ProjectCard = ({ project }) => {
@@ -49,7 +52,7 @@ const ProjectCard = ({ project }) => {
             {/* Tecnologías visibles al fondo sin overlay */}
             <div className="mt-6 border-t border-accent-cyan/30 pt-4 opacity-70 group-hover:opacity-100 transition-opacity duration-300">
                 <p className="text-sm text-accent-magenta mb-2 font-semibold font-mono uppercase tracking-wider">
-                    // Tech Stack
+                    Tech Stack
                 </p>
                 <div className="flex flex-wrap justify-start gap-3">
                     {techList.map((tech, index) => (
