@@ -3,6 +3,8 @@ import { useParams, Link } from 'react-router-dom';
 import projectsData from '../data/projects.json';
 import { motion } from 'framer-motion';
 import { ArrowLeftIcon } from '@heroicons/react/24/outline';
+import Button from '../components/ui/Button';
+import { FaGithub } from 'react-icons/fa';
 
 const ProjectDetailPage = () => {
   const { id } = useParams();
@@ -91,26 +93,41 @@ const ProjectDetailPage = () => {
           </div>
         )}
 
-        <div className="flex flex-wrap gap-4 justify-center md:justify-start">
+        <div className="flex flex-col md:flex-row justify-center gap-3 md:gap-4 mt-6 relative z-20 flex-wrap">
           {project.liveUrl && (
-            <a
+            <Button
+              as="a"
               href={project.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-[var(--color-accent-jedi-blue)] text-[var(--color-background)] py-3 px-6 rounded-md font-bold hover:bg-[var(--color-accent-jedi-green)] transition duration-300 shadow-lg"
+              className="w-full md:w-fit border-[var(--color-accent-jedi-blue)] text-[var(--color-accent-jedi-blue)] hover:bg-[var(--color-accent-jedi-blue)] hover:text-[var(--color-background)] shadow-[0_0_15px_var(--color-accent-jedi-blue)] hover:shadow-[0_0_30px_var(--color-accent-jedi-blue)]"
             >
-              Ver Demo en Vivo
-            </a>
+              Ver Demo
+            </Button>
           )}
           {project.githubUrl && (
-            <a
+            <Button
+              as="a"
               href={project.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="border-2 border-[var(--color-accent-jedi-blue)] text-[var(--color-accent-jedi-blue)] py-3 px-6 rounded-md font-bold hover:bg-[var(--color-accent-jedi-blue)] hover:text-[var(--color-background)] transition duration-300 shadow-lg"
+              className="w-full md:w-auto border-[var(--color-accent-jedi-green)] text-[var(--color-accent-jedi-green)] hover:bg-[var(--color-accent-jedi-green)] hover:text-[var(--color-background)] shadow-[0_0_15px_var(--color-accent-jedi-green)] hover:shadow-[0_0_30px_var(--color-accent-jedi-green)]"
+              icon={<FaGithub />}
             >
-              Ver en GitHub
-            </a>
+              Ver Repositorio Backend
+            </Button>
+          )}
+          {project.frontendUrl && (
+            <Button
+              as="a"
+              href={project.frontendUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full md:w-fit border-[var(--color-accent-jedi-green)] text-[var(--color-accent-jedi-green)] hover:bg-[var(--color-accent-jedi-green)] hover:text-[var(--color-background)] shadow-[0_0_15px_var(--color-accent-jedi-green)] hover:shadow-[0_0_30px_var(--color-accent-jedi-green)]"
+              icon={<FaGithub />}
+            >
+              Ver Repositorio Frontend
+            </Button>
           )}
         </div>
       </div>
