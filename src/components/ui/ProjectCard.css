@@ -43,3 +43,61 @@
   }
 }
 
+/* New styles for 3D tech icon effect */
+.tech-icon-container {
+    position: relative;
+    perspective: 150px; /* Aumenta la perspectiva para un efecto más notable */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    cursor: pointer;
+    transform-style: preserve-3d; /* Mantiene el contexto 3D para los hijos */
+}
+
+.tech-icon {
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transform-style: preserve-3d;
+}
+
+.tech-icon-container:hover .tech-icon {
+    transform: translateZ(25px) rotateX(-15deg); /* Eleva y rota ligeramente el ícono */
+}
+
+.tech-name {
+    position: absolute;
+    bottom: -10px; /* Posición inicial de la "sombra" */
+    opacity: 0;
+    font-size: 12px;
+    font-weight: 600;
+    color: #00ff9f;
+    text-shadow: 0 0 5px rgba(0, 229, 255, 0.5);
+    transition: opacity 0.4s ease-out, transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transform: translateY(20px) rotateX(90deg) scale(0.8); /* Inicia "plano" en el suelo y escalado */
+    transform-origin: bottom center;
+}
+
+.tech-icon-container:hover .tech-name {
+    opacity: 1;
+    transform: translateY(10px) rotateX(0deg) scale(1); /* Se levanta y se vuelve visible */
+}
+
+/* Efecto de "suelo" para la proyección */
+.tech-icon-container::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at bottom, rgba(0, 229, 255, 0.2), transparent 60%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: -1; /* Detrás del ícono */
+}
+
+.tech-icon-container:hover::after {
+    opacity: 1;
+}

@@ -4,7 +4,7 @@
     "title": " Dental Management System ",
     "description": "Sistema de gestión para clínicas odontológicas que permite la digitalización de historiales médicos, control de inventario y agendamiento automatizado de citas.",
     "imageUrl": "/images/project-task-app.png",
-    "technologies": ["Java", "Javascript", "Junit", "JWT", ""],
+    "technologies": ["Java", "Javascript", "Junit", "JWT", "React", "SpringBoot", "MySQL", "Git", "Tailwind", "Axios", "Vite", "Node"],
     "githubUrl": "https://github.com/CamiloCuenca/dental-management-system-backend.git",
     "frontendUrl": "https://github.com/CamiloCuenca/dental-management-system-frontend.git",
     "liveUrl": "https://dental-management-system-frontend.vercel.app/"
@@ -14,7 +14,7 @@
     "title": "UniEventos",
     "description": "UniEventos es una plataforma de venta de entradas diseñada para ayudar a los usuarios a registrarse, gestionar y comprar boletos para eventos. El frontend proporciona una interfaz intuitiva y adaptable que permite interacciones fluidas del usuario con la plataforma. Este proyecto se centra en crear una experiencia fácil de usar, manteniendo una comunicación eficiente y segura con los servicios de backend.",
     "imageUrl": "/images/project-ecommerce.jpg",
-    "technologies": ["React", "Redux", "Node.js", "Express", "MongoDB", "Stripe"],
+    "technologies": ["Angular", "SpringBoot", "Node", "Java", "MongoDB", "Css", "JWT", "Git", "Junit", "Postman"],
     "githubUrl": "https://github.com/CamiloCuenca/UniEventos_proyecto_final_Backend.git",
     "frontendUrl": "https://github.com/CamiloCuenca/UniEventos_proyecto_final_Frontend.git",
     "liveUrl": "https://app-frontend-unieventos-d7166.web.app/"
@@ -24,7 +24,7 @@
     "title": "Exami",
     "description": " Desarrollé el backend de un sistema integral para la gestión de exámenes académicos, diseñado para optimizar los procesos de evaluación en entornos educativos. Esta aplicación permite a los usuarios\n  autenticarse de forma segura, crear y administrar preguntas de examen con diferentes niveles de dificultad y categorías, ensamblar exámenes personalizados, registrar y consultar las notas obtenidas por\n  los estudiantes, y gestionar la información de usuarios y entidades académicas.",
     "imageUrl": "/images/project-blog.webp",
-    "technologies": ["Next.js", "React", "Markdown", "Tailwind CSS"],
+    "technologies": ["Node", "React", "Oracle", "Git", "Axios", "Vite", "Java", "SpringBoot", "Junit", "Tailwind"],
     "githubUrl": "https://github.com/CamiloCuenca/Exami.git",
     "frontendUrl": "https://github.com/CamiloCuenca/exami-front.git"
   },

@@ -1,13 +1,22 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { FaReact, FaNodeJs, FaDatabase, FaGitAlt, FaGithub, FaJava } from 'react-icons/fa';
+import { FaReact, FaNodeJs, FaDatabase, FaGitAlt, FaGithub, FaJava, FaLinode} from 'react-icons/fa';
 import Button from './Button';
 import './ProjectCard.css';
 import {
     SiPostgresql, SiTailwindcss, SiMongodb,
-    SiDjango, SiPython, SiJavascript
+    SiDjango, SiPython, SiMysql, SiSpringboot, SiAxios, SiJunit5,
+    SiJsonwebtokens, SiCssdesignawards, SiPostman, SiOracle
 } from 'react-icons/si';
+
+import{
+    GiAngularSpider
+}from 'react-icons/gi';
+
+import{
+    TbBrandVite, TbBrandJavascript
+} from 'react-icons/tb';
 
 // Mapeo de tecnologías a íconos
 const techIcons = {
@@ -20,10 +29,21 @@ const techIcons = {
     Git: <FaGitAlt className="text-orange-500 text-2xl md:text-3xl" />,
     SQL: <FaDatabase className="text-gray-300 text-2xl md:text-3xl" />,
     Python: <SiPython className="text-yellow-300 text-2xl md:text-3xl" />,
-    Javascript: <SiJavascript className="text-yellow-300 text-2xl md:text-3xl" />,
+    Javascript: <TbBrandJavascript className="text-yellow-300 text-2xl md:text-3xl" />,
     Tkinter: <SiPython className="text-blue-500 text-2xl md:text-3xl" />,
     Pytest: <SiPython className="text-purple-500 text-2xl md:text-3xl" />,
     Java:<FaJava className="text-red-600 text-2xl md:text-3xl" />,
+    MySQL: <SiMysql className="text-blue-600 text-2xl md:text-3xl" />,
+    SpringBoot: <SiSpringboot className="text-green-700 text-2xl md:text-3xl" />,
+    Axios: <SiAxios className="text-purple-600 text-2xl md:text-3xl" />,
+    Junit: <SiJunit5 className="text-yellow-500 text-2xl md:text-3xl" />,
+    JWT: <SiJsonwebtokens className="text-red-500 text-2xl md:text-3xl" />,
+    Vite: <TbBrandVite className="text-purple-500 text-2xl md:text-3xl" />,
+    Node: <FaNodeJs className="text-green-500 text-2xl md:text-3xl" />,
+    Angular: <GiAngularSpider className="text-red-600 text-2xl md:text-3xl" />,
+    Css: <SiCssdesignawards className="text-purple-500 text-2xl md:text-3xl" />,
+    Postman: <SiPostman className="text-orange-500 text-2xl md:text-3xl" />,
+    Oracle: <SiOracle className="text-blue-500 text-2xl md:text-3xl" />
 };
 
 const ProjectCard = ({ project }) => {
@@ -51,15 +71,12 @@ const ProjectCard = ({ project }) => {
 
             {/* Tecnologías visibles al fondo sin overlay */}
             <div className="mt-6 border-t border-accent-cyan/30 pt-4 opacity-70 group-hover:opacity-100 transition-opacity duration-300">
-                <p className="text-sm text-accent-magenta mb-2 font-semibold font-mono uppercase tracking-wider">
-                    Tech Stack
-                </p>
+               <h2 className="text-3xl font-bold mb-6 text-center md:text-left">Tech Stack</h2>
                 <div className="flex flex-wrap justify-start gap-3">
                     {techList.map((tech, index) => (
-                        <div key={index} className="tooltip" title={tech}>
-                            {techIcons[tech] || (
-                                <span className="text-white text-sm font-mono">{tech}</span>
-                            )}
+                        <div key={index} className="tech-icon-container">
+                            <div className="tech-icon">{techIcons[tech]}</div>
+                            <span className="tech-name">{tech}</span>
                         </div>
                     ))}
                 </div>
