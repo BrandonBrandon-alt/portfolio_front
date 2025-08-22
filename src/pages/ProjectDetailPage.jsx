@@ -98,7 +98,7 @@ const ProjectDetailPage = () => {
 
   return (
     <motion.div
-      className="container mx-auto px-4 py-12 relative"
+      className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12 relative"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
@@ -122,7 +122,7 @@ const ProjectDetailPage = () => {
       />
       {/* Breadcrumb navigation */}
       <nav
-        className="mb-6 text-sm font-mono text-[var(--color-text-primary)]/60 flex items-center flex-wrap gap-2"
+        className="mb-5 sm:mb-6 text-xs sm:text-sm font-mono text-[var(--color-text-primary)]/60 flex items-center flex-wrap gap-1 sm:gap-2"
         aria-label="Ruta de navegación"
       >
         <Link
@@ -187,7 +187,7 @@ const ProjectDetailPage = () => {
 
       {/* Título holográfico */}
       <motion.h1
-        className="text-4xl md:text-5xl font-display text-center mb-4 text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-accent-jedi-blue)] to-[var(--color-accent-jedi-green)] relative"
+        className="text-3xl sm:text-4xl lg:text-5xl font-display text-center mb-4 sm:mb-6 text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-accent-jedi-blue)] to-[var(--color-accent-jedi-green)] relative leading-tight px-1"
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, delay: 0.2 }}
@@ -204,7 +204,7 @@ const ProjectDetailPage = () => {
       {/* Badge holográfico del tipo de proyecto */}
       {project.projectType && (
         <motion.div
-          className="text-center mb-8"
+          className="text-center mb-6 sm:mb-8 px-2"
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, delay: 0.3 }}
@@ -232,24 +232,26 @@ const ProjectDetailPage = () => {
           <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-[var(--color-accent-jedi-green)] rounded-br-2xl opacity-80" />
         </div>
 
-        <div className="relative z-10 p-8 space-y-8">
+        <div className="relative z-10 p-5 sm:p-8 space-y-8 sm:space-y-10">
           {project.imageUrl && (
-            <img
-              src={project.imageUrl}
-              alt={project.title}
-              className="w-full h-auto rounded-md mb-6 shadow-lg"
-              loading="lazy"
-              decoding="async"
-              width="1200"
-              height="675"
-              fetchpriority="low"
-            />
+            <div className="w-full aspect-video rounded-lg overflow-hidden mb-6 shadow-lg border border-[var(--color-accent-jedi-blue)]/20 bg-[var(--color-accent-jedi-blue)]/5">
+              <img
+                src={project.imageUrl}
+                alt={project.title}
+                className="w-full h-full object-cover"
+                loading="lazy"
+                decoding="async"
+                width="1200"
+                height="675"
+                fetchpriority="low"
+              />
+            </div>
           )}
 
           {/* Información del proyecto con diseño holográfico */}
           {(project.myRole || project.teamSize || project.duration) && (
             <motion.div
-              className="grid grid-cols-1 md:grid-cols-3 gap-4 p-6 bg-[var(--color-accent-jedi-green)]/5 rounded-lg border-2 border-[var(--color-accent-jedi-green)]/30 relative overflow-hidden"
+              className="grid grid-cols-1 sm:grid-cols-3 gap-4 p-4 sm:p-6 bg-[var(--color-accent-jedi-green)]/5 rounded-lg border border-[var(--color-accent-jedi-green)]/25 relative overflow-hidden"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6 }}
@@ -309,7 +311,7 @@ const ProjectDetailPage = () => {
                 transition={{ duration: 1, delay: 0.8 }}
               />
             </h2>
-            <p className="text-lg leading-relaxed text-[var(--color-text-primary)]/90 bg-[var(--color-accent-jedi-blue)]/5 p-6 rounded-lg border border-[var(--color-accent-jedi-blue)]/20">
+            <p className="text-base sm:text-lg leading-relaxed text-[var(--color-text-primary)]/90 bg-[var(--color-accent-jedi-blue)]/5 p-4 sm:p-6 rounded-lg border border-[var(--color-accent-jedi-blue)]/20">
               {project.description}
             </p>
           </motion.div>
@@ -332,11 +334,11 @@ const ProjectDetailPage = () => {
                   transition={{ duration: 1, delay: 0.9 }}
                 />
               </h2>
-              <div className="space-y-3">
+      <div className="space-y-3">
                 {project.myContribution.map((contribution, index) => (
                   <motion.div
                     key={index}
-                    className="flex items-start p-4 bg-[var(--color-accent-jedi-green)]/5 rounded-lg border border-[var(--color-accent-jedi-green)]/20"
+        className="flex items-start p-3 sm:p-4 bg-[var(--color-accent-jedi-green)]/5 rounded-lg border border-[var(--color-accent-jedi-green)]/20 text-sm sm:text-base"
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.9 + index * 0.1 }}
@@ -359,7 +361,7 @@ const ProjectDetailPage = () => {
               <h2 className="text-2xl font-bold mb-4 text-[var(--color-accent-jedi-blue)] drop-shadow-[0_0_8px_var(--color-accent-jedi-blue)]">
                 Desafíos Técnicos
               </h2>
-              <p className="text-lg leading-relaxed text-[var(--color-text-primary)] bg-[var(--color-accent-jedi-blue)]/10 p-4 rounded-lg border border-[var(--color-accent-jedi-blue)]/30">
+              <p className="text-base sm:text-lg leading-relaxed text-[var(--color-text-primary)] bg-[var(--color-accent-jedi-blue)]/10 p-4 rounded-lg border border-[var(--color-accent-jedi-blue)]/30">
                 {project.challenges}
               </p>
             </div>
@@ -371,11 +373,11 @@ const ProjectDetailPage = () => {
               <h2 className="text-2xl font-bold mb-4 text-[var(--color-accent-jedi-green)] drop-shadow-[0_0_8px_var(--color-accent-jedi-green)]">
                 Resultados e Impacto
               </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 {project.results.map((result, index) => (
                   <div
                     key={index}
-                    className="bg-[var(--color-accent-jedi-green)]/10 p-4 rounded-lg border border-[var(--color-accent-jedi-green)]/30"
+        className="bg-[var(--color-accent-jedi-green)]/10 p-3 sm:p-4 rounded-lg border border-[var(--color-accent-jedi-green)]/30 text-sm sm:text-base"
                   >
                     <span className="text-[var(--color-text-primary)] flex items-center">
                       <span className="text-[var(--color-accent-jedi-green)] mr-2">
@@ -407,14 +409,14 @@ const ProjectDetailPage = () => {
                   transition={{ duration: 1, delay: 1.1 }}
                 />
               </h2>
-              <div className="flex flex-wrap gap-3">
+      <div className="flex flex-wrap gap-2 sm:gap-3">
                 {(Array.isArray(project.technologies)
                   ? project.technologies
                   : project.technologies.split(",").map((t) => t.trim())
                 ).map((tech, index) => (
                   <motion.span
                     key={index}
-                    className="bg-[var(--color-accent-jedi-blue)]/10 text-[var(--color-accent-jedi-blue)] px-4 py-2 rounded-full text-sm font-mono border border-[var(--color-accent-jedi-blue)]/30 hover:border-[var(--color-accent-jedi-blue)]/60 hover:bg-[var(--color-accent-jedi-blue)]/20 transition-all duration-300 relative overflow-hidden"
+        className="bg-[var(--color-accent-jedi-blue)]/10 text-[var(--color-accent-jedi-blue)] px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-mono border border-[var(--color-accent-jedi-blue)]/30 hover:border-[var(--color-accent-jedi-blue)]/60 hover:bg-[var(--color-accent-jedi-blue)]/20 transition-all duration-300 relative overflow-hidden"
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 1.1 + index * 0.05 }}
@@ -430,7 +432,7 @@ const ProjectDetailPage = () => {
 
           {/* Botones de acción con diseño holográfico */}
           <motion.div
-            className="flex flex-col md:flex-row justify-center gap-4 mt-8 relative z-20"
+            className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 mt-8 relative z-20 w-full max-w-3xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.2 }}
@@ -445,7 +447,7 @@ const ProjectDetailPage = () => {
                   href={project.liveUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group relative overflow-hidden w-full md:w-fit border-2 border-[var(--color-accent-jedi-blue)] text-[var(--color-accent-jedi-blue)] hover:bg-[var(--color-accent-jedi-blue)] hover:text-[var(--color-background)] shadow-[0_0_15px_rgba(0,240,255,0.3)] hover:shadow-[0_0_30px_rgba(0,240,255,0.6)] font-mono font-bold py-3 px-6 rounded-lg transition-all duration-500"
+                  className="group relative overflow-hidden w-full sm:w-auto border border-[var(--color-accent-jedi-blue)] sm:border-2 text-[var(--color-accent-jedi-blue)] hover:bg-[var(--color-accent-jedi-blue)] hover:text-[var(--color-background)] shadow-[0_0_12px_rgba(0,240,255,0.25)] hover:shadow-[0_0_25px_rgba(0,240,255,0.5)] font-mono font-bold py-3 px-5 sm:px-6 rounded-lg transition-all duration-500 text-sm sm:text-base"
                 >
                   <span className="relative z-10">VER DEMO</span>
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
@@ -462,7 +464,7 @@ const ProjectDetailPage = () => {
                   href={project.githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group relative overflow-hidden w-full md:w-auto border-2 border-[var(--color-accent-jedi-green)] text-[var(--color-accent-jedi-green)] hover:bg-[var(--color-accent-jedi-green)] hover:text-[var(--color-background)] shadow-[0_0_15px_rgba(0,255,159,0.3)] hover:shadow-[0_0_30px_rgba(0,255,159,0.6)] font-mono font-bold py-3 px-6 rounded-lg transition-all duration-500"
+                  className="group relative overflow-hidden w-full sm:w-auto border border-[var(--color-accent-jedi-green)] sm:border-2 text-[var(--color-accent-jedi-green)] hover:bg-[var(--color-accent-jedi-green)] hover:text-[var(--color-background)] shadow-[0_0_12px_rgba(0,255,159,0.25)] hover:shadow-[0_0_25px_rgba(0,255,159,0.5)] font-mono font-bold py-3 px-5 sm:px-6 rounded-lg transition-all duration-500 text-sm sm:text-base"
                   icon={<FaGithub />}
                 >
                   <span className="relative z-10 flex items-center gap-2">
@@ -483,7 +485,7 @@ const ProjectDetailPage = () => {
                   href={project.frontendUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group relative overflow-hidden w-full md:w-fit border-2 border-[var(--color-accent-jedi-green)] text-[var(--color-accent-jedi-green)] hover:bg-[var(--color-accent-jedi-green)] hover:text-[var(--color-background)] shadow-[0_0_15px_rgba(0,255,159,0.3)] hover:shadow-[0_0_30px_rgba(0,255,159,0.6)] font-mono font-bold py-3 px-6 rounded-lg transition-all duration-500"
+                  className="group relative overflow-hidden w-full sm:w-auto border border-[var(--color-accent-jedi-green)] sm:border-2 text-[var(--color-accent-jedi-green)] hover:bg-[var(--color-accent-jedi-green)] hover:text-[var(--color-background)] shadow-[0_0_12px_rgba(0,255,159,0.25)] hover:shadow-[0_0_25px_rgba(0,255,159,0.5)] font-mono font-bold py-3 px-5 sm:px-6 rounded-lg transition-all duration-500 text-sm sm:text-base"
                   icon={<FaGithub />}
                 >
                   <span className="relative z-10 flex items-center gap-2">
