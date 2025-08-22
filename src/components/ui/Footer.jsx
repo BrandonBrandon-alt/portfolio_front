@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { FaLinkedin, FaWhatsapp, FaEnvelope, FaGithub } from 'react-icons/fa';
-import { motion } from 'framer-motion';
+import { FaLinkedin, FaWhatsapp, FaEnvelope, FaGithub } from "react-icons/fa";
+import { motion } from "framer-motion";
 
 const socialLinks = [
   {
@@ -27,64 +27,199 @@ const socialLinks = [
 ];
 
 const Footer = ({ children }) => {
+  const [openSection, setOpenSection] = React.useState(null);
+  const toggle = (key) => setOpenSection((prev) => (prev === key ? null : key));
+  const isMobile = typeof window !== "undefined" && window.innerWidth < 640;
   return (
-      <motion.footer
-          className="hologram-effect bg-[var(--color-background)] text-[var(--color-text-primary)] border-t border-[var(--color-accent-jedi-blue)]/40 py-10 backdrop-blur-sm shadow-inner shadow-[var(--color-accent-jedi-blue)]/10"
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-      >
-        <div className="container mx-auto px-4 flex flex-col md:flex-row md:justify-between gap-12 items-center md:items-start text-center md:text-left">
-          {/* Contacto */}
-          <div className="flex-1">
-            <h3 className="text-xl font-bold mb-2 text-[var(--color-accent-jedi-blue)]">Datos de contacto</h3>
-            <p className="text-sm text-[var(--color-text-muted)] mb-1">Teléfono: <a href="tel:+573153033412" className="hover:text-[var(--color-accent-jedi-blue)] transition">+57 315 303 3412</a></p>
-            <p className="text-sm text-[var(--color-text-muted)] mb-1">Email: <a href="mailto:brandonmontealegre15@gmail.com" className="hover:text-[var(--color-accent-jedi-blue)] transition">brandonmontealegre15@gmail.com</a></p>
+    <motion.footer
+      className="relative mt-32 border-t border-[var(--color-accent-jedi-blue)]/25 bg-[linear-gradient(135deg,rgba(10,18,28,0.92),rgba(10,18,28,0.78))] backdrop-blur-xl text-[var(--color-text-primary)] overflow-hidden"
+      initial={{ opacity: 0, y: 60 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
+      aria-labelledby="footer-title"
+    >
+      {/* Glow decorativo */}
+      <div className="pointer-events-none absolute inset-0 opacity-[0.09]">
+        <div className="absolute -top-32 -left-10 w-[30rem] h-[30rem] bg-[var(--color-accent-jedi-blue)] blur-[160px] rounded-full" />
+        <div className="absolute bottom-[-18rem] right-[-6rem] w-[34rem] h-[34rem] bg-[var(--color-accent-jedi-green)] blur-[180px] rounded-full" />
+      </div>
+
+      {/* Línea scan superior */}
+      <div className="absolute left-0 right-0 top-0 h-[3px] bg-gradient-to-r from-transparent via-[var(--color-accent-jedi-blue)] to-transparent overflow-hidden">
+        <span className="absolute inset-0 -translate-x-full animate-[scanSlide_5s_linear_infinite] bg-gradient-to-r from-transparent via-white/40 to-transparent" />
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 py-20">
+        <div className="grid gap-16 md:gap-12 md:grid-cols-12">
+          {/* Brand / Intro */}
+          <div className="md:col-span-5 lg:col-span-4">
+            <h2
+              id="footer-title"
+              className="font-mono tracking-[0.35em] text-[10px] text-[var(--color-accent-jedi-green)] mb-5"
+            >
+              [ BRAN_DEV_CORE ]
+            </h2>
+            <p className="text-sm leading-relaxed text-[var(--color-text-primary)]/70 max-w-xs mb-6">
+              Desarrollo soluciones escalables enfocadas en performance,
+              accesibilidad y experiencias futuristas con identidad técnica
+              clara.
+            </p>
+            <div className="flex items-center gap-3 text-[10px] font-mono tracking-widest text-[var(--color-accent-jedi-blue)]/70">
+              <span className="inline-block w-2 h-2 rounded-full bg-[var(--color-accent-jedi-green)] animate-pulse" />
+              LIVE_SYSTEM_CHANNEL
+            </div>
           </div>
 
-          {/* Redes */}
-          <div className="flex-1 flex flex-col items-center">
-            <h3 className="text-xl font-bold mb-2 text-[var(--color-accent-jedi-blue)]">Contactame</h3>
-            <div className="flex space-x-4">
-              {socialLinks.map(({ href, label, icon }) => (
-                  <motion.a
-                      key={label}
-                      href={href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={label}
-                      className="bg-[var(--color-accent-jedi-blue)]/10 hover:bg-[var(--color-accent-jedi-green)] text-white rounded-full p-3 transition duration-300 shadow-[0_0_6px_var(--color-accent-jedi-blue)] hover:shadow-[0_0_12px_var(--color-accent-jedi-green)]"
-                      whileHover={{ scale: 1.1, rotate: 5 }}
-                      whileTap={{ scale: 0.9 }}
+          {/* Navegación */}
+          <div className="md:col-span-4 lg:col-span-3">
+            <button
+              type="button"
+              onClick={() => toggle("nav")}
+              className="w-full sm:w-auto flex items-center justify-between font-mono tracking-[0.3em] text-[11px] text-[var(--color-accent-jedi-blue)] mb-4 sm:mb-6"
+              aria-expanded={openSection === "nav"}
+              aria-controls="footer-nav"
+            >
+              <span>[ NAVEGACION ]</span>
+              {isMobile && (
+                <span className="text-xs ml-2 font-sans tracking-normal">
+                  {openSection === "nav" ? "−" : "+"}
+                </span>
+              )}
+            </button>
+            <ul
+              id="footer-nav"
+              className={`space-y-2 ${
+                isMobile
+                  ? openSection === "nav"
+                    ? "block"
+                    : "hidden"
+                  : "block"
+              }`}
+            >
+              {[
+                { to: "/", label: "Inicio" },
+                { to: "/projects", label: "Proyectos" },
+                { to: "/about", label: "Acerca de" },
+                { to: "/contact", label: "Contacto" },
+                { to: "/skills", label: "Habilidades" },
+              ].map((link) => (
+                <li key={link.to}>
+                  <Link
+                    to={link.to}
+                    className="group text-sm text-[var(--color-text-primary)]/60 hover:text-[var(--color-accent-jedi-green)] transition-colors inline-flex items-center gap-2"
                   >
-                    {icon}
-                  </motion.a>
+                    <span className="relative">
+                      {link.label}
+                      <span className="absolute left-0 -bottom-0.5 h-px w-0 group-hover:w-full transition-all duration-500 bg-gradient-to-r from-[var(--color-accent-jedi-blue)] to-[var(--color-accent-jedi-green)]" />
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Contacto directo */}
+          <div className="md:col-span-3 lg:col-span-3">
+            <button
+              type="button"
+              onClick={() => toggle("contact")}
+              className="w-full sm:w-auto flex items-center justify-between font-mono tracking-[0.3em] text-[11px] text-[var(--color-accent-jedi-blue)] mb-4 sm:mb-6"
+              aria-expanded={openSection === "contact"}
+              aria-controls="footer-contact"
+            >
+              <span>[ CONTACTO ]</span>
+              {isMobile && (
+                <span className="text-xs ml-2 font-sans tracking-normal">
+                  {openSection === "contact" ? "−" : "+"}
+                </span>
+              )}
+            </button>
+            <ul
+              id="footer-contact"
+              className={`space-y-3 text-sm ${
+                isMobile
+                  ? openSection === "contact"
+                    ? "block"
+                    : "hidden"
+                  : "block"
+              }`}
+            >
+              <li>
+                <a
+                  href="tel:+573153033412"
+                  className="hover:text-[var(--color-accent-jedi-green)] text-[var(--color-text-primary)]/70 transition-colors inline-flex items-center gap-2"
+                >
+                  <span className="w-2 h-2 rounded-full bg-[var(--color-accent-jedi-green)]/60" />{" "}
+                  +57 315 303 3412
+                </a>
+              </li>
+              <li>
+                <a
+                  href="mailto:brandonmontealegre15@gmail.com"
+                  className="hover:text-[var(--color-accent-jedi-green)] text-[var(--color-text-primary)]/70 transition-colors inline-flex items-center gap-2"
+                >
+                  <span className="w-2 h-2 rounded-full bg-[var(--color-accent-jedi-green)]/60" />{" "}
+                  brandonmontealegre15@gmail.com
+                </a>
+              </li>
+            </ul>
+            <div className="mt-8 flex gap-4">
+              {socialLinks.map(({ href, label, icon }) => (
+                <motion.a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="relative group w-11 h-11 rounded-xl border border-[var(--color-accent-jedi-blue)]/30 flex items-center justify-center text-[var(--color-accent-jedi-blue)] bg-[var(--color-accent-jedi-blue)]/10 overflow-hidden transition-colors hover:text-[var(--color-background)]"
+                  whileHover={{ y: -3 }}
+                  whileTap={{ scale: 0.92 }}
+                >
+                  <span className="absolute inset-0 bg-gradient-to-br from-[var(--color-accent-jedi-blue)]/20 via-transparent to-[var(--color-accent-jedi-green)]/20 opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <span className="absolute inset-0 -translate-x-full skew-x-[-20deg] group-hover:translate-x-full bg-gradient-to-r from-transparent via-white/30 to-transparent transition-transform duration-[1000ms]" />
+                  {icon}
+                </motion.a>
               ))}
             </div>
           </div>
 
-          {/* Navegación Rápida */}
-          <div className="flex-1">
-            <h3 className="text-xl font-bold mb-2">Navegación Rápida</h3>
-            <ul className="space-y-1">
-              <li><Link to="/" className="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-jedi-blue)] transition">Inicio</Link></li>
-              <li><Link to="/projects" className="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-jedi-blue)] transition">Proyectos</Link></li>
-              <li><Link to="/about" className="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-jedi-blue)] transition">Acerca de</Link></li>
-              <li><Link to="/contact" className="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-jedi-blue)] transition">Contacto</Link></li>
-              <li><Link to="/skills" className="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-accent-jedi-blue)] transition">Habilidades</Link></li>
-            </ul>
+          {/* Extra / Children slot */}
+          <div className="md:col-span-12 lg:col-span-2 flex md:justify-end">
+            {children && (
+              <div className="w-full md:w-auto px-0 md:px-4">{children}</div>
+            )}
           </div>
         </div>
 
-        {/* Línea inferior */}
-        <div className="container mx-auto px-4 mt-8 border-t border-white/10 pt-4 text-center text-xs text-[var(--color-text-muted)] tracking-wide flex flex-col items-center justify-center">
-          <p>&copy; {new Date().getFullYear()} BRAN/DEV - Galactic Solutions</p>
-          {/* Placeholder for Star Wars themed icon, e.g., a small R2-D2 or BB-8 SVG */}
-          {/* <img src="/path/to/your/star-wars-icon.svg" alt="Star Wars Icon" className="h-6 w-6 mt-2" /> */}
+        {/* Divider */}
+        <div className="mt-20 relative">
+          <div className="h-px w-full bg-gradient-to-r from-transparent via-[var(--color-accent-jedi-blue)]/40 to-transparent overflow-hidden">
+            <span className="absolute inset-0 -translate-x-full animate-[scanSlide_6s_linear_infinite] bg-gradient-to-r from-transparent via-white/35 to-transparent" />
+          </div>
+          <div className="mt-6 flex flex-col md:flex-row md:items-center md:justify-between gap-6 text-[10px] font-mono tracking-widest text-[var(--color-text-primary)]/45">
+            <div className="flex items-center gap-3">
+              <span className="inline-flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-[var(--color-accent-jedi-green)] animate-pulse" />
+                © {new Date().getFullYear()} BRAN/DEV
+              </span>
+              <span className="hidden sm:inline">•</span>
+              <span>GALACTIC SOLUTIONS</span>
+            </div>
+            <div className="flex items-center gap-4">
+              <span className="hover:text-[var(--color-accent-jedi-green)] transition-colors cursor-pointer">
+                TERMINOS
+              </span>
+              <span className="hover:text-[var(--color-accent-jedi-green)] transition-colors cursor-pointer">
+                PRIVACIDAD
+              </span>
+              <span className="hover:text-[var(--color-accent-jedi-green)] transition-colors cursor-pointer">
+                LICENCIAS
+              </span>
+            </div>
+          </div>
         </div>
-
-        {children && <div className="mt-2 w-full">{children}</div>}
-      </motion.footer>
+      </div>
+    </motion.footer>
   );
 };
 

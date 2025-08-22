@@ -1,57 +1,108 @@
-// src/ProjectList.jsx
-import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
-import { containerVariants, itemVariants } from '../../styles/animations';
-import projectsData from '../../data/projects.json';
-import ProjectCard from '../ui/ProjectCard'; // Import ProjectCard
+// sections/ProjectList.jsx (refactor holográfico)
+import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import { containerVariants, itemVariants } from "../../styles/animations";
+import projectsData from "../../data/projects.json";
+import RevealProjectCard from "../ui/RevealProjectCard";
+
+// (Hook extraído a RevealProjectCard)
 
 const ProjectList = () => {
-    const [projects, setProjects] = useState([]);
+  const [projects, setProjects] = useState([]);
 
-    useEffect(() => {
-        setProjects(projectsData.slice(0, 3)); // Mostrar solo los primeros 3 proyectos
-    }, []);
+  useEffect(() => {
+    // Limitamos a los 3 primeros para teaser
+    setProjects(projectsData.slice(0, 3));
+  }, []);
 
-    return (
-        <motion.section
-            id="proyectos-destacados"
-            className="py-20 px-6 section-card-style text-[var(--color-text-primary)]"
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-        >
-            <motion.h2
-                className="text-3xl md:text-4xl font-display text-center mb-4 lightsaber-underline"
-                variants={itemVariants}
-            >
-                PROYECTOS DESTACADOS
-            </motion.h2>
-            <motion.p
-                className="text-lg md:text-xl font-sans text-center max-w-3xl mx-auto mb-12"
-                variants={itemVariants}
-            >
-                Explora una selección de mis trabajos más recientes y significativos. Cada proyecto es una historia de innovación y solución de problemas.
-            </motion.p>
+  return (
+    <motion.section
+      id="proyectos-destacados"
+      aria-labelledby="featured-projects-title"
+      className="relative mt-10 mb-20 px-4 sm:px-6 lg:px-8"
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+    >
+      {/* Marco holográfico contenedor */}
+      <div className="holo-frame" data-corners="on">
+        <div className="panel-holo p-10 md:p-14 rounded-3xl overflow-hidden">
+          {/* Glow / partículas sutiles decorativas */}
+          <div className="pointer-events-none absolute inset-0 opacity-[0.07] mix-blend-screen">
+            <div className="absolute -top-32 -left-16 w-96 h-96 bg-[var(--color-accent-jedi-blue)] blur-[120px] rounded-full" />
+            <div className="absolute -bottom-40 -right-10 w-[28rem] h-[28rem] bg-[var(--color-accent-jedi-green)] blur-[140px] rounded-full" />
+          </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {projects.map(project => (
-                    <motion.div key={project.id} variants={itemVariants} className="h-full">
-                        <ProjectCard project={project} />
-                    </motion.div>
-                ))}
+          {/* Encabezado */}
+          <motion.div
+            variants={itemVariants}
+            className="relative mb-12 text-center"
+          >
+            <div className="mb-5 flex items-center justify-center gap-4 flex-wrap">
+              <span className="text-[10px] tracking-[0.3em] font-mono px-4 py-1 rounded-full border border-[var(--color-accent-jedi-blue)]/40 text-[var(--color-accent-jedi-blue)] bg-[var(--color-accent-jedi-blue)]/10 shadow-[0_0_0_1px_rgba(0,240,255,0.15)]">
+                [ FEATURED_CHANNEL ]
+              </span>
+              <span className="text-[10px] tracking-[0.3em] font-mono px-4 py-1 rounded-full border border-[var(--color-accent-jedi-green)]/40 text-[var(--color-accent-jedi-green)] bg-[var(--color-accent-jedi-green)]/10">
+                {projects.length.toString().padStart(2, "0")} ITEMS
+              </span>
             </div>
+            <h2
+              id="featured-projects-title"
+              className="holo-title text-3xl md:text-4xl lg:text-5xl"
+            >
+              PROYECTOS DESTACADOS
+            </h2>
+            <p className="holo-lead mt-6 max-w-3xl mx-auto opacity-90">
+              Explora una selección de mis trabajos más recientes y
+              significativos. Cada proyecto representa una historia de
+              innovación, resolución de problemas y evolución técnica.
+            </p>
+          </motion.div>
 
-            <motion.div variants={itemVariants} className="text-center mt-12">
-                <Link
-                    to="/projects"
-                    className="inline-block px-8 py-3 text-lg font-bold rounded-full border-2 border-[var(--color-accent-jedi-green)] text-[var(--color-accent-jedi-green)] hover:bg-[var(--color-accent-jedi-green)] hover:text-[var(--color-background)] shadow-[0_0_15px_var(--color-accent-jedi-green)] hover:shadow-[0_0_30px_var(--color-accent-jedi-green)] transition-all duration-300"
-                >
-                    Ver Todos los Proyectos
-                </Link>
+          {/* Grid de proyectos */}
+          <div className="relative">
+            <motion.div
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10"
+              variants={itemVariants}
+            >
+              {projects.length > 0 ? (
+                projects.map((project, idx) => (
+                  <RevealProjectCard
+                    key={project.id}
+                    project={project}
+                    motionDelay={idx * 0.1}
+                  />
+                ))
+              ) : (
+                <div className="col-span-full text-center py-20 font-mono text-sm tracking-widest text-[var(--color-text-primary)]/60">
+                  [ NO_DATA_AVAILABLE ]
+                </div>
+              )}
             </motion.div>
-        </motion.section>
-    );
+          </div>
+
+          {/* Botón Ver todos */}
+          <motion.div
+            variants={itemVariants}
+            className="mt-14 flex justify-center"
+          >
+            <Link
+              to="/projects"
+              className="group relative inline-flex items-center gap-3 font-mono font-bold tracking-wider px-10 py-4 rounded-xl border border-[var(--color-accent-jedi-blue)]/40 text-[var(--color-accent-jedi-blue)] overflow-hidden transition-all duration-500 hover:text-[var(--color-background)] hover:border-[var(--color-accent-jedi-green)]/60 bg-[linear-gradient(120deg,rgba(0,240,255,0.08),rgba(0,255,159,0.08))] hover:shadow-[0_0_40px_-6px_rgba(0,255,159,0.6)]"
+              aria-label="Ver todos los proyectos"
+            >
+              <span className="relative z-10">VER TODOS LOS PROYECTOS</span>
+              {/* Barrido */}
+              <span className="absolute inset-0 -translate-x-full skew-x-[-20deg] bg-gradient-to-r from-transparent via-white/25 to-transparent group-hover:translate-x-full transition-transform duration-[1100ms]" />
+              {/* Glow hover */}
+              <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-r from-[var(--color-accent-jedi-blue)] to-[var(--color-accent-jedi-green)] mix-blend-overlay" />
+            </Link>
+          </motion.div>
+        </div>
+      </div>
+    </motion.section>
+  );
 };
 
 export default ProjectList;

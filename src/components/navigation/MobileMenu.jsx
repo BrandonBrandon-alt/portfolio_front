@@ -1,6 +1,6 @@
 // navigation/MobileMenu.jsx
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useEffect, useRef } from "react";
+import { NavLink, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { HiXMark } from "react-icons/hi2";
 import { navLinks } from "./navLinks";
@@ -10,16 +10,24 @@ const MobileMenu = ({ isOpen, onClose }) => {
 
   if (!isOpen) return null;
 
-  const getMobileNavLinkClasses = ({ isActive }) => {
-    const base =
-      "flex items-center py-4 px-4 rounded-xl text-lg font-semibold transition-all duration-300 border-2 w-full";
-    const inactive =
-      "text-[var(--color-text-primary)] border-[var(--color-accent-jedi-blue)]/30 hover:text-[var(--color-accent-jedi-blue)] hover:bg-gradient-to-r hover:from-[var(--color-accent-jedi-blue)]/10 hover:to-[var(--color-accent-jedi-green)]/10 hover:border-[var(--color-accent-jedi-blue)] transform hover:scale-[1.02]";
-    const active =
-      "text-[var(--color-background)] bg-gradient-to-r from-[var(--color-accent-jedi-blue)] to-[var(--color-accent-jedi-green)] border-[var(--color-accent-jedi-green)] scale-[1.02]";
+  const getMobileNavLinkClasses = ({ isActive }) =>
+    `nav-link-mobile ${isActive ? "" : ""}`;
 
-    return `${base} ${isActive ? active : inactive}`;
-  };
+  const location = useLocation();
+  const firstLinkRef = useRef(null);
+
+  // Cerrar automáticamente al cambiar la ruta
+  useEffect(() => {
+    onClose?.();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location.pathname]);
+
+  // Enfoque inicial para accesibilidad
+  useEffect(() => {
+    if (isOpen && firstLinkRef.current) {
+      firstLinkRef.current.focus();
+    }
+  }, [isOpen]);
 
   return (
     <div className="block sm:block md:block lg:hidden xl:hidden">
@@ -33,18 +41,12 @@ const MobileMenu = ({ isOpen, onClose }) => {
       >
         {/* Menu Panel */}
         <motion.div
-          className="absolute right-0 top-0 h-full w-full max-w-sm bg-[var(--color-background)] shadow-2xl overflow-y-auto border-l-2 border-[var(--color-accent-jedi-blue)]/30"
+          className="absolute right-0 top-0 h-full w-full max-w-sm nav-panel shadow-2xl overflow-y-auto"
           initial={{ x: "100%", opacity: 0 }}
           animate={{ x: "0%", opacity: 1 }}
           exit={{ x: "100%", opacity: 0 }}
           transition={{ type: "spring", stiffness: 300, damping: 30 }}
           onClick={(e) => e.stopPropagation()}
-          style={{
-            background: `linear-gradient(135deg, 
-              var(--color-background) 0%, 
-              var(--color-background) 70%, 
-              rgba(0, 150, 255, 0.05) 100%)`,
-          }}
         >
           <div className="p-6">
             {/* Header */}
@@ -72,7 +74,7 @@ const MobileMenu = ({ isOpen, onClose }) => {
             </div>
 
             {/* Navigation Links */}
-            <nav className="space-y-3">
+            <nav className="space-y-4" aria-label="Navegación principal móvil">
               {navLinks.map((link, index) => (
                 <motion.div
                   key={link.to}
@@ -88,43 +90,37 @@ const MobileMenu = ({ isOpen, onClose }) => {
                 >
                   <NavLink
                     to={link.to}
-                    className={getMobileNavLinkClasses}
+                    ref={index === 0 ? firstLinkRef : null}
+                    className={({ isActive }) =>
+                      `nav-link-mobile ${isActive ? "active" : ""}`
+                    }
                     onClick={onClose}
                     end={link.exact || false}
                   >
-                    <motion.div
-                      className="flex items-center w-full"
-                      whileHover={{ x: 5 }}
+                    <motion.span
+                      className="flex items-center gap-3 w-full"
+                      whileHover={{ x: 4 }}
                       transition={{
                         type: "spring",
-                        stiffness: 400,
-                        damping: 25,
+                        stiffness: 350,
+                        damping: 24,
                       }}
                     >
-                      <motion.div
-                        whileHover={{ scale: 1.2, rotate: 10 }}
+                      <motion.span
+                        whileHover={{ scale: 1.15, rotate: 8 }}
                         transition={{
                           type: "spring",
                           stiffness: 400,
-                          damping: 10,
+                          damping: 14,
                         }}
                       >
                         {link.icon}
-                      </motion.div>
-                      <span className="flex-1">{link.label}</span>
-                      <motion.div
-                        className="w-2 h-2 bg-[var(--color-accent-jedi-blue)] rounded-full opacity-70"
-                        animate={{
-                          scale: [1, 1.3, 1],
-                          opacity: [0.7, 1, 0.7],
-                        }}
-                        transition={{
-                          duration: 2,
-                          repeat: Infinity,
-                          ease: "easeInOut",
-                        }}
-                      />
-                    </motion.div>
+                      </motion.span>
+                      <span className="flex-1 tracking-wider font-mono">
+                        {link.label.toUpperCase()}
+                      </span>
+                      <span className="nav-link-mobile-underline" />
+                    </motion.span>
                   </NavLink>
                 </motion.div>
               ))}
@@ -137,19 +133,16 @@ const MobileMenu = ({ isOpen, onClose }) => {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.8 }}
             >
-              <div className="text-center">
+              <div className="text-center font-mono text-xs tracking-wider text-[var(--color-text-primary)]/50">
                 <motion.p
-                  className="text-sm text-[var(--color-text-secondary)] opacity-60"
-                  animate={{
-                    opacity: [0.6, 1, 0.6],
-                  }}
+                  animate={{ opacity: [0.5, 1, 0.5] }}
                   transition={{
-                    duration: 3,
+                    duration: 4,
                     repeat: Infinity,
                     ease: "easeInOut",
                   }}
                 >
-                  ✨ Desarrollado con pasión ✨
+                  [ NAV_CHANNEL_READY ]
                 </motion.p>
               </div>
             </motion.div>

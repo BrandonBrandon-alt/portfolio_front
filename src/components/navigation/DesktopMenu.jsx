@@ -22,16 +22,7 @@ const DesktopMenu = () => {
     },
   };
 
-  const getNavLinkClasses = ({ isActive }) => {
-    const base =
-      "inline-flex items-center justify-center font-sans font-bold py-3 px-6 rounded-lg transition-all duration-300 text-base relative overflow-hidden group";
-    const inactive =
-      "border-2 border-[var(--color-accent-jedi-blue)] text-[var(--color-accent-jedi-blue)] hover:bg-[var(--color-accent-jedi-green)] hover:text-[var(--color-background)] hover:border-[var(--color-accent-jedi-green)] shadow-[0_0_15px_rgba(0,150,255,0.3)] hover:shadow-[0_0_25px_rgba(0,255,150,0.5)] transform hover:scale-105";
-    const active =
-      'bg-gradient-to-r from-[var(--color-accent-jedi-blue)] to-[var(--color-accent-jedi-green)] text-[var(--color-background)] shadow-[0_0_25px_rgba(0,150,255,0.5)] border-2 border-white/30 scale-105 after:content-[""] after:absolute after:inset-0 after:bg-white/10 after:rounded-lg';
-
-    return `${base} ${isActive ? active : inactive}`;
-  };
+  const getNavLinkClasses = ({ isActive }) => `nav-link ${isActive ? "" : ""}`;
 
   return (
     <motion.ul
@@ -49,21 +40,20 @@ const DesktopMenu = () => {
         >
           <NavLink
             to={link.to}
-            className={getNavLinkClasses}
+            className={({ isActive }) => `nav-link ${isActive ? "active" : ""}`}
             end={link.exact || false}
           >
-            <motion.div
-              className="flex items-center"
-              whileHover={{ scale: 1.1 }}
-              transition={{ type: "spring", stiffness: 400, damping: 10 }}
+            <motion.span
+              className="flex items-center gap-2"
+              whileHover={{ scale: 1.06 }}
+              transition={{ type: "spring", stiffness: 300, damping: 18 }}
             >
               {link.icon}
-              <span className="hidden xl:inline">{link.label}</span>
-            </motion.div>
-            {/* Efecto de partículas en hover */}
-            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-white rounded-full animate-ping"></div>
-            </div>
+              <span className="hidden xl:inline tracking-wider">
+                {link.label.toUpperCase()}
+              </span>
+            </motion.span>
+            <span className="nav-link-underline" />
           </NavLink>
         </motion.li>
       ))}
