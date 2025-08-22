@@ -13,6 +13,7 @@ const Hero = () => {
   const [particlesContainer, setParticlesContainer] = useState(null);
   const [ParticlesCmp, setParticlesCmp] = useState(null);
   const [particlesOptions, setParticlesOptions] = useState(null);
+  const [isMobile, setIsMobile] = useState(false);
   const heroRef = useRef(null);
   const [isHyperspace, setIsHyperspace] = useState(false);
   const [displayText, setDisplayText] = useState("");
@@ -96,9 +97,18 @@ const Hero = () => {
     return () => clearTimeout(timeout);
   }, [toggleHyperspace, shouldReduceMotion]);
 
-  // Lazy import particles when hero visible & user not motion-reduced
+  // Detect mobile viewport (once) for responsive + perf decisions
   useEffect(() => {
-    if (shouldReduceMotion) return;
+    const mq = window.matchMedia("(max-width: 639px)");
+    const apply = () => setIsMobile(mq.matches);
+    apply();
+    mq.addEventListener("change", apply);
+    return () => mq.removeEventListener("change", apply);
+  }, []);
+
+  // Lazy import particles when hero visible & user not motion-reduced & not small mobile (perf)
+  useEffect(() => {
+    if (shouldReduceMotion || isMobile) return;
     if (!heroRef.current) return;
     let observer;
     let cancelled = false;
@@ -139,7 +149,7 @@ const Hero = () => {
       cancelled = true;
       if (observer) observer.disconnect();
     };
-  }, [shouldReduceMotion]);
+  }, [shouldReduceMotion, isMobile]);
 
   useEffect(() => {
     if (shouldReduceMotion) return; // Desactiva animación reactiva al scroll
@@ -163,7 +173,7 @@ const Hero = () => {
   return (
     <section
       ref={heroRef}
-      className="h-screen w-full flex flex-col justify-center items-center relative overflow-hidden"
+      className="min-h-[100dvh] w-full flex flex-col justify-center items-center relative overflow-hidden px-4 sm:px-6"
     >
       {/* Fondo con gradiente holográfico */}
       <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-background)] via-[var(--color-background)]/95 to-[var(--color-background)]/90">
@@ -189,7 +199,7 @@ const Hero = () => {
         )}
       </div>
 
-      {!shouldReduceMotion && ParticlesCmp && particlesOptions && (
+      {!shouldReduceMotion && !isMobile && ParticlesCmp && particlesOptions && (
         <ParticlesCmp
           id="tsparticles"
           init={particlesInit}
@@ -199,7 +209,7 @@ const Hero = () => {
         />
       )}
       {/* lightweight placeholder gradient while particles bundle loads */}
-      {!shouldReduceMotion && !ParticlesCmp && (
+      {!shouldReduceMotion && !isMobile && !ParticlesCmp && (
         <div
           className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_50%_50%,rgba(0,240,255,0.08),transparent_70%)] animate-pulse"
           aria-hidden="true"
@@ -208,16 +218,16 @@ const Hero = () => {
 
       {/* Marco holográfico principal */}
       <motion.div
-        className="absolute inset-20 border-2 border-[var(--color-accent-jedi-blue)]/20 rounded-3xl"
+        className="absolute inset-4 sm:inset-10 lg:inset-20 border border-[var(--color-accent-jedi-blue)]/25 sm:border-2 rounded-2xl sm:rounded-3xl"
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 2, type: "spring" }}
       >
         {/* Esquinas brillantes */}
-        <div className="absolute top-0 left-0 w-12 h-12 border-t-2 border-l-2 border-[var(--color-accent-jedi-green)] rounded-tl-3xl animate-pulse" />
-        <div className="absolute top-0 right-0 w-12 h-12 border-t-2 border-r-2 border-[var(--color-accent-jedi-green)] rounded-tr-3xl animate-pulse" />
-        <div className="absolute bottom-0 left-0 w-12 h-12 border-b-2 border-l-2 border-[var(--color-accent-jedi-green)] rounded-bl-3xl animate-pulse" />
-        <div className="absolute bottom-0 right-0 w-12 h-12 border-b-2 border-r-2 border-[var(--color-accent-jedi-green)] rounded-br-3xl animate-pulse" />
+        <div className="absolute top-0 left-0 w-6 h-6 sm:w-10 sm:h-10 lg:w-12 lg:h-12 border-t border-l sm:border-t-2 sm:border-l-2 border-[var(--color-accent-jedi-green)] rounded-tl-2xl sm:rounded-tl-3xl animate-pulse" />
+        <div className="absolute top-0 right-0 w-6 h-6 sm:w-10 sm:h-10 lg:w-12 lg:h-12 border-t border-r sm:border-t-2 sm:border-r-2 border-[var(--color-accent-jedi-green)] rounded-tr-2xl sm:rounded-tr-3xl animate-pulse" />
+        <div className="absolute bottom-0 left-0 w-6 h-6 sm:w-10 sm:h-10 lg:w-12 lg:h-12 border-b border-l sm:border-b-2 sm:border-l-2 border-[var(--color-accent-jedi-green)] rounded-bl-2xl sm:rounded-bl-3xl animate-pulse" />
+        <div className="absolute bottom-0 right-0 w-6 h-6 sm:w-10 sm:h-10 lg:w-12 lg:h-12 border-b border-r sm:border-b-2 sm:border-r-2 border-[var(--color-accent-jedi-green)] rounded-br-2xl sm:rounded-br-3xl animate-pulse" />
       </motion.div>
 
       {/* Contenido principal */}
@@ -243,16 +253,16 @@ const Hero = () => {
         {/* Título principal con efecto de escritura */}
         <motion.div className="mb-8">
           <motion.h1
-            className="text-5xl md:text-8xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-accent-jedi-blue)] via-[var(--color-text-primary)] to-[var(--color-accent-jedi-green)] relative"
+            className="text-4xl sm:text-5xl lg:text-7xl xl:text-8xl leading-tight font-display font-bold text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-accent-jedi-blue)] via-[var(--color-text-primary)] to-[var(--color-accent-jedi-green)] relative break-words"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 1, type: "spring" }}
           >
-            <FaCode className="inline-block mr-6 text-[var(--color-accent-jedi-green)]" />
+            <FaCode className="hidden sm:inline-block mr-4 text-[var(--color-accent-jedi-green)] text-3xl sm:text-5xl align-middle" />
             {displayText}
             {isTyping && !shouldReduceMotion && (
               <motion.span
-                className="inline-block w-1 h-16 bg-[var(--color-accent-jedi-blue)] ml-2"
+                className="inline-block w-1 h-10 sm:h-14 lg:h-16 bg-[var(--color-accent-jedi-blue)] ml-2 align-middle"
                 animate={{ opacity: [1, 0, 1] }}
                 transition={{ duration: 0.8, repeat: Infinity }}
               />
@@ -275,21 +285,21 @@ const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 2.5 }}
         >
-          <p className="text-2xl md:text-4xl font-sans font-bold text-[var(--color-text-primary)] mb-2">
+          <p className="text-xl sm:text-2xl md:text-4xl font-sans font-bold text-[var(--color-text-primary)] mb-2">
             DESARROLLADOR FULL STACK
           </p>
           <div className="flex justify-center items-center gap-4">
-            <div className="h-px bg-[var(--color-accent-jedi-green)] flex-1 max-w-32" />
-            <span className="text-lg md:text-xl font-mono text-[var(--color-accent-jedi-green)]">
+            <div className="h-px bg-[var(--color-accent-jedi-green)] flex-1 max-w-16 sm:max-w-24 md:max-w-32" />
+            <span className="text-sm sm:text-base md:text-xl font-mono text-[var(--color-accent-jedi-green)] text-center">
               CREANDO EXPERIENCIAS DEL FUTURO
             </span>
-            <div className="h-px bg-[var(--color-accent-jedi-green)] flex-1 max-w-32" />
+            <div className="h-px bg-[var(--color-accent-jedi-green)] flex-1 max-w-16 sm:max-w-24 md:max-w-32" />
           </div>
         </motion.div>
 
         {/* Descripción */}
         <motion.p
-          className="text-lg md:text-xl font-sans text-[var(--color-text-primary)]/80 mb-12 max-w-4xl mx-auto leading-relaxed"
+          className="text-base sm:text-lg md:text-xl font-sans text-[var(--color-text-primary)]/80 mb-10 md:mb-12 max-w-3xl md:max-w-4xl mx-auto leading-relaxed px-1"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 3 }}
@@ -306,7 +316,7 @@ const Hero = () => {
 
         {/* Botones rediseñados */}
         <motion.div
-          className="flex flex-col md:flex-row justify-center gap-6"
+          className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6 w-full max-w-xl mx-auto"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 3.5 }}
@@ -315,7 +325,7 @@ const Hero = () => {
             <Button
               as="a"
               href="/projects"
-              className="group relative overflow-hidden font-mono font-bold py-4 px-8 border-2 border-[var(--color-accent-jedi-blue)] text-[var(--color-accent-jedi-blue)] rounded-lg hover:text-[var(--color-background)] transition-all duration-500 bg-transparent hover:bg-[var(--color-accent-jedi-blue)] shadow-[0_0_25px_rgba(0,240,255,0.4)] hover:shadow-[0_0_50px_rgba(0,240,255,0.8)]"
+              className="group relative overflow-hidden font-mono font-bold py-3 sm:py-4 px-6 sm:px-8 border border-[var(--color-accent-jedi-blue)] sm:border-2 text-[var(--color-accent-jedi-blue)] rounded-lg hover:text-[var(--color-background)] transition-all duration-500 bg-transparent hover:bg-[var(--color-accent-jedi-blue)] shadow-[0_0_20px_rgba(0,240,255,0.35)] hover:shadow-[0_0_40px_rgba(0,240,255,0.7)] text-sm sm:text-base"
             >
               <span className="relative z-10">EXPLORAR PROYECTOS</span>
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
@@ -326,7 +336,7 @@ const Hero = () => {
             <Button
               as="a"
               href="/contact"
-              className="group relative overflow-hidden font-mono font-bold py-4 px-8 border-2 border-[var(--color-accent-jedi-green)] text-[var(--color-accent-jedi-green)] rounded-lg hover:text-[var(--color-background)] transition-all duration-500 bg-transparent hover:bg-[var(--color-accent-jedi-green)] shadow-[0_0_25px_rgba(0,255,159,0.4)] hover:shadow-[0_0_50px_rgba(0,255,159,0.8)]"
+              className="group relative overflow-hidden font-mono font-bold py-3 sm:py-4 px-6 sm:px-8 border border-[var(--color-accent-jedi-green)] sm:border-2 text-[var(--color-accent-jedi-green)] rounded-lg hover:text-[var(--color-background)] transition-all duration-500 bg-transparent hover:bg-[var(--color-accent-jedi-green)] shadow-[0_0_20px_rgba(0,255,159,0.35)] hover:shadow-[0_0_40px_rgba(0,255,159,0.7)] text-sm sm:text-base"
             >
               <span className="relative z-10">INICIAR CONTACTO</span>
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
@@ -336,7 +346,7 @@ const Hero = () => {
 
         {/* Indicadores de estado */}
         <motion.div
-          className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6 text-center"
+          className="mt-12 md:mt-16 grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 text-center px-2"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 4 }}
