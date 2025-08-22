@@ -145,9 +145,7 @@ const SkillsSection = ({ isStandalonePage = false }) => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, delay: 0.2 }}
       >
-        <span className="font-mono tracking-wider">
-          MATRIZ_DE_COMPETENCIAS:
-        </span>
+        <span className="font-mono tracking-wider">MATRIZ DE COMPETENCIAS</span>
         {/* Línea animada */}
         <motion.div
           className="absolute bottom-0 left-1/2 transform -translate-x-1/2 h-0.5 bg-gradient-to-r from-[var(--color-accent-jedi-blue)] to-[var(--color-accent-jedi-green)]"

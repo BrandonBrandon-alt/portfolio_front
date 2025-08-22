@@ -145,7 +145,7 @@ const Carousel = ({ slides }) => {
               setTimeout(() => setIsPlaying(true), 3000);
             }}
           >
-            <AnimatePresence mode="wait">
+            <AnimatePresence>
               {slides.map((slide, index) => (
                 <motion.div
                   key={index}

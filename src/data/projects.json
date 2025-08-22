@@ -2,8 +2,8 @@
   {
     "id": 1,
     "title": "Dental Management System",
-    "description": "Sistema completo de gestión para clínicas odontológicas que digitalizó el 100% de historiales médicos, redujo 40% el tiempo de agendamiento y optimizó el control de inventario. Desarrollé tanto el frontend en React como el backend en Spring Boot para crear una solución integral y robusta.",
-    "imageUrl": "/images/project-task-app.png",
+  "description": "Plataforma clínica que digitaliza historiales, agiliza agendamiento y controla inventario: full stack (React + Spring Boot + MySQL).",
+  "imageUrl": "/odontologic.png",
     "technologies": ["Java", "Javascript", "Junit", "JWT", "React", "SpringBoot", "MySQL", "Git", "Tailwind", "Axios", "Vite", "Node"],
     "myRole": "Full Stack Developer",
     "teamSize": "3 desarrolladores",
@@ -18,10 +18,10 @@
     ],
     "challenges": "Integración compleja entre múltiples módulos (historiales, inventario, citas) y optimización de rendimiento para manejo de grandes volúmenes de datos médicos",
     "results": [
-      "100% digitalización de historiales médicos",
-      "40% reducción en tiempo de agendamiento de citas",
-      "Interface intuitiva que mejoró 98% la satisfacción de usuarios",
-      "API robusta con 99.8% de disponibilidad y respuesta <150ms"
+      "100% historiales digitalizados",
+      "-40% tiempo agendamiento",
+      "+ alto adoption usuarios (feedback interno)",
+      "<150ms p95 respuesta API"
     ],
     "projectType": "Universitario - Colaborativo",
     "githubUrl": "https://github.com/CamiloCuenca/dental-management-system-backend.git",
@@ -31,8 +31,8 @@
   {
     "id": 2,
     "title": "UniEventos",
-    "description": "Plataforma completa de venta de entradas para eventos que revoluciona la experiencia de compra de boletos. Desarrollé tanto el frontend en Angular como las APIs backend en Spring Boot, incluyendo sistema de autenticación seguro, gestión de eventos, procesamiento de pagos y panel administrativo.",
-    "imageUrl": "/images/project-ecommerce.jpg",
+  "description": "Venta de entradas end‑to‑end: Angular + Spring Boot + pagos + panel admin escalable.",
+    "imageUrl": "/uni.png",
     "technologies": ["Angular", "SpringBoot", "Node", "Java", "MongoDB", "Css", "JWT", "Git", "Junit", "Postman"],
     "myRole": "Full Stack Developer",
     "teamSize": "3 desarrolladores",
@@ -48,10 +48,10 @@
     ],
     "challenges": "Implementación de sistema de pagos seguro, manejo de concurrencia para venta de boletos limitados, y optimización de rendimiento para picos de tráfico",
     "results": [
-      "Sistema de pagos 100% funcional y seguro (frontend + backend)",
-      "Interfaz intuitiva que redujo 60% el tiempo de compra",
-      "Arquitectura escalable para eventos masivos",
-      "API robusta capaz de manejar 1000+ usuarios concurrentes"
+      "Checkout -60% tiempo compra",
+      "Pagos seguros integrados",
+      "Escalable a 1000+ concurrentes",
+      "Arquitectura modular"
     ],
     "projectType": "Universitario - Colaborativo",
     "githubUrl": "https://github.com/CamiloCuenca/UniEventos_proyecto_final_Backend.git",
@@ -61,7 +61,7 @@
   {
     "id": 3,
     "title": "Exami",
-    "description": "Sistema integral de gestión de exámenes académicos que optimiza los procesos de evaluación educativa. Desarrollé la solución completa: frontend en React para una interfaz intuitiva y backend robusto en Spring Boot con Oracle, incluyendo creación dinámica de exámenes, banco de preguntas categorizado, sistema de calificaciones automatizado y analíticas de rendimiento estudiantil.",
+  "description": "Gestión de exámenes: generación dinámica, banco preguntas, scoring y analíticas (React + Spring Boot + Oracle).",
     "imageUrl": "/images/project-blog.webp",
     "technologies": ["Node", "React", "Oracle", "Git", "Axios", "Vite", "Java", "SpringBoot", "Junit", "Tailwind"],
     "myRole": "Full Stack Developer",
@@ -78,10 +78,10 @@
     ],
     "challenges": "Implementación de algoritmos para generación aleatoria de exámenes balanceados, integración compleja frontend-backend para tiempo real, optimización de consultas complejas en Oracle, y desarrollo de interfaz intuitiva para múltiples tipos de usuarios",
     "results": [
-      "95% reducción en tiempo de creación de exámenes",
-      "Sistema de roles que gestiona 5 tipos de usuarios diferentes", 
-      "Base de datos optimizada para manejar +10,000 preguntas",
-      "API con 99.9% de disponibilidad y respuesta <200ms"
+      "-95% tiempo creación exámenes",
+      "5 roles soportados",
+      "+10k preguntas escalables",
+      "<200ms p95 API"
     ],
     "projectType": "Universitario - Colaborativo",
     "githubUrl": "https://github.com/CamiloCuenca/Exami.git",
@@ -90,7 +90,7 @@
   {
     "id": 4,
     "title": "Analizador Léxico para TypeScript",
-    "description": "Analizador léxico completo desarrollado en Python para procesar código fuente TypeScript y descomponerlo en tokens. Incluye interfaz gráfica intuitiva con PyQt5 para visualización interactiva del proceso de tokenización. Herramienta educativa ideal para el estudio de compiladores y análisis sintáctico.",
+  "description": "Analizador léxico TypeScript en Python con interfaz gráfica educativa y alta precisión.",
     "imageUrl": "/images/project-ecommerce.jpg",
     "technologies": ["Python", "Tkinter", "Pytest"],
     "myRole": "Desarrollador Principal",
@@ -105,10 +105,10 @@
     ],
     "challenges": "Implementación de algoritmos de reconocimiento de patrones complejos, manejo eficiente de archivos grandes de código, y creación de interfaz intuitiva para visualización de tokens",
     "results": [
-      "100% precisión en reconocimiento de tokens TypeScript estándar",
-      "Interfaz gráfica intuitiva con visualización en tiempo real",
-      "Código modular y extensible para otros lenguajes",
-      "Suite de pruebas con 95% de cobertura"
+      "100% tokens estándar",
+      "Visualización tiempo real",
+      "Arquitectura extensible",
+      "95% cobertura tests"
     ],
     "projectType": "Personal - Académico",
     "githubUrl": "https://github.com/Twolifelaw/TLF_proyecto.git"

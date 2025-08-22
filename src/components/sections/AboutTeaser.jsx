@@ -129,6 +129,11 @@ const AboutTeaser = () => {
                   src="brandon-profile.jpg"
                   alt="Brandon Montealegre - Full Stack Developer"
                   className="w-full h-full object-cover"
+                  width="288" /* 72 * 4 (tailwind w-72 => 18rem = 288px) */
+                  height="288"
+                  loading="lazy"
+                  decoding="async"
+                  fetchpriority="low"
                   onError={(e) => {
                     e.target.style.display = "none";
                     e.target.nextSibling.style.display = "flex";
@@ -260,7 +265,7 @@ const AboutTeaser = () => {
           <div className="text-right">
             <div>ID: DEV_001</div>
             <div>STATUS: ACTIVE</div>
-            <div>LEVEL: SENIOR</div>
+            <div>LEVEL: STUDENT</div>
           </div>
         </motion.div>
       </div>

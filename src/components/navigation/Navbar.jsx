@@ -9,9 +9,6 @@ import MobileMenuButton from "./MobileMenuButton";
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // Debug para verificar el estado
-  console.log("Navbar - Menu open:", isMenuOpen);
-
   // Bloquear scroll cuando el menú móvil esté abierto
   useEffect(() => {
     if (isMenuOpen) {
@@ -38,15 +35,9 @@ const Navbar = () => {
     },
   };
 
-  const toggleMenu = () => {
-    console.log("Toggling menu from:", isMenuOpen, "to:", !isMenuOpen);
-    setIsMenuOpen(!isMenuOpen);
-  };
+  const toggleMenu = () => setIsMenuOpen((o) => !o);
 
-  const closeMenu = () => {
-    console.log("Closing menu");
-    setIsMenuOpen(false);
-  };
+  const closeMenu = () => setIsMenuOpen(false);
 
   return (
     <>
@@ -56,6 +47,7 @@ const Navbar = () => {
         initial="hidden"
         animate="visible"
         variants={navVariants}
+        aria-label="Navegación principal"
       >
         <div className="container mx-auto flex justify-between items-center px-4 lg:px-6 relative">
           {/* Logo */}

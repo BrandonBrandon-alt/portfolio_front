@@ -1,5 +1,5 @@
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { Link } from "react-router-dom";
 import {
   FaReact,
@@ -145,6 +145,20 @@ const ProjectCard = ({ project }) => {
       ? project.technologies.split(",").map((t) => t.trim())
       : project.technologies || [];
 
+  const reduceMotion = useReducedMotion();
+
+  // Memoize particle configuration so random values are stable and not recalculated every render
+  const particleConfigs = React.useMemo(
+    () =>
+      Array.from({ length: 6 }, () => ({
+        left: 20 + Math.random() * 60,
+        top: 20 + Math.random() * 60,
+        duration: 2 + Math.random(),
+        delay: Math.random() * 2,
+      })),
+    []
+  );
+
   return (
     <motion.div
       className="relative group h-full"
@@ -162,28 +176,24 @@ const ProjectCard = ({ project }) => {
         <div className="absolute bottom-0 right-0 w-6 h-6 border-b-2 border-r-2 border-[var(--color-accent-jedi-green)] rounded-br-2xl opacity-60 group-hover:opacity-100 transition-opacity duration-300" />
       </div>
 
-      {/* Partículas flotantes */}
-      <div className="absolute inset-0 overflow-hidden rounded-2xl pointer-events-none">
-        {[...Array(6)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-1 h-1 bg-[var(--color-accent-jedi-green)] rounded-full opacity-40"
-            style={{
-              left: `${20 + Math.random() * 60}%`,
-              top: `${20 + Math.random() * 60}%`,
-            }}
-            animate={{
-              y: [0, -10, 0],
-              opacity: [0.4, 0.8, 0.4],
-            }}
-            transition={{
-              duration: 2 + Math.random(),
-              repeat: Infinity,
-              delay: Math.random() * 2,
-            }}
-          />
-        ))}
-      </div>
+      {/* Partículas flotantes (omitidas en reduce motion) */}
+      {!reduceMotion && (
+        <div className="absolute inset-0 overflow-hidden rounded-2xl pointer-events-none">
+          {particleConfigs.map((cfg, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-1 h-1 bg-[var(--color-accent-jedi-green)] rounded-full opacity-40"
+              style={{ left: `${cfg.left}%`, top: `${cfg.top}%` }}
+              animate={{ y: [0, -10, 0], opacity: [0.4, 0.8, 0.4] }}
+              transition={{
+                duration: cfg.duration,
+                repeat: Infinity,
+                delay: cfg.delay,
+              }}
+            />
+          ))}
+        </div>
+      )}
 
       {/* Contenido principal */}
       <div className="relative z-10 p-8 h-full flex flex-col">

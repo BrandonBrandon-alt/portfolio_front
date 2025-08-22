@@ -3,8 +3,18 @@ import "../styles/HeroTextAnimation.css";
 import { motion } from "framer-motion";
 import { containerVariants, itemVariants } from "../styles/animations";
 import React from "react";
+import usePageMeta from "../hooks/usePageMeta";
+import PageTitleBlock from "../components/ui/PageTitleBlock";
 
 const AboutPage = () => {
+  usePageMeta({
+    title: "Acerca de mí",
+    description:
+      "Conoce a Brandon Montealegre: experiencia, enfoque y habilidades como desarrollador Full Stack.",
+  });
+
+  // (Removed stray heading test element)
+
   return (
     <motion.div
       className="page-wrapper"
@@ -12,23 +22,14 @@ const AboutPage = () => {
       initial="hidden"
       animate="visible"
     >
-      <motion.h1
-        className="text-4xl md:text-5xl font-display font-bold text-center mb-14 text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-accent-jedi-blue)] to-[var(--color-accent-jedi-green)] relative"
-        variants={itemVariants}
-      >
-        <span className="font-mono tracking-wider">ACERCA_DE_MI:</span>
-        <motion.div
-          className="absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 bg-gradient-to-r from-[var(--color-accent-jedi-blue)] to-[var(--color-accent-jedi-green)]"
-          initial={{ width: 0 }}
-          animate={{ width: "80%" }}
-          transition={{ duration: 1, delay: 0.6 }}
-        />
-        <motion.div
-          className="absolute inset-0 bg-gradient-to-r from-transparent via-[var(--color-accent-jedi-blue)]/20 to-transparent"
-          animate={{ x: ["-100%", "100%"] }}
-          transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-        />
-      </motion.h1>
+      <PageTitleBlock
+        title="ACERCA DE MI"
+        badges={[
+          { text: "[ PROFILE ]", variant: "blue" },
+          { text: "LIVE", variant: "green" },
+        ]}
+        lead="Quién soy, mi enfoque profesional y cómo puedo aportar valor a tus proyectos a través de soluciones eficientes y escalables."
+      />
 
       {/* Hero / Overview panel */}
       <motion.div
@@ -39,7 +40,7 @@ const AboutPage = () => {
         {/* Badges */}
         <div className="absolute top-4 left-4 flex items-center gap-3 z-20">
           <span className="text-[10px] font-mono tracking-wider text-[var(--color-accent-jedi-green)] bg-[var(--color-accent-jedi-green)]/10 px-2 py-1 rounded border border-[var(--color-accent-jedi-green)]/30">
-            PROFILE_OVERVIEW
+            PROFILE OVERVIEW
           </span>
           <span className="text-[10px] font-mono tracking-wider text-[var(--color-accent-jedi-blue)]/70">
             LIVE
@@ -68,6 +69,11 @@ const AboutPage = () => {
               src="brandon-profile.jpg"
               alt="Brandon Montealegre - Full Stack Developer"
               className="relative z-10 w-full h-full object-cover rounded-full border-4 border-[var(--color-accent-jedi-green)]/30 shadow-2xl"
+              width="256" /* md:w-64 = 16rem => pick largest for reserve space */
+              height="256"
+              loading="lazy"
+              decoding="async"
+              fetchpriority="low"
               onError={(e) => {
                 e.target.style.display = "none";
                 e.target.nextSibling.style.display = "flex";
@@ -123,7 +129,7 @@ const AboutPage = () => {
       >
         <div className="absolute inset-0 pointer-events-none opacity-30 bg-[radial-gradient(circle_at_70%_40%,rgba(0,255,159,0.15),transparent_65%)]" />
         <h2 className="text-2xl md:text-3xl font-display font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-accent-jedi-green)] to-[var(--color-accent-jedi-blue)] tracking-wide relative inline-block">
-          <span className="font-mono">MI_TRAYECTORIA</span>
+          <span className="font-mono">MI TRAYECTORIA</span>
           <span className="absolute -bottom-1 left-0 h-px w-0 bg-gradient-to-r from-[var(--color-accent-jedi-green)] to-transparent animate-[holoUnderlineGrow_1.2s_0.3s_ease_forwards]"></span>
         </h2>
         <motion.p
@@ -154,7 +160,7 @@ const AboutPage = () => {
       >
         <div className="absolute inset-0 pointer-events-none opacity-30 bg-[radial-gradient(circle_at_30%_60%,rgba(0,240,255,0.15),transparent_65%)]" />
         <h2 className="text-2xl md:text-3xl font-display font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-accent-jedi-blue)] to-[var(--color-accent-jedi-green)] tracking-wide relative inline-block">
-          <span className="font-mono">FILOSOFIA_&_ENFOQUE</span>
+          <span className="font-mono">FILOSOFIA & ENFOQUE</span>
           <span className="absolute -bottom-1 left-0 h-px w-0 bg-gradient-to-r from-[var(--color-accent-jedi-blue)] to-transparent animate-[holoUnderlineGrow_1.2s_0.3s_ease_forwards]"></span>
         </h2>
         <motion.p
@@ -186,7 +192,7 @@ const AboutPage = () => {
       >
         <div className="absolute inset-0 pointer-events-none opacity-30 bg-[radial-gradient(circle_at_80%_50%,rgba(0,255,159,0.15),transparent_65%)]" />
         <h2 className="text-2xl md:text-3xl font-display font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-accent-jedi-green)] to-[var(--color-accent-jedi-blue)] tracking-wide relative inline-block">
-          <span className="font-mono">HABILIDADES_CLAVE</span>
+          <span className="font-mono">HABILIDADES CLAVE</span>
           <span className="absolute -bottom-1 left-0 h-px w-0 bg-gradient-to-r from-[var(--color-accent-jedi-green)] to-transparent animate-[holoUnderlineGrow_1.2s_0.3s_ease_forwards]"></span>
         </h2>
         <motion.div

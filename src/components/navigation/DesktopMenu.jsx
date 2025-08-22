@@ -3,6 +3,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { motion } from "framer-motion";
 import { navLinks } from "./navLinks";
+import { prefetchRoute } from "../../utils/routePrefetch";
 
 const DesktopMenu = () => {
   const navListContainerVariants = {
@@ -42,6 +43,8 @@ const DesktopMenu = () => {
             to={link.to}
             className={({ isActive }) => `nav-link ${isActive ? "active" : ""}`}
             end={link.exact || false}
+            onMouseEnter={() => prefetchRoute(link.to)}
+            onFocus={() => prefetchRoute(link.to)}
           >
             <motion.span
               className="flex items-center gap-2"

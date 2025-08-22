@@ -1,4 +1,5 @@
 import React from "react";
+import usePageMeta from "../hooks/usePageMeta";
 import Hero from "../components/sections/Hero";
 import AboutTeaser from "../components/sections/AboutTeaser";
 import SkillsSection from "../components/sections/SkillsSection";
@@ -40,8 +41,17 @@ const ctaSlides = [
 ];
 
 const HomePageContent = () => {
+  usePageMeta({
+    title: "Inicio",
+    description:
+      "Portafolio de Brandon Montealegre: proyectos destacados, habilidades y contacto profesional.",
+  });
+
   return (
     <>
+      {/* Passive prefetch hints for high-probability navigation targets */}
+      <link rel="prefetch" href="/projects" as="document" />
+      <link rel="prefetch" href="/skills" as="document" />
       <Hero />
       <div className="py-16">
         <AboutTeaser />

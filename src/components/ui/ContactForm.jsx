@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Form from "./Form";
 import Input from "./Input";
 import Button from "./Button";
@@ -13,50 +13,75 @@ const ContactForm = () => {
 
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
+  const [touched, setTouched] = useState({});
+  const debounceRef = useRef(null);
+  const firstErrorRef = useRef(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-    if (errors[name]) {
-      setErrors({
-        ...errors,
-        [name]: null,
-      });
-    }
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
+    setTouched((prev) => ({ ...prev, [name]: true }));
+    setSubmitted(false);
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+    debounceRef.current = setTimeout(() => {
+      // live validation solo de ese campo
+      validateForm({ field: name });
+    }, 300);
   };
 
-  const validateForm = () => {
-    let newErrors = {};
+  const validateForm = ({ field } = {}) => {
+    let newErrors = { ...errors };
     let isValid = true;
 
-    const nameRegex = /^[a-zA-Z\s]+$/;
-    if (!formData.name.trim()) {
-      newErrors.name = "El nombre es requerido.";
-      isValid = false;
-    } else if (!nameRegex.test(formData.name)) {
-      newErrors.name = "El nombre solo puede contener letras y espacios.";
-      isValid = false;
+    const checkName = () => {
+      const nameRegex = /^[a-zA-Z\s]+$/;
+      if (!formData.name.trim()) {
+        newErrors.name = "El nombre es requerido.";
+        isValid = false;
+      } else if (!nameRegex.test(formData.name)) {
+        newErrors.name = "El nombre solo puede contener letras y espacios.";
+        isValid = false;
+      } else {
+        delete newErrors.name;
+      }
+    };
+
+    const checkEmail = () => {
+      const emailRegex = /^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,6}$/;
+      if (!formData.email.trim()) {
+        newErrors.email = "El correo electrónico es requerido.";
+        isValid = false;
+      } else if (!emailRegex.test(formData.email)) {
+        newErrors.email = "Formato de correo electrónico inválido.";
+        isValid = false;
+      } else {
+        delete newErrors.email;
+      }
+    };
+
+    const checkMessage = () => {
+      if (!formData.message.trim()) {
+        newErrors.message = "El mensaje es requerido.";
+        isValid = false;
+      } else if (formData.message.length < 10) {
+        newErrors.message = "El mensaje debe tener al menos 10 caracteres.";
+        isValid = false;
+      } else {
+        delete newErrors.message;
+      }
+    };
+
+    if (field) {
+      if (field === "name") checkName();
+      if (field === "email") checkEmail();
+      if (field === "message") checkMessage();
+      setErrors(newErrors);
+      return Object.keys(newErrors).length === 0;
     }
 
-    const emailRegex = /^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,6}$/;
-    if (!formData.email.trim()) {
-      newErrors.email = "El correo electrónico es requerido.";
-      isValid = false;
-    } else if (!emailRegex.test(formData.email)) {
-      newErrors.email = "Formato de correo electrónico inválido.";
-      isValid = false;
-    }
-
-    if (!formData.message.trim()) {
-      newErrors.message = "El mensaje es requerido.";
-      isValid = false;
-    } else if (formData.message.length < 10) {
-      newErrors.message = "El mensaje debe tener al menos 10 caracteres.";
-      isValid = false;
-    }
+    checkName();
+    checkEmail();
+    checkMessage();
 
     setErrors(newErrors);
     return isValid;
@@ -67,6 +92,17 @@ const ContactForm = () => {
 
     if (!validateForm()) {
       toast.error("Por favor, corrige los errores en el formulario.");
+      // focus primer error
+      const order = ["name", "email", "message"];
+      for (const f of order) {
+        if (errors[f] || !formData[f].trim()) {
+          const el = document.getElementById(f);
+          if (el) {
+            el.focus();
+            break;
+          }
+        }
+      }
       return;
     }
 
@@ -165,6 +201,7 @@ const ContactForm = () => {
               type="text"
               id="name"
               name="name"
+              autoComplete="name"
               placeholder="Tu Nombre"
               value={formData.name}
               onChange={handleChange}
@@ -187,6 +224,7 @@ const ContactForm = () => {
               type="email"
               id="email"
               name="email"
+              autoComplete="email"
               placeholder="Tu Correo Electrónico"
               value={formData.email}
               onChange={handleChange}
@@ -212,6 +250,7 @@ const ContactForm = () => {
               value={formData.message}
               onChange={handleChange}
               rows="6"
+              autoComplete="off"
               className={`w-full p-3 rounded-md bg-[var(--color-background)]/60 border-2 ${
                 errors.message
                   ? "border-[var(--color-accent-sith-red)]"
