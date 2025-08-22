@@ -51,12 +51,13 @@ const Navbar = () => {
   return (
     <>
       <motion.nav
-        className="hologram-effect text-[var(--color-text-primary)] border-b border-[var(--color-accent-jedi-blue)]/40 py-4 backdrop-blur-md shadow-inner shadow-[var(--color-accent-jedi-blue)]/20 sticky top-0 z-50 bg-[var(--color-background)]/90"
+        className="nav-holo text-[var(--color-text-primary)] py-3"
+        data-scan="on"
         initial="hidden"
         animate="visible"
         variants={navVariants}
       >
-        <div className="container mx-auto flex justify-between items-center px-4 lg:px-6">
+        <div className="container mx-auto flex justify-between items-center px-4 lg:px-6 relative">
           {/* Logo */}
           <NavLogo />
 

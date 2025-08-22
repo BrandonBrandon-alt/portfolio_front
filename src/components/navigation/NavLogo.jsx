@@ -7,7 +7,7 @@ const NavLogo = () => {
   return (
     <NavLink
       to="/"
-      className="text-[var(--color-accent-jedi-blue)] text-2xl font-bold flex items-center space-x-3 drop-shadow-lg z-50"
+      className="text-[var(--color-accent-jedi-blue)] text-2xl font-bold flex items-center space-x-3 drop-shadow-lg"
     >
       <motion.div
         whileHover={{ scale: 1.1, rotate: 10 }}

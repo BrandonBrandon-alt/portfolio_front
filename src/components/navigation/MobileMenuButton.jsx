@@ -10,7 +10,7 @@ const MobileMenuButton = ({ isOpen, onClick }) => {
     <div className="block sm:block md:block lg:hidden xl:hidden">
       <motion.button
         whileTap={{ scale: 0.9 }}
-        className="relative z-50 p-3 rounded-full border-2 border-[var(--color-accent-jedi-blue)] text-[var(--color-accent-jedi-blue)] hover:bg-[var(--color-accent-jedi-blue)] hover:text-[var(--color-background)] shadow-[0_0_15px_rgba(0,150,255,0.3)] hover:shadow-[0_0_25px_rgba(0,150,255,0.5)] transition-all duration-300 bg-[var(--color-background)]"
+        className="relative z-50 p-3 nav-mobile-btn text-[var(--color-accent-jedi-blue)]"
         aria-label={isOpen ? "Cerrar menú" : "Abrir menú"}
         onClick={() => {
           console.log("Button clicked, current state:", isOpen);

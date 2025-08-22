@@ -1,131 +1,314 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import React, { useCallback, useEffect, useState } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import Particles from "@tsparticles/react";
 import { loadSlim } from "tsparticles-slim";
 import particlesOptions from "./particles-config";
 import Button from "../ui/Button";
 import "../../styles/HeroTextAnimation.css";
-import { FaCode } from 'react-icons/fa'; // Importar nuevos iconos
-import { containerVariants, itemVariants } from '../../styles/animations';
+import { FaCode, FaRocket } from "react-icons/fa";
 
 const Hero = () => {
-    const [particlesContainer, setParticlesContainer] = useState(null);
-    const [isHyperspace, setIsHyperspace] = useState(false);
+  const shouldReduceMotion = useReducedMotion();
+  const [particlesContainer, setParticlesContainer] = useState(null);
+  const [isHyperspace, setIsHyperspace] = useState(false);
+  const [displayText, setDisplayText] = useState("");
+  const [isTyping, setIsTyping] = useState(true);
 
-    const particlesInit = useCallback(async engine => {
-        await loadSlim(engine);
-    }, []);
+  const fullText = "BRANDON MONTEALEGRE";
 
-    const particlesLoaded = useCallback(async container => {
-        setParticlesContainer(container);
-    }, []);
+  const particlesInit = useCallback(async (engine) => {
+    await loadSlim(engine);
+  }, []);
 
-    const toggleHyperspace = useCallback((enable) => {
-        if (!particlesContainer) return;
+  const particlesLoaded = useCallback(async (container) => {
+    setParticlesContainer(container);
+  }, []);
 
-        particlesContainer.loadOptions({
-            particles: {
-                move: {
-                    speed: enable ? 200 : 3, // Mucho más rápido en hiperespacio
-                    direction: "none",
-                    random: true,
-                    straight: false,
-                    outModes: {
-                        default: "bounce",
-                    },
-                },
-                shape: {
-                    type: enable ? "line" : "circle", // Estirar a líneas en hiperespacio
-                },
-                size: {
-                    value: enable ? { min: 1, max: 5 } : { min: 1, max: 3 },
-                },
-                links: {
-                    enable: !enable, // Deshabilitar enlaces en hiperespacio
-                },
-                opacity: {
-                    value: enable ? 0.5 : 0.7,
-                },
+  const toggleHyperspace = useCallback(
+    (enable) => {
+      if (!particlesContainer) return;
+
+      particlesContainer.loadOptions({
+        particles: {
+          move: {
+            speed: enable ? 200 : 3,
+            direction: "none",
+            random: true,
+            straight: false,
+            outModes: {
+              default: "bounce",
             },
-        });
-        setIsHyperspace(enable);
-    }, [particlesContainer]);
+          },
+          shape: {
+            type: enable ? "line" : "circle",
+          },
+          size: {
+            value: enable ? { min: 1, max: 5 } : { min: 1, max: 3 },
+          },
+          links: {
+            enable: !enable,
+          },
+          opacity: {
+            value: enable ? 0.5 : 0.7,
+          },
+        },
+      });
+      setIsHyperspace(enable);
+    },
+    [particlesContainer]
+  );
 
-    useEffect(() => {
-        // Activar hiperespacio al cargar la página por un corto tiempo
-        const timeout = setTimeout(() => {
-            toggleHyperspace(true);
-            setTimeout(() => toggleHyperspace(false), 1000); // Duración del efecto
-        }, 500); // Retraso inicial
+  // Efecto de escritura para el nombre
+  // Efecto de escritura (omitido si reduce motion)
+  useEffect(() => {
+    if (shouldReduceMotion) {
+      setDisplayText(fullText);
+      setIsTyping(false);
+      return;
+    }
+    let index = 0;
+    const timer = setInterval(() => {
+      if (index < fullText.length) {
+        setDisplayText(fullText.slice(0, index + 1));
+        index++;
+      } else {
+        setIsTyping(false);
+        clearInterval(timer);
+      }
+    }, 100);
+    return () => clearInterval(timer);
+  }, [shouldReduceMotion]);
 
-        return () => clearTimeout(timeout);
-    }, [toggleHyperspace]);
+  useEffect(() => {
+    if (shouldReduceMotion) return; // No hiperspace en reduce motion
+    const timeout = setTimeout(() => {
+      toggleHyperspace(true);
+      setTimeout(() => toggleHyperspace(false), 1000);
+    }, 500);
+    return () => clearTimeout(timeout);
+  }, [toggleHyperspace, shouldReduceMotion]);
 
-    // Opcional: Activar hiperespacio al hacer scroll hacia arriba rápidamente
-    useEffect(() => {
-        let lastScrollY = window.scrollY;
-        const handleScroll = () => {
-            const currentScrollY = window.scrollY;
-            if (currentScrollY < lastScrollY && currentScrollY < 50 && !isHyperspace) { // Si sube y está cerca del top
-                toggleHyperspace(true);
-                setTimeout(() => toggleHyperspace(false), 1000);
-            }
-            lastScrollY = currentScrollY;
-        };
+  useEffect(() => {
+    if (shouldReduceMotion) return; // Desactiva animación reactiva al scroll
+    let lastScrollY = window.scrollY;
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      if (
+        currentScrollY < lastScrollY &&
+        currentScrollY < 50 &&
+        !isHyperspace
+      ) {
+        toggleHyperspace(true);
+        setTimeout(() => toggleHyperspace(false), 1000);
+      }
+      lastScrollY = currentScrollY;
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [isHyperspace, toggleHyperspace, shouldReduceMotion]);
 
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, [isHyperspace, toggleHyperspace]);
-
-    return (
-        <section className="h-screen w-full flex flex-col justify-center items-center relative overflow-hidden bg-gradient-to-b from-black via-gray-900 to-[var(--color-background)]">
-            <Particles
-                id="tsparticles"
-                init={particlesInit}
-                loaded={particlesLoaded}
-                options={particlesOptions}
-                className="absolute inset-0 z-0"
-            />
-
-            <motion.div
-                className="text-center p-4 relative z-10 backdrop-blur-sm"
-                variants={containerVariants}
-                initial="hidden"
-                animate="visible"
-            >
-                <motion.h1
-                    className="text-5xl md:text-7xl font-display text-[var(--color-text-primary)] mb-4 relative inline-block lightsaber-underline drop-shadow-[0_0_15px_#0ff] animated-text-ray"
-                    variants={itemVariants}
-                >
-                    <FaCode className="inline-block mr-4 text-[var(--color-accent-jedi-green)]" /> BRANDON MONTEALEGRE
-                </motion.h1>
-                <motion.p
-                    className="text-xl md:text-2xl font-sans text-[var(--color-text-primary)] mt-4 drop-shadow-[0_0_5px_#0ff]"
-                    variants={itemVariants}
-                >
-                    Desarrollador Full Stack | Creando Experiencias del Futuro
-                </motion.p>
-                <motion.p
-                    className="text-lg md:text-xl font-sans text-[var(--color-text-muted)] mt-2 max-w-2xl mx-auto"
-                    variants={itemVariants}
-                >
-                    Transformando ideas en soluciones digitales innovadoras con un enfoque en la eficiencia y la experiencia de usuario.
-                </motion.p>
-
+  return (
+    <section className="h-screen w-full flex flex-col justify-center items-center relative overflow-hidden">
+      {/* Fondo con gradiente holográfico */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-background)] via-[var(--color-background)]/95 to-[var(--color-background)]/90">
+        {/* Grid holográfico (simplificado en móviles & reduce motion) */}
+        {!shouldReduceMotion && (
+          <div className="absolute inset-0 opacity-10 hidden sm:block">
+            <div className="grid grid-cols-12 grid-rows-12 h-full w-full">
+              {[...Array(144)].map((_, i) => (
                 <motion.div
-                    className="mt-8 flex flex-col md:flex-row justify-center gap-4"
-                    variants={itemVariants}
+                  key={i}
+                  className="border-r border-b border-[var(--color-accent-jedi-blue)]"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: Math.random() > 0.8 ? 0.3 : 0 }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    delay: Math.random() * 2,
+                  }}
+                />
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+
+      {!shouldReduceMotion && (
+        <Particles
+          id="tsparticles"
+          init={particlesInit}
+          loaded={particlesLoaded}
+          options={particlesOptions}
+          className="absolute inset-0 z-0"
+        />
+      )}
+
+      {/* Marco holográfico principal */}
+      <motion.div
+        className="absolute inset-20 border-2 border-[var(--color-accent-jedi-blue)]/20 rounded-3xl"
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 2, type: "spring" }}
+      >
+        {/* Esquinas brillantes */}
+        <div className="absolute top-0 left-0 w-12 h-12 border-t-2 border-l-2 border-[var(--color-accent-jedi-green)] rounded-tl-3xl animate-pulse" />
+        <div className="absolute top-0 right-0 w-12 h-12 border-t-2 border-r-2 border-[var(--color-accent-jedi-green)] rounded-tr-3xl animate-pulse" />
+        <div className="absolute bottom-0 left-0 w-12 h-12 border-b-2 border-l-2 border-[var(--color-accent-jedi-green)] rounded-bl-3xl animate-pulse" />
+        <div className="absolute bottom-0 right-0 w-12 h-12 border-b-2 border-r-2 border-[var(--color-accent-jedi-green)] rounded-br-3xl animate-pulse" />
+      </motion.div>
+
+      {/* Contenido principal */}
+      <motion.div
+        className="text-center p-4 relative z-10 max-w-6xl mx-auto"
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, type: "spring", stiffness: 60 }}
+      >
+        {/* Badge superior */}
+        <motion.div
+          className="mb-8 flex justify-center"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5 }}
+        >
+          <span className="text-sm font-mono tracking-wider text-[var(--color-accent-jedi-green)] bg-[var(--color-accent-jedi-green)]/10 px-6 py-3 rounded-full border border-[var(--color-accent-jedi-green)]/30 backdrop-blur-sm">
+            <FaRocket className="inline mr-2" />
+            SISTEMA INICIADO / SYSTEM ONLINE
+          </span>
+        </motion.div>
+
+        {/* Título principal con efecto de escritura */}
+        <motion.div className="mb-8">
+          <motion.h1
+            className="text-5xl md:text-8xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-accent-jedi-blue)] via-[var(--color-text-primary)] to-[var(--color-accent-jedi-green)] relative"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 1, type: "spring" }}
+          >
+            <FaCode className="inline-block mr-6 text-[var(--color-accent-jedi-green)]" />
+            {displayText}
+            {isTyping && !shouldReduceMotion && (
+              <motion.span
+                className="inline-block w-1 h-16 bg-[var(--color-accent-jedi-blue)] ml-2"
+                animate={{ opacity: [1, 0, 1] }}
+                transition={{ duration: 0.8, repeat: Infinity }}
+              />
+            )}
+          </motion.h1>
+
+          {/* Underline holográfico */}
+          <motion.div
+            className="mx-auto mt-4 h-1 bg-gradient-to-r from-transparent via-[var(--color-accent-jedi-blue)] to-transparent"
+            initial={{ width: 0 }}
+            animate={{ width: "60%" }}
+            transition={{ delay: 2, duration: 1.5 }}
+          />
+        </motion.div>
+
+        {/* Subtítulo */}
+        <motion.div
+          className="mb-6"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 2.5 }}
+        >
+          <p className="text-2xl md:text-4xl font-sans font-bold text-[var(--color-text-primary)] mb-2">
+            DESARROLLADOR FULL STACK
+          </p>
+          <div className="flex justify-center items-center gap-4">
+            <div className="h-px bg-[var(--color-accent-jedi-green)] flex-1 max-w-32" />
+            <span className="text-lg md:text-xl font-mono text-[var(--color-accent-jedi-green)]">
+              CREANDO EXPERIENCIAS DEL FUTURO
+            </span>
+            <div className="h-px bg-[var(--color-accent-jedi-green)] flex-1 max-w-32" />
+          </div>
+        </motion.div>
+
+        {/* Descripción */}
+        <motion.p
+          className="text-lg md:text-xl font-sans text-[var(--color-text-primary)]/80 mb-12 max-w-4xl mx-auto leading-relaxed"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 3 }}
+        >
+          Transformando ideas en soluciones digitales innovadoras. Especializado
+          en desarrollo frontend y backend, con enfoque en la eficiencia,
+          escalabilidad y experiencia de usuario excepcional.
+          <motion.span
+            className="inline-block w-0.5 h-5 bg-[var(--color-accent-jedi-green)] ml-1"
+            animate={{ opacity: [1, 0, 1] }}
+            transition={{ duration: 1.2, repeat: Infinity, delay: 3.5 }}
+          />
+        </motion.p>
+
+        {/* Botones rediseñados */}
+        <motion.div
+          className="flex flex-col md:flex-row justify-center gap-6"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 3.5 }}
+        >
+          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <Button
+              as="a"
+              href="/projects"
+              className="group relative overflow-hidden font-mono font-bold py-4 px-8 border-2 border-[var(--color-accent-jedi-blue)] text-[var(--color-accent-jedi-blue)] rounded-lg hover:text-[var(--color-background)] transition-all duration-500 bg-transparent hover:bg-[var(--color-accent-jedi-blue)] shadow-[0_0_25px_rgba(0,240,255,0.4)] hover:shadow-[0_0_50px_rgba(0,240,255,0.8)]"
+            >
+              <span className="relative z-10">EXPLORAR PROYECTOS</span>
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+            </Button>
+          </motion.div>
+
+          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <Button
+              as="a"
+              href="/contact"
+              className="group relative overflow-hidden font-mono font-bold py-4 px-8 border-2 border-[var(--color-accent-jedi-green)] text-[var(--color-accent-jedi-green)] rounded-lg hover:text-[var(--color-background)] transition-all duration-500 bg-transparent hover:bg-[var(--color-accent-jedi-green)] shadow-[0_0_25px_rgba(0,255,159,0.4)] hover:shadow-[0_0_50px_rgba(0,255,159,0.8)]"
+            >
+              <span className="relative z-10">INICIAR CONTACTO</span>
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+            </Button>
+          </motion.div>
+        </motion.div>
+
+        {/* Indicadores de estado */}
+        <motion.div
+          className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6 text-center"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 4 }}
+        >
+          {[
+            { label: "PROYECTOS", value: "15+", color: "jedi-blue" },
+            { label: "TECNOLOGÍAS", value: "20+", color: "jedi-green" },
+            { label: "EXPERIENCIA", value: "3+ AÑOS", color: "jedi-blue" },
+          ].map((stat, index) => (
+            <motion.div
+              key={index}
+              className="relative"
+              whileHover={{ scale: 1.05 }}
+            >
+              <div
+                className={`border border-[var(--color-accent-${stat.color})]/30 rounded-lg p-4 bg-[var(--color-accent-${stat.color})]/5 backdrop-blur-sm`}
+              >
+                <div
+                  className={`text-2xl font-mono font-bold text-[var(--color-accent-${stat.color})]`}
                 >
-                    <Button as="a" href="/projects" className="border-[var(--color-accent-jedi-blue)] text-[var(--color-accent-jedi-blue)] hover:bg-[var(--color-accent-jedi-blue)] hover:text-[var(--color-background)] shadow-[0_0_10px_var(--color-accent-jedi-green)] hover:shadow-[0_0_20px_var(--color-accent-jedi-green)]">
-                        Explorar Proyectos
-                    </Button>
-                    <Button as="a" href="/contact" className="border-[var(--color-accent-jedi-green)] text-[var(--color-accent-jedi-green)] hover:bg-[var(--color-accent-jedi-green)] hover:text-[var(--color-background)] shadow-[0_0_10px_var(--color-accent-jedi-green)] hover:shadow-[0_0_20px_var(--color-accent-jedi-green)]">
-                        Contactar
-                    </Button>
-                </motion.div>
+                  {stat.value}
+                </div>
+                <div className="text-sm font-mono text-[var(--color-text-primary)]/70">
+                  {stat.label}
+                </div>
+              </div>
             </motion.div>
-        </section>
-    );
+          ))}
+        </motion.div>
+      </motion.div>
+
+      {/* Efecto de escaneo holográfico */}
+      {/* Overlay local retirado (efecto ahora global) */}
+    </section>
+  );
 };
 
 export default Hero;

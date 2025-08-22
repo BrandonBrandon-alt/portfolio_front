@@ -25,6 +25,13 @@ const NotFound = () => (
 function App() {
   return (
     <BrowserRouter>
+      {/* Skip link for keyboard users */}
+      <a
+        href="#main-content"
+        className="skip-to-content focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent-jedi-green)]"
+      >
+        Saltar al contenido principal
+      </a>
       <ScrollToTop />
       <ErrorBoundary>
         <MainLayout>
@@ -37,15 +44,17 @@ function App() {
           >
             {" "}
             {/* Puedes usar un spinner aquí */}
-            <Routes>
-              <Route path="/" element={<HomePageContent />} />
-              <Route path="/projects" element={<ProjectsPage />} />
-              <Route path="/projects/:id" element={<ProjectDetailPage />} />
-              <Route path="/about" element={<AboutPage />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/skills" element={<SkillsPage />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
+            <div id="main-content" role="main" className="outline-none">
+              <Routes>
+                <Route path="/" element={<HomePageContent />} />
+                <Route path="/projects" element={<ProjectsPage />} />
+                <Route path="/projects/:id" element={<ProjectDetailPage />} />
+                <Route path="/about" element={<AboutPage />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/skills" element={<SkillsPage />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </div>
           </Suspense>
         </MainLayout>
       </ErrorBoundary>
