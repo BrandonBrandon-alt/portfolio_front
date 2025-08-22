@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Brandon Montealegre Portfolio">
+  <defs>
+    <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0%" stop-color="#00f0ff" />
+      <stop offset="50%" stop-color="#ffffff" />
+      <stop offset="100%" stop-color="#00ff9f" />
+    </linearGradient>
+    <linearGradient id="bg" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#0b0c10" />
+      <stop offset="100%" stop-color="#091018" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)" />
+  <g fill="none" stroke="#00f0ff" stroke-opacity="0.15">
+    <circle cx="600" cy="315" r="500" />
+    <circle cx="600" cy="315" r="400" />
+    <circle cx="600" cy="315" r="300" />
+    <circle cx="600" cy="315" r="200" />
+  </g>
+  <text x="600" y="250" font-family="'Orbitron', 'Roboto', sans-serif" font-size="84" text-anchor="middle" fill="url(#g)" font-weight="700">BRAN / DEV</text>
+  <text x="600" y="330" font-family="'Roboto', sans-serif" font-size="40" text-anchor="middle" fill="#cfd8dc" font-weight="500">Full Stack Developer</text>
+  <text x="600" y="390" font-family="'Roboto', sans-serif" font-size="26" text-anchor="middle" fill="#00ff9f" opacity="0.85">React · Node · Java · Spring Boot</text>
+  <rect x="400" y="430" width="400" height="70" rx="12" fill="rgba(0,240,255,0.08)" stroke="#00f0ff" stroke-opacity="0.4" />
+  <text x="600" y="477" font-family="'Roboto', sans-serif" font-size="30" text-anchor="middle" fill="#ffffff" font-weight="600">brandonmontealegre.dev</text>
+  <text x="1180" y="610" font-family="'Roboto', sans-serif" font-size="14" text-anchor="end" fill="#62727b">© 2025 Brandon Montealegre</text>
+</svg>

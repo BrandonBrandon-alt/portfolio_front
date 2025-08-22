@@ -6,8 +6,6 @@ import { HiXMark } from "react-icons/hi2";
 import { navLinks } from "./navLinks";
 
 const MobileMenu = ({ isOpen, onClose }) => {
-  console.log("MobileMenu rendered, isOpen:", isOpen);
-
   if (!isOpen) return null;
 
   const getMobileNavLinkClasses = ({ isActive }) =>
@@ -28,6 +26,36 @@ const MobileMenu = ({ isOpen, onClose }) => {
       firstLinkRef.current.focus();
     }
   }, [isOpen]);
+
+  // Cerrar con Escape
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleKey = (e) => {
+      if (e.key === "Escape") {
+        onClose?.();
+      }
+      // Tab trapping básico
+      if (e.key === "Tab") {
+        const panel = document.querySelector(".nav-panel");
+        if (!panel) return;
+        const focusables = panel.querySelectorAll(
+          'a[href], button:not([disabled]), [tabindex="0"]'
+        );
+        if (focusables.length === 0) return;
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    };
+    document.addEventListener("keydown", handleKey);
+    return () => document.removeEventListener("keydown", handleKey);
+  }, [isOpen, onClose]);
 
   return (
     <div className="block sm:block md:block lg:hidden xl:hidden">

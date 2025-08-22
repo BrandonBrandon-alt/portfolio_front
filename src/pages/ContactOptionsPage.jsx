@@ -1,4 +1,5 @@
 import React from "react";
+import usePageMeta from "../hooks/usePageMeta";
 import { motion } from "framer-motion";
 import ContactFormSection from "../components/sections/ContactFormSection";
 import ContactChannelCard from "../components/ui/ContactChannelCard";
@@ -51,6 +52,12 @@ const channels = [
 ];
 
 const ContactOptionsPage = () => {
+  usePageMeta({
+    title: "Contacto",
+    description:
+      "Canales de contacto de Brandon Montealegre: LinkedIn, WhatsApp, correo y formulario profesional.",
+  });
+
   return (
     <motion.div
       className="page-wrapper flex flex-col items-center"
@@ -66,7 +73,7 @@ const ContactOptionsPage = () => {
         <div className="text-center mb-8">
           <div className="flex items-center justify-center gap-4 mb-6 flex-wrap">
             <span className="text-[10px] tracking-[0.35em] font-mono px-4 py-1 rounded-full border border-[var(--color-accent-jedi-blue)]/40 text-[var(--color-accent-jedi-blue)] bg-[var(--color-accent-jedi-blue)]/10 shadow-[0_0_0_1px_rgba(0,240,255,0.2)]">
-              [ CONTACT_CHANNELS ]
+              [ CONTACT CHANNELS ]
             </span>
             <span className="text-[10px] tracking-[0.35em] font-mono px-4 py-1 rounded-full border border-[var(--color-accent-jedi-green)]/40 text-[var(--color-accent-jedi-green)] bg-[var(--color-accent-jedi-green)]/10">
               LIVE
@@ -111,7 +118,7 @@ const ContactOptionsPage = () => {
             id="alt-channels-title"
             className="text-xl font-mono tracking-[0.4em] text-[var(--color-accent-jedi-green)] mb-4"
           >
-            [ CANALES_ALTERNATIVOS ]
+            [ CANALES ALTERNATIVOS ]
           </h2>
           <p className="text-sm font-mono tracking-wider text-[var(--color-text-primary)]/60">
             DIFUSIÓN · RESPUESTA RÁPIDA · FORMAL · CÓDIGO · EXPLORACIÓN
@@ -123,7 +130,7 @@ const ContactOptionsPage = () => {
           ))}
         </div>
         <div className="mt-14 text-center font-mono text-xs tracking-widest text-[var(--color-text-primary)]/35">
-          [ FIN_CANALES ]
+          [ FIN CANALES ]
         </div>
       </motion.section>
     </motion.div>

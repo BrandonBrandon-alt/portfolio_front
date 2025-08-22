@@ -1,6 +1,8 @@
 import React, { lazy, Suspense } from "react";
+import { websiteSchema, personSchema } from "./utils/structuredData";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ScrollToTop from "./components/utils/ScrollToTop";
+import useIdleRoutePrefetch from "./hooks/useIdleRoutePrefetch";
 
 // Importa tus componentes de layout y UI
 import MainLayout from "./components/layout/MainLayout";
@@ -23,6 +25,7 @@ const NotFound = () => (
 );
 
 function App() {
+  useIdleRoutePrefetch();
   return (
     <BrowserRouter>
       {/* Skip link for keyboard users */}
@@ -33,6 +36,14 @@ function App() {
         Saltar al contenido principal
       </a>
       <ScrollToTop />
+      {/* Global Structured Data */}
+      <script
+        type="application/ld+json"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify([websiteSchema(), personSchema()]),
+        }}
+      />
       <ErrorBoundary>
         <MainLayout>
           <Suspense

@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
+import usePageMeta from "../hooks/usePageMeta";
 import { useParams, Link } from "react-router-dom";
 import projectsData from "../data/projects.json";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
+import { breadcrumbSchema, projectSchema } from "../utils/structuredData";
 import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 import Button from "../components/ui/Button";
 import { FaGithub } from "react-icons/fa";
@@ -11,6 +13,20 @@ const ProjectDetailPage = () => {
   const [project, setProject] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const reduceMotion = useReducedMotion();
+
+  // Must be declared before any early returns so hook order stays stable
+  const particlePositions = useMemo(
+    () =>
+      Array.from({ length: 12 }, () => ({
+        left: `${Math.random() * 100}%`,
+        top: `${Math.random() * 100}%`,
+        duration: 3 + Math.random() * 2,
+        delay: Math.random() * 3,
+      })),
+    []
+  );
 
   useEffect(() => {
     const fetchProject = () => {
@@ -32,9 +48,25 @@ const ProjectDetailPage = () => {
     fetchProject();
   }, [id]);
 
+  usePageMeta({
+    title: project ? `Proyecto: ${project.title}` : "Proyecto",
+    description: project
+      ? project.description?.slice(0, 150)
+      : "Detalles del proyecto seleccionado en el portafolio de Brandon Montealegre.",
+    image:
+      project?.imageUrl &&
+      (project.imageUrl.startsWith("http")
+        ? project.imageUrl
+        : project.imageUrl),
+  });
+
   if (loading) {
     return (
-      <div className="min-h-screen flex flex-col justify-center items-center text-[var(--color-accent-jedi-blue)] font-sans text-xl animate-pulse">
+      <div
+        className="min-h-screen flex flex-col justify-center items-center text-[var(--color-accent-jedi-blue)] font-sans text-xl animate-pulse"
+        role="status"
+        aria-live="polite"
+      >
         Cargando detalles del proyecto...
       </div>
     );
@@ -42,7 +74,11 @@ const ProjectDetailPage = () => {
 
   if (error) {
     return (
-      <div className="min-h-screen flex flex-col justify-center items-center text-red-500 font-sans text-xl">
+      <div
+        className="min-h-screen flex flex-col justify-center items-center text-red-500 font-sans text-xl"
+        role="alert"
+        aria-live="assertive"
+      >
         {error}
       </div>
     );
@@ -50,7 +86,11 @@ const ProjectDetailPage = () => {
 
   if (!project) {
     return (
-      <div className="min-h-screen flex flex-col justify-center items-center text-[var(--color-text-muted)] font-sans text-xl">
+      <div
+        className="min-h-screen flex flex-col justify-center items-center text-[var(--color-text-muted)] font-sans text-xl"
+        role="alert"
+        aria-live="assertive"
+      >
         Proyecto no encontrado.
       </div>
     );
@@ -63,28 +103,70 @@ const ProjectDetailPage = () => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
     >
-      {/* Partículas de fondo */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        {[...Array(12)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-1 h-1 bg-[var(--color-accent-jedi-green)] rounded-full opacity-30"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-            }}
-            animate={{
-              y: [0, -20, 0],
-              opacity: [0.3, 0.7, 0.3],
-            }}
-            transition={{
-              duration: 3 + Math.random() * 2,
-              repeat: Infinity,
-              delay: Math.random() * 3,
-            }}
-          />
-        ))}
-      </div>
+      {/* Structured Data JSON-LD (Breadcrumb + Project) */}
+      <script
+        type="application/ld+json"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            [
+              breadcrumbSchema([
+                { name: "Inicio", path: "/" },
+                { name: "Proyectos", path: "/projects" },
+                { name: project.title, path: `/projects/${project.id}` },
+              ]),
+              projectSchema(project),
+            ].filter(Boolean)
+          ),
+        }}
+      />
+      {/* Breadcrumb navigation */}
+      <nav
+        className="mb-6 text-sm font-mono text-[var(--color-text-primary)]/60 flex items-center flex-wrap gap-2"
+        aria-label="Ruta de navegación"
+      >
+        <Link
+          to="/"
+          className="hover:text-[var(--color-accent-jedi-green)] transition-colors"
+        >
+          Inicio
+        </Link>
+        <span aria-hidden="true">/</span>
+        <Link
+          to="/projects"
+          className="hover:text-[var(--color-accent-jedi-green)] transition-colors"
+        >
+          Proyectos
+        </Link>
+        <span aria-hidden="true">/</span>
+        <span
+          className="text-[var(--color-accent-jedi-green)]"
+          aria-current="page"
+        >
+          {project.title}
+        </span>
+      </nav>
+      {/* Partículas de fondo (omitidas en reduce motion) */}
+      {!reduceMotion && (
+        <div className="fixed inset-0 overflow-hidden pointer-events-none">
+          {particlePositions.map((p, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-1 h-1 bg-[var(--color-accent-jedi-green)] rounded-full opacity-30"
+              style={{ left: p.left, top: p.top }}
+              animate={{
+                y: [0, -20, 0],
+                opacity: [0.3, 0.7, 0.3],
+              }}
+              transition={{
+                duration: p.duration,
+                repeat: Infinity,
+                delay: p.delay,
+              }}
+            />
+          ))}
+        </div>
+      )}
 
       {/* Botón de regreso holográfico */}
       <motion.div
@@ -157,6 +239,10 @@ const ProjectDetailPage = () => {
               alt={project.title}
               className="w-full h-auto rounded-md mb-6 shadow-lg"
               loading="lazy"
+              decoding="async"
+              width="1200"
+              height="675"
+              fetchpriority="low"
             />
           )}
 

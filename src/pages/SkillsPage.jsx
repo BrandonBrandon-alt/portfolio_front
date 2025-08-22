@@ -1,9 +1,17 @@
 import React from "react";
+import usePageMeta from "../hooks/usePageMeta";
 import { motion } from "framer-motion";
 import SkillsSection from "../components/sections/SkillsSection";
 import { containerVariants, itemVariants } from "../styles/animations.js";
+import PageTitleBlock from "../components/ui/PageTitleBlock";
 
 const SkillsPage = () => {
+  usePageMeta({
+    title: "Habilidades",
+    description:
+      "Matriz de competencias: tecnologías y herramientas dominadas por Brandon Montealegre.",
+  });
+
   return (
     <motion.div
       variants={containerVariants}
@@ -11,27 +19,14 @@ const SkillsPage = () => {
       animate="visible"
       className="min-h-screen py-16 px-4 md:px-8 lg:px-16"
     >
-      <motion.h1
-        className="text-4xl md:text-5xl font-display font-bold text-center mb-10 text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-accent-jedi-blue)] to-[var(--color-accent-jedi-green)] relative"
-        variants={itemVariants}
-      >
-        <span className="font-mono tracking-wider">
-          MATRIZ_DE_COMPETENCIAS:
-        </span>
-        {/* Línea animada */}
-        <motion.div
-          className="absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 bg-gradient-to-r from-[var(--color-accent-jedi-blue)] to-[var(--color-accent-jedi-green)]"
-          initial={{ width: 0 }}
-          animate={{ width: "80%" }}
-          transition={{ duration: 1, delay: 0.6 }}
-        />
-        {/* Barrido */}
-        <motion.div
-          className="absolute inset-0 bg-gradient-to-r from-transparent via-[var(--color-accent-jedi-blue)]/20 to-transparent"
-          animate={{ x: ["-100%", "100%"] }}
-          transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-        />
-      </motion.h1>
+      <PageTitleBlock
+        title="MATRIZ DE COMPETENCIAS"
+        badges={[
+          { text: "[ SKILLS ]", variant: "blue" },
+          { text: "LIVE", variant: "green" },
+        ]}
+        lead="Resumen de tecnologías, herramientas y fundamentos que aplico para construir soluciones escalables, mantenibles y orientadas a resultados."
+      />
 
       <motion.section
         className="mb-10 text-center md:text-left max-w-4xl mx-auto"

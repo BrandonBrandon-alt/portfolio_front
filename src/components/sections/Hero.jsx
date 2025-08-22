@@ -1,8 +1,9 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState, useRef } from "react";
 import { motion, useReducedMotion } from "framer-motion";
-import Particles from "@tsparticles/react";
-import { loadSlim } from "tsparticles-slim";
-import particlesOptions from "./particles-config";
+// Particles heavy libs will be dynamically imported only when hero visible & no reduce motion
+// import Particles from "@tsparticles/react"; (removed for lazy load)
+// import { loadSlim } from "tsparticles-slim"; (removed for lazy load)
+// import particlesOptions from "./particles-config"; (lazy)
 import Button from "../ui/Button";
 import "../../styles/HeroTextAnimation.css";
 import { FaCode, FaRocket } from "react-icons/fa";
@@ -10,15 +11,22 @@ import { FaCode, FaRocket } from "react-icons/fa";
 const Hero = () => {
   const shouldReduceMotion = useReducedMotion();
   const [particlesContainer, setParticlesContainer] = useState(null);
+  const [ParticlesCmp, setParticlesCmp] = useState(null);
+  const [particlesOptions, setParticlesOptions] = useState(null);
+  const heroRef = useRef(null);
   const [isHyperspace, setIsHyperspace] = useState(false);
   const [displayText, setDisplayText] = useState("");
   const [isTyping, setIsTyping] = useState(true);
 
   const fullText = "BRANDON MONTEALEGRE";
 
-  const particlesInit = useCallback(async (engine) => {
-    await loadSlim(engine);
-  }, []);
+  const particlesInit = useCallback(
+    async (engine) => {
+      if (!ParticlesCmp) return; // guard
+      // loadSlim dynamically already done in visibility effect
+    },
+    [ParticlesCmp]
+  );
 
   const particlesLoaded = useCallback(async (container) => {
     setParticlesContainer(container);
@@ -88,6 +96,51 @@ const Hero = () => {
     return () => clearTimeout(timeout);
   }, [toggleHyperspace, shouldReduceMotion]);
 
+  // Lazy import particles when hero visible & user not motion-reduced
+  useEffect(() => {
+    if (shouldReduceMotion) return;
+    if (!heroRef.current) return;
+    let observer;
+    let cancelled = false;
+    function loadParticles() {
+      Promise.all([
+        import("@tsparticles/react"),
+        import("tsparticles-slim").then((m) => m.loadSlim),
+        import("./particles-config"),
+      ])
+        .then(([reactMod, loadSlimFn, configMod]) => {
+          if (cancelled) return;
+          setParticlesCmp(() => reactMod.default);
+          setParticlesOptions(configMod.default);
+          // loadSlim on first engine init will run via callback
+        })
+        .catch(() => {});
+    }
+    // Use IntersectionObserver to delay cost until actually in viewport (should be on load, but safe)
+    if ("IntersectionObserver" in window) {
+      observer = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            loadParticles();
+            observer.disconnect();
+          }
+        });
+      });
+      observer.observe(heroRef.current);
+    } else {
+      // fallback: idle
+      if ("requestIdleCallback" in window) {
+        window.requestIdleCallback(loadParticles, { timeout: 3000 });
+      } else {
+        setTimeout(loadParticles, 1500);
+      }
+    }
+    return () => {
+      cancelled = true;
+      if (observer) observer.disconnect();
+    };
+  }, [shouldReduceMotion]);
+
   useEffect(() => {
     if (shouldReduceMotion) return; // Desactiva animación reactiva al scroll
     let lastScrollY = window.scrollY;
@@ -108,23 +161,26 @@ const Hero = () => {
   }, [isHyperspace, toggleHyperspace, shouldReduceMotion]);
 
   return (
-    <section className="h-screen w-full flex flex-col justify-center items-center relative overflow-hidden">
+    <section
+      ref={heroRef}
+      className="h-screen w-full flex flex-col justify-center items-center relative overflow-hidden"
+    >
       {/* Fondo con gradiente holográfico */}
       <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-background)] via-[var(--color-background)]/95 to-[var(--color-background)]/90">
         {/* Grid holográfico (simplificado en móviles & reduce motion) */}
         {!shouldReduceMotion && (
           <div className="absolute inset-0 opacity-10 hidden sm:block">
-            <div className="grid grid-cols-12 grid-rows-12 h-full w-full">
-              {[...Array(144)].map((_, i) => (
+            <div className="grid grid-cols-8 grid-rows-8 h-full w-full">
+              {[...Array(64)].map((_, i) => (
                 <motion.div
                   key={i}
                   className="border-r border-b border-[var(--color-accent-jedi-blue)]"
                   initial={{ opacity: 0 }}
-                  animate={{ opacity: Math.random() > 0.8 ? 0.3 : 0 }}
+                  animate={{ opacity: Math.random() > 0.85 ? 0.25 : 0 }}
                   transition={{
-                    duration: 2,
+                    duration: 2.5,
                     repeat: Infinity,
-                    delay: Math.random() * 2,
+                    delay: Math.random() * 2.5,
                   }}
                 />
               ))}
@@ -133,13 +189,20 @@ const Hero = () => {
         )}
       </div>
 
-      {!shouldReduceMotion && (
-        <Particles
+      {!shouldReduceMotion && ParticlesCmp && particlesOptions && (
+        <ParticlesCmp
           id="tsparticles"
           init={particlesInit}
           loaded={particlesLoaded}
           options={particlesOptions}
-          className="absolute inset-0 z-0"
+          className="absolute inset-0 z-0 will-change-transform"
+        />
+      )}
+      {/* lightweight placeholder gradient while particles bundle loads */}
+      {!shouldReduceMotion && !ParticlesCmp && (
+        <div
+          className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_50%_50%,rgba(0,240,255,0.08),transparent_70%)] animate-pulse"
+          aria-hidden="true"
         />
       )}
 
@@ -278,11 +341,7 @@ const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 4 }}
         >
-          {[
-            { label: "PROYECTOS", value: "15+", color: "jedi-blue" },
-            { label: "TECNOLOGÍAS", value: "20+", color: "jedi-green" },
-            { label: "EXPERIENCIA", value: "3+ AÑOS", color: "jedi-blue" },
-          ].map((stat, index) => (
+          {[].map((stat, index) => (
             <motion.div
               key={index}
               className="relative"

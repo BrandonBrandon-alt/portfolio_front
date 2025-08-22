@@ -41,7 +41,7 @@ const ContactFormSection = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
       >
-        <span className="font-mono tracking-wider">CONTACTO_DIRECTO:</span>
+        <span className="font-mono tracking-wider">CONTACTO DIRECTO</span>
         <motion.div
           className="absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 bg-gradient-to-r from-[var(--color-accent-jedi-blue)] to-[var(--color-accent-jedi-green)]"
           initial={{ width: 0 }}
