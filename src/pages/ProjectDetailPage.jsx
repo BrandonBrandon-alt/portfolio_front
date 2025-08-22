@@ -334,11 +334,11 @@ const ProjectDetailPage = () => {
                   transition={{ duration: 1, delay: 0.9 }}
                 />
               </h2>
-      <div className="space-y-3">
+              <div className="space-y-3">
                 {project.myContribution.map((contribution, index) => (
                   <motion.div
                     key={index}
-        className="flex items-start p-3 sm:p-4 bg-[var(--color-accent-jedi-green)]/5 rounded-lg border border-[var(--color-accent-jedi-green)]/20 text-sm sm:text-base"
+                    className="flex items-start p-3 sm:p-4 bg-[var(--color-accent-jedi-green)]/5 rounded-lg border border-[var(--color-accent-jedi-green)]/20 text-sm sm:text-base"
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.9 + index * 0.1 }}
@@ -373,11 +373,11 @@ const ProjectDetailPage = () => {
               <h2 className="text-2xl font-bold mb-4 text-[var(--color-accent-jedi-green)] drop-shadow-[0_0_8px_var(--color-accent-jedi-green)]">
                 Resultados e Impacto
               </h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 {project.results.map((result, index) => (
                   <div
                     key={index}
-        className="bg-[var(--color-accent-jedi-green)]/10 p-3 sm:p-4 rounded-lg border border-[var(--color-accent-jedi-green)]/30 text-sm sm:text-base"
+                    className="bg-[var(--color-accent-jedi-green)]/10 p-3 sm:p-4 rounded-lg border border-[var(--color-accent-jedi-green)]/30 text-sm sm:text-base"
                   >
                     <span className="text-[var(--color-text-primary)] flex items-center">
                       <span className="text-[var(--color-accent-jedi-green)] mr-2">
@@ -409,14 +409,14 @@ const ProjectDetailPage = () => {
                   transition={{ duration: 1, delay: 1.1 }}
                 />
               </h2>
-      <div className="flex flex-wrap gap-2 sm:gap-3">
+              <div className="flex flex-wrap gap-2 sm:gap-3">
                 {(Array.isArray(project.technologies)
                   ? project.technologies
                   : project.technologies.split(",").map((t) => t.trim())
                 ).map((tech, index) => (
                   <motion.span
                     key={index}
-        className="bg-[var(--color-accent-jedi-blue)]/10 text-[var(--color-accent-jedi-blue)] px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-mono border border-[var(--color-accent-jedi-blue)]/30 hover:border-[var(--color-accent-jedi-blue)]/60 hover:bg-[var(--color-accent-jedi-blue)]/20 transition-all duration-300 relative overflow-hidden"
+                    className="bg-[var(--color-accent-jedi-blue)]/10 text-[var(--color-accent-jedi-blue)] px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-mono border border-[var(--color-accent-jedi-blue)]/30 hover:border-[var(--color-accent-jedi-blue)]/60 hover:bg-[var(--color-accent-jedi-blue)]/20 transition-all duration-300 relative overflow-hidden"
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 1.1 + index * 0.05 }}
