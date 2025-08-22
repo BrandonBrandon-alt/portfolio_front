@@ -1,5 +1,5 @@
-// navigation/MobileMenu.jsx
-import React, { useEffect, useRef, useCallback } from "react";
+// navigation/MobileMenu.jsx - Versión más robusta
+import React, { useEffect, useRef, useCallback, useMemo } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { motion, useReducedMotion } from "framer-motion";
 import { HiXMark } from "react-icons/hi2";
@@ -10,12 +10,25 @@ const MobileMenu = ({ isOpen, onClose }) => {
   const firstLinkRef = useRef(null);
   const panelRef = useRef(null);
   const prefersReducedMotion = useReducedMotion();
+  const prevPathname = useRef(location.pathname);
 
-  // Cerrar automáticamente al cambiar la ruta
+  // Solo cerrar cuando hay un cambio real de ruta Y el menú está abierto
   useEffect(() => {
-    console.log("Route changed, closing menu");
-    onClose?.();
-  }, [location.pathname, onClose]);
+    if (prevPathname.current !== location.pathname && isOpen) {
+      console.log(
+        "Route changed from",
+        prevPathname.current,
+        "to",
+        location.pathname,
+        "- closing menu"
+      );
+      prevPathname.current = location.pathname;
+      onClose?.();
+    } else if (prevPathname.current !== location.pathname) {
+      // Solo actualizar la referencia si el menú no está abierto
+      prevPathname.current = location.pathname;
+    }
+  }, [location.pathname, isOpen, onClose]);
 
   // Enfoque inicial para accesibilidad
   useEffect(() => {
@@ -78,41 +91,39 @@ const MobileMenu = ({ isOpen, onClose }) => {
     return () => window.removeEventListener("resize", handleResize);
   }, [isOpen, onClose]);
 
-  // Swipe para cerrar
-  const touchData = useRef({ startX: 0, startY: 0, active: false });
+  // Touch handlers memoizados
+  const touchHandlers = useMemo(() => {
+    const touchData = { startX: 0, startY: 0, active: false };
 
-  const onTouchStart = useCallback((e) => {
-    const touch = e.touches[0];
-    touchData.current = {
-      startX: touch.clientX,
-      startY: touch.clientY,
-      active: true,
+    return {
+      onTouchStart: (e) => {
+        const touch = e.touches[0];
+        touchData.startX = touch.clientX;
+        touchData.startY = touch.clientY;
+        touchData.active = true;
+      },
+
+      onTouchMove: (e) => {
+        if (!touchData.active) return;
+
+        const touch = e.touches[0];
+        const deltaX = touch.clientX - touchData.startX;
+        const deltaY = Math.abs(touch.clientY - touchData.startY);
+
+        if (deltaX > 50 && deltaY < 100) {
+          touchData.active = false;
+          console.log("Swipe detected, closing menu");
+          onClose?.();
+        }
+      },
+
+      onTouchEnd: () => {
+        touchData.active = false;
+      },
     };
-  }, []);
+  }, [onClose]);
 
-  const onTouchMove = useCallback(
-    (e) => {
-      if (!touchData.current.active) return;
-
-      const touch = e.touches[0];
-      const deltaX = touch.clientX - touchData.current.startX;
-      const deltaY = Math.abs(touch.clientY - touchData.current.startY);
-
-      // Swipe derecha para cerrar
-      if (deltaX > 50 && deltaY < 100) {
-        touchData.current.active = false;
-        console.log("Swipe detected, closing menu");
-        onClose?.();
-      }
-    },
-    [onClose]
-  );
-
-  const onTouchEnd = useCallback(() => {
-    touchData.current.active = false;
-  }, []);
-
-  // Cerrar y detener propagación
+  // Handlers memoizados
   const closeAndStop = useCallback(
     (e) => {
       e.stopPropagation();
@@ -122,7 +133,6 @@ const MobileMenu = ({ isOpen, onClose }) => {
     [onClose]
   );
 
-  // Manejar click en backdrop
   const handleBackdropClick = useCallback(
     (e) => {
       if (e.target === e.currentTarget) {
@@ -133,28 +143,50 @@ const MobileMenu = ({ isOpen, onClose }) => {
     [onClose]
   );
 
+  const handleLinkClick = useCallback(
+    (linkTo) => {
+      console.log("Nav link clicked:", linkTo);
+      onClose?.();
+    },
+    [onClose]
+  );
+
   // Variants de animación
-  const backdropVariants = {
-    initial: { opacity: 0 },
-    animate: { opacity: 1 },
-    exit: { opacity: 0 },
-  };
+  const backdropVariants = useMemo(
+    () => ({
+      initial: { opacity: 0 },
+      animate: { opacity: 1 },
+      exit: { opacity: 0 },
+    }),
+    []
+  );
 
-  const panelVariants = prefersReducedMotion
-    ? {
-        initial: { opacity: 0 },
-        animate: { opacity: 1 },
-        exit: { opacity: 0 },
-      }
-    : {
-        initial: { x: "100%", opacity: 0 },
-        animate: { x: "0%", opacity: 1 },
-        exit: { x: "100%", opacity: 0 },
-      };
+  const panelVariants = useMemo(
+    () =>
+      prefersReducedMotion
+        ? {
+            initial: { opacity: 0 },
+            animate: { opacity: 1 },
+            exit: { opacity: 0 },
+          }
+        : {
+            initial: { x: "100%", opacity: 0 },
+            animate: { x: "0%", opacity: 1 },
+            exit: { x: "100%", opacity: 0 },
+          },
+    [prefersReducedMotion]
+  );
 
-  const transition = prefersReducedMotion
-    ? { duration: 0.2 }
-    : { type: "spring", stiffness: 300, damping: 30 };
+  const transition = useMemo(
+    () =>
+      prefersReducedMotion
+        ? { duration: 0.2 }
+        : { type: "spring", stiffness: 300, damping: 30 },
+    [prefersReducedMotion]
+  );
+
+  // Evitar render si no está abierto (esto ayuda con AnimatePresence)
+  if (!isOpen) return null;
 
   return (
     <motion.div
@@ -181,9 +213,7 @@ const MobileMenu = ({ isOpen, onClose }) => {
         variants={panelVariants}
         transition={transition}
         onClick={(e) => e.stopPropagation()}
-        onTouchStart={onTouchStart}
-        onTouchMove={onTouchMove}
-        onTouchEnd={onTouchEnd}
+        {...touchHandlers}
       >
         <div className="p-6 flex-1 flex flex-col min-h-0">
           {/* Header */}
@@ -247,10 +277,7 @@ const MobileMenu = ({ isOpen, onClose }) => {
                   className={({ isActive }) =>
                     `nav-link-mobile ${isActive ? "active" : ""}`
                   }
-                  onClick={() => {
-                    console.log("Nav link clicked:", link.to);
-                    onClose?.();
-                  }}
+                  onClick={() => handleLinkClick(link.to)}
                   end={link.exact || false}
                 >
                   <motion.span
@@ -274,7 +301,6 @@ const MobileMenu = ({ isOpen, onClose }) => {
                         damping: 14,
                       }}
                     >
-                      {/* Remover el mr-3 del icono ya que estamos usando gap-3 */}
                       {React.cloneElement(link.icon, {
                         className: link.icon.props.className.replace(
                           " mr-3",

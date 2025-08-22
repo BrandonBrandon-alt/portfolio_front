@@ -39,7 +39,10 @@ const Navbar = () => {
 
   const toggleMenu = useCallback(() => {
     console.log("Toggle menu - current state:", isMenuOpen);
-    setIsMenuOpen((prev) => !prev);
+    setIsMenuOpen((prev) => {
+      console.log("Setting menu to:", !prev);
+      return !prev;
+    });
   }, [isMenuOpen]);
 
   const closeMenu = useCallback(() => {
