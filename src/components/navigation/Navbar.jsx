@@ -1,5 +1,5 @@
 // navigation/Navbar.jsx
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import NavLogo from "./NavLogo";
 import DesktopMenu from "./DesktopMenu";
@@ -12,17 +12,19 @@ const Navbar = () => {
   // Bloquear scroll cuando el menú móvil esté abierto
   useEffect(() => {
     if (isMenuOpen) {
+      const scrollbarWidth =
+        window.innerWidth - document.documentElement.clientWidth;
       document.body.style.overflow = "hidden";
-      document.body.style.paddingRight = "var(--scrollbar-width, 0px)";
+      document.body.style.paddingRight = `${scrollbarWidth}px`;
     } else {
-      document.body.style.overflow = "auto";
-      document.body.style.paddingRight = "0px";
+      document.body.style.overflow = "";
+      document.body.style.paddingRight = "";
     }
 
     // Cleanup function
     return () => {
-      document.body.style.overflow = "auto";
-      document.body.style.paddingRight = "0px";
+      document.body.style.overflow = "";
+      document.body.style.paddingRight = "";
     };
   }, [isMenuOpen]);
 
@@ -35,9 +37,15 @@ const Navbar = () => {
     },
   };
 
-  const toggleMenu = () => setIsMenuOpen((o) => !o);
+  const toggleMenu = useCallback(() => {
+    console.log("Toggle menu - current state:", isMenuOpen);
+    setIsMenuOpen((prev) => !prev);
+  }, [isMenuOpen]);
 
-  const closeMenu = () => setIsMenuOpen(false);
+  const closeMenu = useCallback(() => {
+    console.log("Close menu called");
+    setIsMenuOpen(false);
+  }, []);
 
   return (
     <>
@@ -61,9 +69,15 @@ const Navbar = () => {
         </div>
       </motion.nav>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu - CORREGIDO: AnimatePresence debe envolver solo el contenido condicional */}
       <AnimatePresence mode="wait">
-        <MobileMenu key="mobile-menu" isOpen={isMenuOpen} onClose={closeMenu} />
+        {isMenuOpen && (
+          <MobileMenu
+            key="mobile-menu"
+            isOpen={isMenuOpen}
+            onClose={closeMenu}
+          />
+        )}
       </AnimatePresence>
     </>
   );
