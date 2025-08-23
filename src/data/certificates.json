@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "title": "Fundamentos de Python 1",
+    "provider": "Cisco",
+    "date": "2025",
+    "category": "Programming",
+    "level": "Intermediate",
+    "duration": "30 horas",
+    "image": "/certificates/react-complete.jpg",
+    "pdfUrl": "/certificates/python.pdf",
+    "skills": ["Variables", "Funciones", "Listas", "Ciclos", "Diccionaris"],
+    "description": "Curso completo de conceptos basicos pero esenciales para el."
+  },
+  {
+    "id": 2,
+    "title": "Node.js - Backend Development",
+    "provider": "Coursera",
+    "instructor": "IBM",
+    "date": "2024",
+    "category": "Backend",
+    "level": "Intermediate",
+    "duration": "32 horas",
+    "image": "/certificates/nodejs-ibm.jpg",
+    "pdfUrl": "/certificates/nodejs-ibm.pdf",
+    "skills": ["Node.js", "Express", "MongoDB", "API REST", "JWT"],
+    "description": "Desarrollo de aplicaciones backend escalables con Node.js, Express y bases de datos NoSQL."
+  }
+  
+]

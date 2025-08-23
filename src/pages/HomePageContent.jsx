@@ -20,8 +20,14 @@ const ctaSlides = [
     },
     secondaryButton: {
       text: "Ver Mi CV",
-      as: "a",
-      href: "/Hoja_Brandon.pdf", // Ruta directa al PDF en la carpeta public
+      as: "button",
+      onClick: () => {
+        window.open(
+          "/Hoja_Brandon.pdf",
+          "_blank",
+          "width=800,height=900,scrollbars=yes,resizable=yes"
+        );
+      },
       className:
         "border-[var(--color-accent-jedi-blue)] text-[var(--color-accent-jedi-blue)] hover:bg-[var(--color-accent-jedi-blue)] hover:text-[var(--color-background)] shadow-[0_0_15px_var(--color-accent-jedi-blue)] hover:shadow-[0_0_30px_var(--color-accent-jedi-blue)]",
     },
