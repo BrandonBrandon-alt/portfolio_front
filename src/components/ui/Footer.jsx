@@ -142,6 +142,7 @@ const Footer = ({ children }) => {
                 { to: "/about", label: "Acerca de" },
                 { to: "/contact", label: "Contacto" },
                 { to: "/skills", label: "Habilidades" },
+                { to: "/certificates", label: "Certificados" },
               ].map((link) => (
                 <li key={link.to}>
                   <Link
