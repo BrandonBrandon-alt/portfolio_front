@@ -14,17 +14,16 @@
   },
   {
     "id": 2,
-    "title": "Node.js - Backend Development",
-    "provider": "Coursera",
-    "instructor": "IBM",
-    "date": "2024",
-    "category": "Backend",
+    "title": "Java Foundations",
+    "provider": "Oracle",
+    "date": "2023",
+    "category": "Programming",
     "level": "Intermediate",
-    "duration": "32 horas",
+    "duration": "122 horas",
     "image": "/certificates/nodejs-ibm.jpg",
-    "pdfUrl": "/certificates/nodejs-ibm.pdf",
-    "skills": ["Node.js", "Express", "MongoDB", "API REST", "JWT"],
-    "description": "Desarrollo de aplicaciones backend escalables con Node.js, Express y bases de datos NoSQL."
+    "pdfUrl": "/certificates/java.pdf",
+    "skills": ["Variables", "Listas", "Arraylist", "Ciclos", "Herencia","Funciones"],
+    "description": "Curso completo de conceptos basicos y avanzados eseciales para el lenguaje"
   }
   
 ]
