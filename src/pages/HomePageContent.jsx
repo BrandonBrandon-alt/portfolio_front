@@ -23,7 +23,7 @@ const ctaSlides = [
       as: "button",
       onClick: () => {
         window.open(
-          "/Hoja_Brandon.pdf",
+          "/hoja_brandon.pdf",
           "_blank",
           "width=800,height=900,scrollbars=yes,resizable=yes"
         );
