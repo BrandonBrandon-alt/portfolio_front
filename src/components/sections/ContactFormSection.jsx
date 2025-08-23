@@ -5,7 +5,7 @@ import ContactForm from "../ui/ContactForm";
 const ContactFormSection = () => {
   return (
     <motion.section
-      className="w-full flex flex-col items-center justify-center py-24 px-4 relative"
+      className="w-full flex flex-col items-center justify-center py-16 sm:py-20 md:py-24 px-4 sm:px-6 relative"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
@@ -36,7 +36,7 @@ const ContactFormSection = () => {
 
       {/* Título holográfico */}
       <motion.h2
-        className="text-4xl md:text-5xl font-display font-bold text-center mb-4 text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-accent-jedi-blue)] to-[var(--color-accent-jedi-green)] relative"
+        className="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-center mb-3 sm:mb-4 text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-accent-jedi-blue)] to-[var(--color-accent-jedi-green)] relative"
         initial={{ opacity: 0, y: -30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
@@ -57,7 +57,7 @@ const ContactFormSection = () => {
 
       {/* Subtítulo / descriptor */}
       <motion.p
-        className="holo-lead text-center mb-12 max-w-2xl"
+        className="holo-lead text-center mb-8 sm:mb-10 md:mb-12 max-w-xl sm:max-w-2xl px-2 sm:px-0"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.8 }}
@@ -68,17 +68,17 @@ const ContactFormSection = () => {
 
       {/* Contenedor holográfico del formulario */}
       <motion.div
-        className="relative group w-full max-w-2xl"
+        className="relative group w-full max-w-sm sm:max-w-xl md:max-w-2xl px-2 sm:px-0"
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.9, duration: 0.6, ease: "easeOut" }}
       >
         {/* Marco holográfico */}
-        <div className="absolute inset-0 rounded-2xl border-2 border-[var(--color-accent-jedi-blue)]/35 bg-gradient-to-br from-[var(--color-accent-jedi-blue)]/10 via-transparent to-[var(--color-accent-jedi-green)]/10 backdrop-blur-sm group-hover:border-[var(--color-accent-jedi-blue)]/60 transition-all duration-500" />
-        <div className="absolute -inset-px rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-[conic-gradient(from_0deg_at_50%_50%,rgba(0,240,255,0.15),rgba(0,255,159,0.15),rgba(0,240,255,0.15))] blur" />
+        <div className="absolute inset-0 rounded-xl sm:rounded-2xl border border-[var(--color-accent-jedi-blue)]/35 sm:border-2 bg-gradient-to-br from-[var(--color-accent-jedi-blue)]/10 via-transparent to-[var(--color-accent-jedi-green)]/10 backdrop-blur-sm group-hover:border-[var(--color-accent-jedi-blue)]/60 transition-all duration-500" />
+        <div className="absolute -inset-px rounded-xl sm:rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-[conic-gradient(from_0deg_at_50%_50%,rgba(0,240,255,0.15),rgba(0,255,159,0.15),rgba(0,240,255,0.15))] blur" />
 
         {/* Partículas dentro del panel */}
-        <div className="absolute inset-0 overflow-hidden rounded-2xl pointer-events-none">
+        <div className="absolute inset-0 overflow-hidden rounded-xl sm:rounded-2xl pointer-events-none">
           {[...Array(5)].map((_, i) => (
             <motion.div
               key={i}
@@ -97,12 +97,12 @@ const ContactFormSection = () => {
           ))}
         </div>
 
-        <div className="relative z-10 p-10">
-          <div className="flex items-center justify-between mb-8">
-            <span className="text-xs font-mono tracking-wider text-[var(--color-accent-jedi-green)] bg-[var(--color-accent-jedi-green)]/10 px-3 py-1 rounded-full border border-[var(--color-accent-jedi-green)]/30">
+        <div className="relative z-10 p-6 sm:p-8 md:p-10">
+          <div className="flex items-center justify-between mb-6 sm:mb-8">
+            <span className="text-[10px] sm:text-xs font-mono tracking-wider text-[var(--color-accent-jedi-green)] bg-[var(--color-accent-jedi-green)]/10 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full border border-[var(--color-accent-jedi-green)]/30">
               FORM_CHANNEL
             </span>
-            <span className="text-[10px] font-mono text-[var(--color-accent-jedi-blue)]/60 tracking-widest">
+            <span className="text-[9px] sm:text-[10px] font-mono text-[var(--color-accent-jedi-blue)]/60 tracking-widest">
               LIVE
             </span>
           </div>
@@ -112,7 +112,7 @@ const ContactFormSection = () => {
 
       {/* Indicador inferior */}
       <motion.div
-        className="mt-10 text-center font-mono text-xs text-[var(--color-text-primary)]/40"
+        className="mt-8 sm:mt-10 text-center font-mono text-[10px] sm:text-xs text-[var(--color-text-primary)]/40"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.4 }}

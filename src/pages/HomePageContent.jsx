@@ -4,7 +4,7 @@ import Hero from "../components/sections/Hero";
 import AboutTeaser from "../components/sections/AboutTeaser";
 import SkillsSection from "../components/sections/SkillsSection";
 import ProjectList from "../components/sections/ProjectList"; // Import the ProjectList component
-import Carousel from "../components/ui/CarouselImproved"; // Import the improved Carousel component
+import Carousel from "../components/sections/CarouselImproved"; // Import the improved Carousel component
 
 const ctaSlides = [
   {
