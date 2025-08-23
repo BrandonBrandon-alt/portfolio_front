@@ -14,6 +14,7 @@ const HomePageContent = lazy(() => import("./pages/HomePageContent"));
 const SkillsPage = lazy(() => import("./pages/SkillsPage"));
 const AboutPage = lazy(() => import("./pages/AboutPage"));
 const ProjectDetailPage = lazy(() => import("./pages/ProjectDetailPage"));
+const CertificatesPage = lazy(() => import("./pages/CertificatesPage"));
 
 // Componentes simples (dummies) para otras secciones si no existen
 
@@ -63,6 +64,7 @@ function App() {
                 <Route path="/about" element={<AboutPage />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/skills" element={<SkillsPage />} />
+                <Route path="/certificates" element={<CertificatesPage />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </div>

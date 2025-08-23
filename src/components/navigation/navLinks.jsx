@@ -5,6 +5,7 @@ import {
   FaUserAstronaut,
   FaSatelliteDish,
   FaTools,
+  FaCertificate,
 } from "react-icons/fa";
 
 export const navLinks = [
@@ -23,6 +24,11 @@ export const navLinks = [
     to: "/skills",
     label: "Habilidades",
     icon: <FaTools className="h-5 w-5" />,
+  },
+  {
+    to: "/certificates",
+    label: "Certificados",
+    icon: <FaCertificate className="h-5 w-5" />,
   },
   {
     to: "/about",
