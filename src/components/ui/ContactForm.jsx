@@ -274,7 +274,7 @@ const ContactForm = () => {
             type="submit"
             className="group relative overflow-hidden w-full border-2 border-[var(--color-accent-jedi-blue)] text-[var(--color-accent-jedi-blue)] hover:text-[var(--color-background)] rounded-lg font-mono font-bold py-3 px-6 transition-all duration-500 bg-transparent hover:bg-[var(--color-accent-jedi-blue)] shadow-[0_0_15px_rgba(0,240,255,0.25)] hover:shadow-[0_0_30px_rgba(0,240,255,0.5)]"
           >
-            <span className="relative z-10 tracking-wider">ENVIAR_MENSAJE</span>
+            <span className="relative z-10 tracking-wider">ENVIAR MENSAJE</span>
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
           </Button>
           <div id="form-status" aria-live="polite" className="sr-only">

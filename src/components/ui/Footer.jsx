@@ -249,7 +249,7 @@ const Footer = ({ children }) => {
                 <span className="w-2 h-2 rounded-full bg-[var(--color-accent-jedi-green)] animate-pulse" />
                 © {new Date().getFullYear()} BRAN/DEV
               </span>
-              <span className="hidden sm:inline">•</span>
+              <span className="hidden sm:inline">•</span>https://www.redhat.com/
               <span>GALACTIC SOLUTIONS</span>
             </div>
             <div className="flex items-center gap-4">

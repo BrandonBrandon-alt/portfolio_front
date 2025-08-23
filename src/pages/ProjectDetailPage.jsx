@@ -302,7 +302,7 @@ const ProjectDetailPage = () => {
           >
             <h2 className="text-2xl font-display font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-accent-jedi-blue)] to-[var(--color-accent-jedi-green)] relative">
               <span className="font-mono tracking-wider">
-                DESCRIPCIÓN_DEL_PROYECTO:
+                DESCRIPCIÓN PROYECTO
               </span>
               <motion.div
                 className="absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-[var(--color-accent-jedi-blue)] to-[var(--color-accent-jedi-green)]"
@@ -325,7 +325,7 @@ const ProjectDetailPage = () => {
             >
               <h2 className="text-2xl font-display font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-accent-jedi-green)] to-[var(--color-accent-jedi-blue)] relative">
                 <span className="font-mono tracking-wider">
-                  MI_CONTRIBUCIÓN:
+                  MI CONTRIBUCIÓN
                 </span>
                 <motion.div
                   className="absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-[var(--color-accent-jedi-green)] to-[var(--color-accent-jedi-blue)]"
@@ -400,7 +400,7 @@ const ProjectDetailPage = () => {
             >
               <h2 className="text-2xl font-display font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-accent-jedi-green)] to-[var(--color-accent-jedi-blue)] relative">
                 <span className="font-mono tracking-wider">
-                  STACK_TECNOLÓGICO:
+                  STACK TECNOLÓGICO
                 </span>
                 <motion.div
                   className="absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-[var(--color-accent-jedi-green)] to-[var(--color-accent-jedi-blue)]"

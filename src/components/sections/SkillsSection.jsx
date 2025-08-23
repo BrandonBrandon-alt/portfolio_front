@@ -104,8 +104,8 @@ const brandColors = {
 
 const SkillsSection = ({ isStandalonePage = false }) => {
   const sectionClasses = isStandalonePage
-    ? "py-20 px-4 container mx-auto text-center relative"
-    : "py-20 px-4 container mx-auto text-center relative";
+    ? "py-16 sm:py-20 px-4 sm:px-6 container mx-auto text-center relative"
+    : "py-16 sm:py-20 px-4 sm:px-6 container mx-auto text-center relative";
 
   return (
     <motion.section
@@ -140,7 +140,7 @@ const SkillsSection = ({ isStandalonePage = false }) => {
 
       {/* Título holográfico */}
       <motion.h2
-        className="text-4xl md:text-5xl font-display font-bold text-center mb-4 text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-accent-jedi-blue)] to-[var(--color-accent-jedi-green)] relative"
+        className="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-center mb-3 sm:mb-4 text-transparent bg-clip-text bg-gradient-to-r from-[var(--color-accent-jedi-blue)] to-[var(--color-accent-jedi-green)] relative"
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, delay: 0.2 }}
@@ -163,7 +163,7 @@ const SkillsSection = ({ isStandalonePage = false }) => {
 
       {/* Subtítulo */}
       <motion.p
-        className="text-lg text-[var(--color-text-primary)]/80 mb-12 font-mono"
+        className="text-base sm:text-lg text-[var(--color-text-primary)]/80 mb-8 sm:mb-10 md:mb-12 font-mono"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.5 }}
@@ -179,16 +179,16 @@ const SkillsSection = ({ isStandalonePage = false }) => {
         transition={{ duration: 0.8, delay: 0.4 }}
       >
         {/* Marco holográfico */}
-        <div className="absolute inset-0 rounded-2xl border-2 border-[var(--color-accent-jedi-blue)]/30 bg-gradient-to-br from-[var(--color-accent-jedi-blue)]/5 via-transparent to-[var(--color-accent-jedi-green)]/5 backdrop-blur-sm">
+        <div className="absolute inset-0 rounded-xl sm:rounded-2xl border border-[var(--color-accent-jedi-blue)]/30 sm:border-2 bg-gradient-to-br from-[var(--color-accent-jedi-blue)]/5 via-transparent to-[var(--color-accent-jedi-green)]/5 backdrop-blur-sm">
           {/* Esquinas brillantes */}
-          <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-[var(--color-accent-jedi-green)] rounded-tl-2xl opacity-80" />
-          <div className="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-[var(--color-accent-jedi-green)] rounded-tr-2xl opacity-80" />
-          <div className="absolute bottom-0 left-0 w-8 h-8 border-b-2 border-l-2 border-[var(--color-accent-jedi-green)] rounded-bl-2xl opacity-80" />
-          <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-[var(--color-accent-jedi-green)] rounded-br-2xl opacity-80" />
+          <div className="absolute top-0 left-0 w-4 h-4 sm:w-6 sm:h-6 md:w-8 md:h-8 border-t border-l sm:border-t-2 sm:border-l-2 border-[var(--color-accent-jedi-green)] rounded-tl-xl sm:rounded-tl-2xl opacity-80" />
+          <div className="absolute top-0 right-0 w-4 h-4 sm:w-6 sm:h-6 md:w-8 md:h-8 border-t border-r sm:border-t-2 sm:border-r-2 border-[var(--color-accent-jedi-green)] rounded-tr-xl sm:rounded-tr-2xl opacity-80" />
+          <div className="absolute bottom-0 left-0 w-4 h-4 sm:w-6 sm:h-6 md:w-8 md:h-8 border-b border-l sm:border-b-2 sm:border-l-2 border-[var(--color-accent-jedi-green)] rounded-bl-xl sm:rounded-bl-2xl opacity-80" />
+          <div className="absolute bottom-0 right-0 w-4 h-4 sm:w-6 sm:h-6 md:w-8 md:h-8 border-b border-r sm:border-b-2 sm:border-r-2 border-[var(--color-accent-jedi-green)] rounded-br-xl sm:rounded-br-2xl opacity-80" />
         </div>
 
         {/* Grid de habilidades */}
-        <div className="relative z-10 p-8 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 gap-6 max-h-[600px] overflow-y-auto">
+        <div className="relative z-10 p-4 sm:p-6 md:p-8 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-4 md:gap-6 max-h-[500px] sm:max-h-[600px] overflow-y-auto">
           {skills.map((skill, index) => {
             const IconComponent = skill.icon;
             const brand = brandColors[skill.name];
@@ -213,7 +213,7 @@ const SkillsSection = ({ isStandalonePage = false }) => {
             return (
               <motion.div
                 key={index}
-                className={`group relative p-6 rounded-xl border-2 ${borderColor} ${hoverBorderColor} bg-[var(--color-background)]/50 backdrop-blur-sm ${shadowColor} flex flex-col items-center justify-center transition-all duration-500 overflow-hidden`}
+                className={`group relative p-3 sm:p-4 md:p-6 rounded-lg sm:rounded-xl border border-[var(--color-accent-jedi-blue)]/30 sm:border-2 ${borderColor} ${hoverBorderColor} bg-[var(--color-background)]/50 backdrop-blur-sm ${shadowColor} flex flex-col items-center justify-center transition-all duration-500 overflow-hidden`}
                 initial={{ opacity: 0, scale: 0.8, y: 20 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 transition={{
@@ -229,45 +229,45 @@ const SkillsSection = ({ isStandalonePage = false }) => {
               >
                 {/* Esquinas brillantes mini */}
                 <div
-                  className={`absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 ${
+                  className={`absolute top-0 left-0 w-2 h-2 sm:w-3 sm:h-3 border-t border-l sm:border-t-2 sm:border-l-2 ${
                     brand
                       ? "border-white/30"
                       : fallbackBlue
                       ? "border-[var(--color-accent-jedi-green)]"
                       : "border-[var(--color-accent-jedi-blue)]"
-                  } rounded-tl-xl opacity-0 group-hover:opacity-80 transition-opacity duration-300`}
+                  } rounded-tl-lg sm:rounded-tl-xl opacity-0 group-hover:opacity-80 transition-opacity duration-300`}
                 />
                 <div
-                  className={`absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 ${
+                  className={`absolute top-0 right-0 w-2 h-2 sm:w-3 sm:h-3 border-t border-r sm:border-t-2 sm:border-r-2 ${
                     brand
                       ? "border-white/30"
                       : fallbackBlue
                       ? "border-[var(--color-accent-jedi-green)]"
                       : "border-[var(--color-accent-jedi-blue)]"
-                  } rounded-tr-xl opacity-0 group-hover:opacity-80 transition-opacity duration-300`}
+                  } rounded-tr-lg sm:rounded-tr-xl opacity-0 group-hover:opacity-80 transition-opacity duration-300`}
                 />
                 <div
-                  className={`absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 ${
+                  className={`absolute bottom-0 left-0 w-2 h-2 sm:w-3 sm:h-3 border-b border-l sm:border-b-2 sm:border-l-2 ${
                     brand
                       ? "border-white/30"
                       : fallbackBlue
                       ? "border-[var(--color-accent-jedi-green)]"
                       : "border-[var(--color-accent-jedi-blue)]"
-                  } rounded-bl-xl opacity-0 group-hover:opacity-80 transition-opacity duration-300`}
+                  } rounded-bl-lg sm:rounded-bl-xl opacity-0 group-hover:opacity-80 transition-opacity duration-300`}
                 />
                 <div
-                  className={`absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 ${
+                  className={`absolute bottom-0 right-0 w-2 h-2 sm:w-3 sm:h-3 border-b border-r sm:border-b-2 sm:border-r-2 ${
                     brand
                       ? "border-white/30"
                       : fallbackBlue
                       ? "border-[var(--color-accent-jedi-green)]"
                       : "border-[var(--color-accent-jedi-blue)]"
-                  } rounded-br-xl opacity-0 group-hover:opacity-80 transition-opacity duration-300`}
+                  } rounded-br-lg sm:rounded-br-xl opacity-0 group-hover:opacity-80 transition-opacity duration-300`}
                 />
 
                 {/* Icono */}
                 <motion.div
-                  className={`text-4xl md:text-5xl mb-3 relative z-10`}
+                  className={`text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-2 sm:mb-3 relative z-10`}
                   animate={{
                     y: [0, -4, 0],
                     rotateY: [0, 5, 0],
@@ -282,12 +282,12 @@ const SkillsSection = ({ isStandalonePage = false }) => {
                 </motion.div>
 
                 {/* Nombre de la habilidad */}
-                <h3 className="text-sm md:text-base font-mono font-bold text-[var(--color-text-primary)] text-center relative z-10 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[var(--color-accent-jedi-blue)] group-hover:to-[var(--color-accent-jedi-green)] transition-all duration-300">
+                <h3 className="text-xs sm:text-sm md:text-base font-mono font-bold text-[var(--color-text-primary)] text-center relative z-10 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[var(--color-accent-jedi-blue)] group-hover:to-[var(--color-accent-jedi-green)] transition-all duration-300">
                   {skill.name}
                 </h3>
 
                 {/* Categoría */}
-                <span className="text-xs font-mono text-[var(--color-text-primary)]/60 mt-1 relative z-10">
+                <span className="text-[10px] sm:text-xs font-mono text-[var(--color-text-primary)]/60 mt-1 relative z-10">
                   {skill.category}
                 </span>
 
@@ -323,17 +323,19 @@ const SkillsSection = ({ isStandalonePage = false }) => {
 
       {/* Indicador de estadísticas */}
       <motion.div
-        className="mt-8 text-center"
+        className="mt-6 sm:mt-8 text-center"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5 }}
       >
-        <div className="inline-flex items-center gap-4 font-mono text-sm text-[var(--color-text-primary)]/60">
-          <span className="flex items-center gap-2">
-            <div className="w-2 h-2 bg-[var(--color-accent-jedi-green)] rounded-full animate-pulse" />
+        <div className="inline-flex items-center gap-2 sm:gap-4 font-mono text-xs sm:text-sm text-[var(--color-text-primary)]/60 flex-wrap justify-center">
+          <span className="flex items-center gap-1 sm:gap-2">
+            <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-[var(--color-accent-jedi-green)] rounded-full animate-pulse" />
             {skills.length} TECNOLOGÍAS ACTIVAS
           </span>
-          <span className="text-[var(--color-accent-jedi-blue)]">|</span>
+          <span className="text-[var(--color-accent-jedi-blue)] hidden sm:inline">
+            |
+          </span>
           <span>NIVEL: AVANZADO</span>
         </div>
       </motion.div>
