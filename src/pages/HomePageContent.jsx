@@ -5,53 +5,69 @@ import AboutTeaser from "../components/sections/AboutTeaser";
 import SkillsSection from "../components/sections/SkillsSection";
 import ProjectList from "../components/sections/ProjectList"; // Import the ProjectList component
 import Carousel from "../components/sections/CarouselImproved"; // Import the improved Carousel component
-
-const ctaSlides = [
-  {
-    title: "Listo para tu Próximo Proyecto?",
-    description:
-      "Hablemos sobre cómo puedo ayudarte a construir la solución perfecta.",
-    button: {
-      text: "Contactar Ahora",
-      as: "a",
-      href: "/contact",
-      className:
-        "border-[var(--color-accent-jedi-green)] text-[var(--color-accent-jedi-green)] hover:bg-[var(--color-accent-jedi-green)] hover:text-[var(--color-background)] shadow-[0_0_15px_var(--color-accent-jedi-green)] hover:shadow-[0_0_30px_var(--color-accent-jedi-green)]",
-    },
-    secondaryButton: {
-      text: "Ver Mi CV",
-      as: "button",
-      onClick: () => {
-        window.open(
-          "/hoja_brandon.pdf",
-          "_blank",
-          "width=800,height=900,scrollbars=yes,resizable=yes"
-        );
-      },
-      className:
-        "border-[var(--color-accent-jedi-blue)] text-[var(--color-accent-jedi-blue)] hover:bg-[var(--color-accent-jedi-blue)] hover:text-[var(--color-background)] shadow-[0_0_15px_var(--color-accent-jedi-blue)] hover:shadow-[0_0_30px_var(--color-accent-jedi-blue)]",
-    },
-  },
-  {
-    title: "Explora Mis Habilidades",
-    description:
-      "Descubre las tecnologías y herramientas que domino para tus proyectos.",
-    button: {
-      text: "Ver Habilidades",
-      as: "a",
-      href: "/skills", // Ahora apunta a la página de habilidades
-      className:
-        "border-[var(--color-accent-jedi-blue)] text-[var(--color-accent-jedi-blue)] hover:bg-[var(--color-accent-jedi-blue)] hover:text-[var(--color-background)] shadow-[0_0_15px_var(--color-accent-jedi-blue)] hover:shadow-[0_0_30px_var(--color-accent-jedi-blue)]",
-    },
-  },
-];
+import { openPDFSafely } from "../utils/pdfUtils";
+import { useNotifications } from "../contexts/NotificationContext";
 
 const HomePageContent = () => {
+  const notifications = useNotifications();
+
+  // Configurar meta tags
   usePageMeta({
     title: "Inicio",
     description:
       "Portafolio de Brandon Montealegre: proyectos destacados, habilidades y contacto profesional.",
   });
+
+  const ctaSlides = [
+    {
+      title: "Listo para tu Próximo Proyecto?",
+      description:
+        "Hablemos sobre cómo puedo ayudarte a construir la solución perfecta.",
+      button: {
+        text: "Contactar Ahora",
+        as: "a",
+        href: "/contact",
+        className:
+          "border-[var(--color-accent-jedi-green)] text-[var(--color-accent-jedi-green)] hover:bg-[var(--color-accent-jedi-green)] hover:text-[var(--color-background)] shadow-[0_0_15px_var(--color-accent-jedi-green)] hover:shadow-[0_0_30px_var(--color-accent-jedi-green)]",
+      },
+      secondaryButton: {
+        text: "Ver Mi CV",
+        as: "button",
+        onClick: () => {
+          console.info("[HomePageContent] Opening CV PDF");
+
+          openPDFSafely(
+            "/hoja_brandon.pdf",
+            "CV-Brandon-Desarrollador.pdf",
+            (error) => {
+              console.error("[HomePageContent] Error opening CV:", error);
+
+              // Usar sistema de notificaciones en lugar de alert
+              notifications.showError(
+                "No se pudo abrir el CV. Por favor, verifica tu conexión a internet.",
+                { duration: 6000 }
+              );
+            },
+            notifications // Pasar el sistema de notificaciones
+          );
+        },
+        className:
+          "border-[var(--color-accent-jedi-blue)] text-[var(--color-accent-jedi-blue)] hover:bg-[var(--color-accent-jedi-blue)] hover:text-[var(--color-background)] shadow-[0_0_15px_var(--color-accent-jedi-blue)] hover:shadow-[0_0_30px_var(--color-accent-jedi-blue)]",
+      },
+    },
+    {
+      title: "Explora Mis Habilidades",
+      description:
+        "Descubre las tecnologías y herramientas que domino para tus proyectos.",
+      button: {
+        text: "Ver Habilidades",
+        as: "a",
+        href: "/skills", // Ahora apunta a la página de habilidades
+        className:
+          "border-[var(--color-accent-jedi-blue)] text-[var(--color-accent-jedi-blue)] hover:bg-[var(--color-accent-jedi-blue)] hover:text-[var(--color-background)] shadow-[0_0_15px_var(--color-accent-jedi-blue)] hover:shadow-[0_0_30px_var(--color-accent-jedi-blue)]",
+      },
+    },
+  ];
 
   return (
     <>
