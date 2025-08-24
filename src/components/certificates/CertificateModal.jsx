@@ -9,7 +9,6 @@ import {
 } from "react-icons/fa";
 import { usePDF } from "../../hooks/usePDF";
 import Modal from "../ui/Modal";
-import Button from "../ui/Button";
 
 const CertificateModal = ({ certificate, isOpen, onClose }) => {
   const { processPDF, loading } = usePDF();
@@ -52,24 +51,30 @@ const CertificateModal = ({ certificate, isOpen, onClose }) => {
           </div>
 
           <div className="flex flex-col xs:flex-row gap-3 lg:gap-4">
-            <Button
+            <button
               onClick={handleViewFull}
               disabled={loading}
-              className="flex-1 flex items-center justify-center gap-2 text-xs sm:text-sm lg:text-base py-2.5 sm:py-3 px-4 bg-gradient-to-r from-[var(--color-accent-jedi-green)]/10 to-[var(--color-accent-jedi-green)]/5 hover:from-[var(--color-accent-jedi-green)]/20 hover:to-[var(--color-accent-jedi-green)]/10 border border-[var(--color-accent-jedi-green)]/40 hover:border-[var(--color-accent-jedi-green)]/60 rounded-lg transition-all duration-300 hover:shadow-[0_0_20px_-4px_rgba(0,255,159,0.4)] font-mono tracking-wide"
+              className="group relative overflow-hidden flex-1 flex items-center justify-center gap-2 text-xs sm:text-sm lg:text-base py-3 sm:py-3.5 px-4 bg-transparent border border-[var(--color-accent-jedi-green)] sm:border-2 text-[var(--color-accent-jedi-green)] rounded-lg hover:text-[var(--color-background)] transition-all duration-500 hover:bg-[var(--color-accent-jedi-green)] shadow-[0_0_15px_rgba(0,255,159,0.25)] hover:shadow-[0_0_25px_rgba(0,255,159,0.5)] font-mono tracking-wide disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              <FaExternalLinkAlt className="w-3 h-3 sm:w-3.5 sm:h-3.5 lg:w-4 lg:h-4" />
-              <span className="hidden xs:inline">Ver Completo</span>
-              <span className="xs:hidden">Ver</span>
-            </Button>
-            <Button
+              <FaExternalLinkAlt className="w-3 h-3 sm:w-3.5 sm:h-3.5 lg:w-4 lg:h-4 relative z-10" />
+              <span className="hidden xs:inline relative z-10">
+                VER COMPLETO
+              </span>
+              <span className="xs:hidden relative z-10">VER</span>
+              {/* Efecto de barrido holográfico */}
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+            </button>
+            <button
               onClick={handleDownload}
               disabled={loading}
-              className="flex-1 flex items-center justify-center gap-2 text-xs sm:text-sm lg:text-base py-2.5 sm:py-3 px-4 bg-gradient-to-r from-[var(--color-accent-jedi-blue)]/10 to-[var(--color-accent-jedi-blue)]/5 hover:from-[var(--color-accent-jedi-blue)]/20 hover:to-[var(--color-accent-jedi-blue)]/10 border border-[var(--color-accent-jedi-blue)]/40 hover:border-[var(--color-accent-jedi-blue)]/60 rounded-lg transition-all duration-300 hover:shadow-[0_0_20px_-4px_rgba(0,240,255,0.4)] font-mono tracking-wide"
+              className="group relative overflow-hidden flex-1 flex items-center justify-center gap-2 text-xs sm:text-sm lg:text-base py-3 sm:py-3.5 px-4 bg-transparent border border-[var(--color-accent-jedi-blue)] sm:border-2 text-[var(--color-accent-jedi-blue)] rounded-lg hover:text-[var(--color-background)] transition-all duration-500 hover:bg-[var(--color-accent-jedi-blue)] shadow-[0_0_15px_rgba(0,240,255,0.25)] hover:shadow-[0_0_25px_rgba(0,240,255,0.5)] font-mono tracking-wide disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              <FaDownload className="w-3 h-3 sm:w-3.5 sm:h-3.5 lg:w-4 lg:h-4" />
-              <span className="hidden xs:inline">Descargar</span>
-              <span className="xs:hidden">Download</span>
-            </Button>
+              <FaDownload className="w-3 h-3 sm:w-3.5 sm:h-3.5 lg:w-4 lg:h-4 relative z-10" />
+              <span className="hidden xs:inline relative z-10">DESCARGAR</span>
+              <span className="xs:hidden relative z-10">DOWNLOAD</span>
+              {/* Efecto de barrido holográfico */}
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+            </button>
           </div>
         </div>
 

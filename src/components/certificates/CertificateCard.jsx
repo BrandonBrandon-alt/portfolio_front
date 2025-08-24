@@ -38,7 +38,7 @@ const CATEGORY_STYLES = {
     badge: "bg-cyan-400/15 border-cyan-400/40",
   },
   Programming: {
-    accent: "#facc15",
+    accent: "#15fa20ff",
     ring: "ring-yellow-400/40",
     text: "text-yellow-400",
     badge: "bg-yellow-400/15 border-yellow-400/40",
@@ -80,7 +80,7 @@ const CertificateCard = ({ certificate, index, onSelect }) => {
       role="button"
       aria-label={`Ver certificado ${title}`}
       tabIndex={0}
-      className="group relative overflow-hidden rounded-xl border border-[var(--card-accent)]/30 bg-gradient-to-br from-[var(--card-accent)]/10 via-[var(--color-background)]/60 to-[var(--color-accent-jedi-blue)]/5 backdrop-blur-md cursor-pointer shadow-[0_0_0_0_rgba(0,0,0,0)] hover:shadow-[0_0_30px_-4px_var(--card-accent)] transition-all focus:outline-none focus:ring-2 focus:ring-[var(--card-accent)]/60 flex flex-col h-full min-h-[380px] sm:min-h-[420px] lg:min-h-[460px] max-h-[500px]"
+      className="group relative overflow-hidden rounded-xl border border-[var(--card-accent)]/30 bg-gradient-to-br from-[var(--card-accent)]/10 via-[var(--color-background)]/60 to-[var(--color-accent-jedi-blue)]/5 backdrop-blur-md cursor-pointer hover:shadow-lg transition-all focus:outline-none focus:ring-2 focus:ring-[var(--card-accent)]/60 flex flex-col h-full min-h-[380px] sm:min-h-[420px] lg:min-h-[460px] max-h-[500px]"
       style={{ "--card-accent": style.accent }}
       initial={{ opacity: 0, y: 40 }}
       animate={{ opacity: 1, y: 0 }}
@@ -104,27 +104,7 @@ const CertificateCard = ({ certificate, index, onSelect }) => {
       <span className="pointer-events-none absolute top-0 right-0 w-5 h-5 border-t border-r border-[var(--card-accent)]/60 rounded-tr" />
       <span className="pointer-events-none absolute bottom-0 left-0 w-5 h-5 border-b border-l border-[var(--card-accent)]/40 rounded-bl" />
       <span className="pointer-events-none absolute bottom-0 right-0 w-5 h-5 border-b border-r border-[var(--card-accent)]/40 rounded-br" />
-      {/* Subtle grid overlay (desktop) */}
-      <div
-        className="absolute inset-0 opacity-0 group-hover:opacity-[0.07] transition-opacity duration-700 hidden sm:block"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(255,255,255,0.08) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.08) 1px,transparent 1px)",
-          backgroundSize: "36px 36px",
-        }}
-      />
-      <div
-        className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-        style={{
-          background:
-            "linear-gradient(140deg,var(--card-accent)10%,rgba(255,255,255,0)60%)",
-          mixBlendMode: "overlay",
-        }}
-      />
-      {/* Hover scan line */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -inset-x-10 top-0 h-1/3 bg-gradient-to-b from-[var(--card-accent)]/25 via-transparent to-transparent opacity-0 group-hover:opacity-100 translate-y-[-60%] group-hover:translate-y-[220%] transition-all duration-[1400ms] ease-out skew-y-3" />
-      </div>
+
       <div className="relative h-32 sm:h-36 md:h-40 overflow-hidden">
         {image ? (
           <img
@@ -163,14 +143,6 @@ const CertificateCard = ({ certificate, index, onSelect }) => {
         </div>
       </div>
       <div className="p-3 sm:p-4 md:p-5 flex flex-col gap-3 sm:gap-4 relative min-h-0 flex-1">
-        {/* Inner glow pulse */}
-        <div
-          className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-xl"
-          style={{
-            background:
-              "radial-gradient(circle at 20% 15%, rgba(255,255,255,0.12), transparent 70%)",
-          }}
-        />
         <div className="space-y-1 sm:space-y-1.5 flex-shrink-0">
           <h3 className="relative text-sm sm:text-[15px] font-semibold leading-tight sm:leading-snug text-[var(--color-text-primary)] line-clamp-2 pr-2 sm:pr-4">
             <span className="relative z-10 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[var(--card-accent)] group-hover:to-[var(--color-accent-jedi-green)] transition-colors duration-500">
