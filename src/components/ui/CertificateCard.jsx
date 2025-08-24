@@ -5,8 +5,10 @@ import {
   FaCertificate,
   FaClock,
   FaGraduationCap,
+  FaDownload,
+  FaExternalLinkAlt,
 } from "react-icons/fa";
-import { openPDFSafely } from "../../utils/pdfUtils";
+import { handlePDF, isMobile } from "../../utils/pdfUtils";
 import { useNotifications } from "../../contexts/NotificationContext";
 
 const CertificateCard = ({ certificate, index }) => {
@@ -26,34 +28,63 @@ const CertificateCard = ({ certificate, index }) => {
 
   const notifications = useNotifications();
 
-  // Función para abrir el PDF de forma segura
+  // Manejo optimizado de PDF con mejor feedback
   const openPDF = () => {
-    if (pdfUrl) {
-      console.info(`[CertificateCard] Opening certificate PDF: ${title}`);
-
-      openPDFSafely(
-        pdfUrl,
-        `certificate-${title.replace(/\s+/g, "-").toLowerCase()}.pdf`,
-        (error) => {
-          console.error(
-            `[CertificateCard] Error opening certificate ${title}:`,
-            error
-          );
-
-          // Usar sistema de notificaciones en lugar de alert
-          notifications.showError(
-            `No se pudo abrir el certificado "${title}". Por favor, verifica tu conexión a internet.`,
-            { duration: 6000 }
-          );
-        },
-        notifications // Pasar el sistema de notificaciones
-      );
-    } else {
-      console.warn(
-        `[CertificateCard] No PDF URL provided for certificate: ${title}`
-      );
+    if (!pdfUrl) {
       notifications.showWarning(
         "Este certificado no tiene un archivo PDF disponible."
+      );
+      return;
+    }
+
+    console.info(`[CertificateCard] Opening certificate PDF: ${title}`);
+
+    // Usar la función optimizada que decide automáticamente entre abrir/descargar
+    const result = handlePDF(pdfUrl, {
+      filename: `${title.replace(/[^a-zA-Z0-9\s]/g, "_")}_certificate.pdf`,
+      preferDownload: isMobile(), // En móvil prefiere descarga
+      showFeedback: true,
+      onComplete: (result) => {
+        if (result.success) {
+          if (result.newTab) {
+            notifications.showSuccess(
+              `Certificado "${title}" abierto en nueva pestaña`,
+              { duration: 3000 }
+            );
+          } else if (
+            result.method === "directDownload" ||
+            result.method === "forcedDownload"
+          ) {
+            notifications.showSuccess(`Descargando certificado "${title}"...`, {
+              duration: 3000,
+            });
+          } else {
+            notifications.showInfo(`Abriendo "${title}" en esta pestaña...`, {
+              duration: 3000,
+            });
+          }
+        } else {
+          notifications.showError(
+            `No se pudo abrir el certificado "${title}". ${
+              result.error || "Intente nuevamente."
+            }`,
+            { duration: 5000 }
+          );
+        }
+      },
+      onError: (error) => {
+        console.error("[CertificateCard] PDF error:", error);
+        notifications.showError(
+          `Error al procesar el certificado: ${error.message}`,
+          { duration: 5000 }
+        );
+      },
+    });
+
+    // Log adicional para debugging
+    if (result.method && result.method !== "windowOpenDirect") {
+      console.info(
+        `[CertificateCard] PDF procesado con método: ${result.method}`
       );
     }
   };
@@ -108,6 +139,10 @@ const CertificateCard = ({ certificate, index }) => {
   };
 
   const levelInfo = levelConfig[level] || levelConfig.Intermediate;
+
+  // Determinar si mostrar icono de descarga o enlace externo
+  const shouldShowDownloadIcon =
+    isMobile() || pdfUrl?.startsWith("blob:") || pdfUrl?.startsWith("data:");
 
   return (
     <motion.div
@@ -249,12 +284,31 @@ const CertificateCard = ({ certificate, index }) => {
           {pdfUrl && (
             <motion.button
               onClick={openPDF}
-              className={`inline-flex items-center gap-2 text-xs font-mono px-3 py-1.5 rounded-lg border ${colors.border}/30 ${colors.text} hover:${colors.bg}/20 hover:${colors.border}/60 transition-all duration-300 cursor-pointer`}
+              className={`inline-flex items-center gap-2 text-xs font-mono px-3 py-1.5 rounded-lg border ${colors.border}/30 ${colors.text} hover:${colors.bg}/20 hover:${colors.border}/60 transition-all duration-300 cursor-pointer group/btn`}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              title={
+                shouldShowDownloadIcon
+                  ? "Descargar certificado"
+                  : "Abrir certificado"
+              }
             >
-              <span>VER CERTIFICADO</span>
-              <FaFilePdf className="w-3 h-3" />
+              <span className="hidden sm:inline">
+                {shouldShowDownloadIcon ? "DESCARGAR" : "VER CERTIFICADO"}
+              </span>
+              <span className="sm:hidden">
+                {shouldShowDownloadIcon ? "BAJAR" : "VER"}
+              </span>
+
+              {/* Icono dinámico según contexto */}
+              {shouldShowDownloadIcon ? (
+                <FaDownload className="w-3 h-3 group-hover/btn:animate-bounce" />
+              ) : (
+                <>
+                  <FaFilePdf className="w-3 h-3 sm:hidden" />
+                  <FaExternalLinkAlt className="w-3 h-3 hidden sm:inline group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
+                </>
+              )}
             </motion.button>
           )}
         </div>
