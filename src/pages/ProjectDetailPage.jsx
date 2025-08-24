@@ -7,6 +7,7 @@ import { breadcrumbSchema, projectSchema } from "../utils/structuredData";
 import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 import Button from "../components/ui/Button";
 import { FaGithub } from "react-icons/fa";
+import HolographicContainer from "../components/ui/HolographicContainer";
 
 const ProjectDetailPage = () => {
   const { id } = useParams();
@@ -97,11 +98,14 @@ const ProjectDetailPage = () => {
   }
 
   return (
-    <motion.div
-      className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12 relative"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
+    <HolographicContainer
+      maxWidth="7xl"
+      particleCount={12}
+      gridColumns={8}
+      showGrid={true}
+      showParticles={!reduceMotion}
+      cornerVariant="blue"
+      innerPadding="py-8 sm:py-10 md:py-12"
     >
       {/* Structured Data JSON-LD (Breadcrumb + Project) */}
       <script
@@ -120,6 +124,7 @@ const ProjectDetailPage = () => {
           ),
         }}
       />
+      
       {/* Breadcrumb navigation */}
       <nav
         className="mb-5 sm:mb-6 text-xs sm:text-sm font-mono text-[var(--color-text-primary)]/60 flex items-center flex-wrap gap-1 sm:gap-2"
@@ -146,27 +151,6 @@ const ProjectDetailPage = () => {
           {project.title}
         </span>
       </nav>
-      {/* Partículas de fondo (omitidas en reduce motion) */}
-      {!reduceMotion && (
-        <div className="fixed inset-0 overflow-hidden pointer-events-none">
-          {particlePositions.map((p, i) => (
-            <motion.div
-              key={i}
-              className="absolute w-1 h-1 bg-[var(--color-accent-jedi-green)] rounded-full opacity-30"
-              style={{ left: p.left, top: p.top }}
-              animate={{
-                y: [0, -20, 0],
-                opacity: [0.3, 0.7, 0.3],
-              }}
-              transition={{
-                duration: p.duration,
-                repeat: Infinity,
-                delay: p.delay,
-              }}
-            />
-          ))}
-        </div>
-      )}
 
       {/* Botón de regreso holográfico */}
       <motion.div
@@ -502,7 +486,7 @@ const ProjectDetailPage = () => {
         {/* Efecto de escaneo holográfico */}
         {/* Overlay de escaneo eliminado (global lo reemplaza) */}
       </motion.div>
-    </motion.div>
+    </HolographicContainer>
   );
 };
 
