@@ -2,8 +2,9 @@ import React from "react";
 import usePageMeta from "../hooks/usePageMeta";
 import { motion } from "framer-motion";
 import SkillsSection from "../components/sections/SkillsSection";
-import { containerVariants, itemVariants } from "../styles/animations.js";
+import { itemVariants } from "../styles/animations.js";
 import PageTitleBlock from "../components/ui/PageTitleBlock";
+import HolographicContainer from "../components/ui/HolographicContainer";
 
 const SkillsPage = () => {
   usePageMeta({
@@ -13,11 +14,14 @@ const SkillsPage = () => {
   });
 
   return (
-    <motion.div
-      variants={containerVariants}
-      initial="hidden"
-      animate="visible"
-      className="min-h-screen py-16 px-4 md:px-8 lg:px-16"
+    <HolographicContainer
+      maxWidth="6xl"
+      particleCount={18}
+      gridColumns={8}
+      showGrid={true}
+      showParticles={true}
+      cornerVariant="blue"
+      innerPadding="py-8 sm:py-12 md:py-16"
     >
       <PageTitleBlock
         title="MATRIZ DE COMPETENCIAS"
@@ -31,6 +35,8 @@ const SkillsPage = () => {
       <motion.section
         className="mb-10 text-center md:text-left max-w-4xl mx-auto"
         variants={itemVariants}
+        initial="hidden"
+        animate="visible"
       >
         <p className="text-lg leading-relaxed text-[var(--color-text-primary)] mb-4">
           Mi conjunto de habilidades es el resultado de un compromiso constante
@@ -47,8 +53,7 @@ const SkillsPage = () => {
       </motion.section>
 
       <SkillsSection isStandalonePage={true} />
-      {/* Puedes añadir más contenido específico de la página de habilidades aquí */}
-    </motion.div>
+    </HolographicContainer>
   );
 };
 

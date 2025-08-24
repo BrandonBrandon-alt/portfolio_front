@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import RevealProjectCard from "../components/ui/RevealProjectCard";
 import ProjectCardSkeleton from "../components/ui/ProjectCardSkeleton";
 import PageTitleBlock from "../components/ui/PageTitleBlock";
+import HolographicContainer from "../components/ui/HolographicContainer";
 
 const ProjectsPage = () => {
   const [projects, setProjects] = useState([]);
@@ -44,15 +45,14 @@ const ProjectsPage = () => {
   // Loading state with unified title block
   if (loading) {
     return (
-      <motion.section
-        id="proyectos"
-        className="page-wrapper"
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-        role="status"
-        aria-live="polite"
-        aria-busy="true"
+      <HolographicContainer
+        maxWidth="6xl"
+        particleCount={15}
+        gridColumns={8}
+        showGrid={true}
+        showParticles={true}
+        cornerVariant="green"
+        innerPadding="py-8 sm:py-12 md:py-16"
       >
         <PageTitleBlock
           as="h1"
@@ -71,17 +71,19 @@ const ProjectsPage = () => {
             <ProjectCardSkeleton key={index} />
           ))}
         </div>
-      </motion.section>
+      </HolographicContainer>
     );
   }
 
   return (
-    <motion.section
-      id="proyectos"
-      className="page-wrapper"
-      variants={containerVariants}
-      initial="hidden"
-      animate="visible"
+    <HolographicContainer
+      maxWidth="6xl"
+      particleCount={15}
+      gridColumns={8}
+      showGrid={true}
+      showParticles={true}
+      cornerVariant="green"
+      innerPadding="py-8 sm:py-12 md:py-16"
     >
       <PageTitleBlock
         as="h1"
@@ -114,7 +116,7 @@ const ProjectsPage = () => {
           No se encontraron proyectos registrados en este holocrón.
         </motion.p>
       )}
-    </motion.section>
+    </HolographicContainer>
   );
 };
 

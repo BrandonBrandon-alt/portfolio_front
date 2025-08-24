@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
 import "../styles/HeroTextAnimation.css";
 import { motion } from "framer-motion";
-import { containerVariants, itemVariants } from "../styles/animations";
+import { itemVariants } from "../styles/animations";
 import React from "react";
 import usePageMeta from "../hooks/usePageMeta";
 import PageTitleBlock from "../components/ui/PageTitleBlock";
+import HolographicContainer from "../components/ui/HolographicContainer";
 
 const AboutPage = () => {
   usePageMeta({
@@ -16,11 +17,14 @@ const AboutPage = () => {
   // (Removed stray heading test element)
 
   return (
-    <motion.div
-      className="page-wrapper"
-      variants={containerVariants}
-      initial="hidden"
-      animate="visible"
+    <HolographicContainer
+      maxWidth="6xl"
+      particleCount={20}
+      gridColumns={8}
+      showGrid={true}
+      showParticles={true}
+      cornerVariant="mixed"
+      innerPadding="py-8 sm:py-12 md:py-16"
     >
       <PageTitleBlock
         title="ACERCA DE MI"
@@ -36,6 +40,8 @@ const AboutPage = () => {
         className="flex flex-col lg:flex-row items-center gap-12 mb-20 panel-holo p-8 rounded-2xl relative overflow-hidden group"
         data-variant="blue"
         variants={itemVariants}
+        initial="hidden"
+        animate="visible"
       >
         {/* Badges */}
         <div className="absolute top-4 left-4 flex items-center gap-3 z-20">
@@ -290,7 +296,7 @@ const AboutPage = () => {
           </Link>
         </motion.div>
       </motion.section>
-    </motion.div>
+    </HolographicContainer>
   );
 };
 
