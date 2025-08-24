@@ -6,6 +6,8 @@ import {
   FaClock,
   FaGraduationCap,
 } from "react-icons/fa";
+import { openPDFSafely } from "../../utils/pdfUtils";
+import { useNotifications } from "../../contexts/NotificationContext";
 
 const CertificateCard = ({ certificate, index }) => {
   const {
@@ -22,13 +24,36 @@ const CertificateCard = ({ certificate, index }) => {
     description,
   } = certificate;
 
-  // Función para abrir el PDF
+  const notifications = useNotifications();
+
+  // Función para abrir el PDF de forma segura
   const openPDF = () => {
     if (pdfUrl) {
-      window.open(
+      console.info(`[CertificateCard] Opening certificate PDF: ${title}`);
+
+      openPDFSafely(
         pdfUrl,
-        "_blank",
-        "width=800,height=900,scrollbars=yes,resizable=yes"
+        `certificate-${title.replace(/\s+/g, "-").toLowerCase()}.pdf`,
+        (error) => {
+          console.error(
+            `[CertificateCard] Error opening certificate ${title}:`,
+            error
+          );
+
+          // Usar sistema de notificaciones en lugar de alert
+          notifications.showError(
+            `No se pudo abrir el certificado "${title}". Por favor, verifica tu conexión a internet.`,
+            { duration: 6000 }
+          );
+        },
+        notifications // Pasar el sistema de notificaciones
+      );
+    } else {
+      console.warn(
+        `[CertificateCard] No PDF URL provided for certificate: ${title}`
+      );
+      notifications.showWarning(
+        "Este certificado no tiene un archivo PDF disponible."
       );
     }
   };

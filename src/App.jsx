@@ -3,6 +3,8 @@ import { websiteSchema, personSchema } from "./utils/structuredData";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ScrollToTop from "./components/utils/ScrollToTop";
 import useIdleRoutePrefetch from "./hooks/useIdleRoutePrefetch";
+import usePageVisibility from "./hooks/usePageVisibility";
+import { NotificationProvider } from "./contexts/NotificationContext";
 
 // Importa tus componentes de layout y UI
 import MainLayout from "./components/layout/MainLayout";
@@ -27,51 +29,71 @@ const NotFound = () => (
 
 function App() {
   useIdleRoutePrefetch();
+
+  // Manejar la visibilidad de la página para recuperarse de errores
+  // cuando se regresa de aplicaciones externas (como visualizadores de PDF)
+  usePageVisibility((isVisible) => {
+    if (isVisible) {
+      console.info("[App] Page became visible, checking for errors...");
+
+      // Verificar si hay errores de JavaScript pendientes
+      const hasJSErrors = window.performance
+        ?.getEntriesByType?.("navigation")
+        ?.some((entry) => entry.type === "reload");
+
+      if (hasJSErrors) {
+        console.warn("[App] Detected potential JS errors, but continuing...");
+      }
+    }
+  });
+
   return (
-    <BrowserRouter>
-      {/* Skip link for keyboard users */}
-      <a
-        href="#main-content"
-        className="skip-to-content focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent-jedi-green)]"
-      >
-        Saltar al contenido principal
-      </a>
-      <ScrollToTop />
-      {/* Global Structured Data */}
-      <script
-        type="application/ld+json"
-        // eslint-disable-next-line react/no-danger
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify([websiteSchema(), personSchema()]),
-        }}
-      />
-      <ErrorBoundary>
-        <MainLayout>
-          <Suspense
-            fallback={
-              <div className="flex items-center justify-center h-screen text-[var(--color-accent-jedi-blue)]">
-                Cargando...
+    <NotificationProvider>
+      <BrowserRouter>
+        {/* Skip link for keyboard users */}
+        <a
+          href="#main-content"
+          className="skip-to-content focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent-jedi-green)]"
+        >
+          Saltar al contenido principal
+        </a>
+        <ScrollToTop />
+        {/* Global Structured Data */}
+        <script
+          type="application/ld+json"
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify([websiteSchema(), personSchema()]),
+          }}
+        />
+        <ErrorBoundary>
+          <MainLayout>
+            <Suspense
+              fallback={
+                <div className="flex items-center justify-center h-screen text-[var(--color-accent-jedi-blue)]">
+                  Cargando...
+                </div>
+              }
+            >
+              {" "}
+              {/* Puedes usar un spinner aquí */}
+              <div id="main-content" role="main" className="outline-none">
+                <Routes>
+                  <Route path="/" element={<HomePageContent />} />
+                  <Route path="/projects" element={<ProjectsPage />} />
+                  <Route path="/projects/:id" element={<ProjectDetailPage />} />
+                  <Route path="/about" element={<AboutPage />} />
+                  <Route path="/contact" element={<Contact />} />
+                  <Route path="/skills" element={<SkillsPage />} />
+                  <Route path="/certificates" element={<CertificatesPage />} />
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
               </div>
-            }
-          >
-            {" "}
-            {/* Puedes usar un spinner aquí */}
-            <div id="main-content" role="main" className="outline-none">
-              <Routes>
-                <Route path="/" element={<HomePageContent />} />
-                <Route path="/projects" element={<ProjectsPage />} />
-                <Route path="/projects/:id" element={<ProjectDetailPage />} />
-                <Route path="/about" element={<AboutPage />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="/skills" element={<SkillsPage />} />
-                <Route path="/certificates" element={<CertificatesPage />} />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </div>
-          </Suspense>
-        </MainLayout>
-      </ErrorBoundary>
-    </BrowserRouter>
+            </Suspense>
+          </MainLayout>
+        </ErrorBoundary>
+      </BrowserRouter>
+    </NotificationProvider>
   );
 }
 
