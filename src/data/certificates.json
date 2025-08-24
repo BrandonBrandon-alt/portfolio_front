@@ -20,7 +20,7 @@
     "category": "Programming",
     "level": "Intermediate",
     "duration": "122 horas",
-    "image": "/certificates/nodejs-ibm.jpg",
+    "image": "/certificates/java.png",
     "pdfUrl": "/certificates/java.pdf",
     "skills": ["Variables", "Listas", "Arraylist", "Ciclos", "Herencia","Funciones"],
     "description": "Curso completo de conceptos basicos y avanzados eseciales para el lenguaje"
