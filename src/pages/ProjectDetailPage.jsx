@@ -124,7 +124,7 @@ const ProjectDetailPage = () => {
           ),
         }}
       />
-      
+
       {/* Breadcrumb navigation */}
       <nav
         className="mb-5 sm:mb-6 text-xs sm:text-sm font-mono text-[var(--color-text-primary)]/60 flex items-center flex-wrap gap-1 sm:gap-2"

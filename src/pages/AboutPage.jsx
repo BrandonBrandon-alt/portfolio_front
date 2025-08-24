@@ -54,7 +54,7 @@ const AboutPage = () => {
         </div>
         <div className="absolute inset-0 opacity-40 pointer-events-none bg-[radial-gradient(circle_at_30%_30%,rgba(0,255,255,0.08),transparent_60%)]" />
         <div className="absolute -inset-px rounded-2xl bg-gradient-to-r from-[var(--color-accent-jedi-blue)]/20 via-transparent to-[var(--color-accent-jedi-green)]/20 mix-blend-screen" />
-        
+
         {/* Foto profesional */}
         <motion.div
           className="relative flex-shrink-0"
@@ -110,21 +110,30 @@ const AboutPage = () => {
             className="text-sm sm:text-base lg:text-lg leading-relaxed text-[var(--color-text-primary)] mb-2"
             variants={itemVariants}
           >
-            ¡Hola! Soy <strong className="text-[var(--color-accent-jedi-blue)]">Brandon Montealegre</strong>, un desarrollador{" "}
-            <strong className="text-[var(--color-accent-jedi-green)]">Full Stack</strong> apasionado por transformar ideas
-            creativas en soluciones digitales funcionales y estéticamente
-            atractivas. Mi objetivo es construir experiencias de usuario
-            intuitivas y de alto rendimiento que dejen una impresión duradera.
+            ¡Hola! Soy{" "}
+            <strong className="text-[var(--color-accent-jedi-blue)]">
+              Brandon Montealegre
+            </strong>
+            , un desarrollador{" "}
+            <strong className="text-[var(--color-accent-jedi-green)]">
+              Full Stack
+            </strong>{" "}
+            apasionado por transformar ideas creativas en soluciones digitales
+            funcionales y estéticamente atractivas. Mi objetivo es construir
+            experiencias de usuario intuitivas y de alto rendimiento que dejen
+            una impresión duradera.
           </motion.p>
           <motion.p
             className="text-sm sm:text-base lg:text-lg leading-relaxed text-[var(--color-text-primary)]/90"
             variants={itemVariants}
           >
             Con una sólida base en{" "}
-            <strong className="text-[var(--color-accent-jedi-blue)]">React, Node.js, Java y Spring Boot</strong>, me dedico a la
-            mejora continua y a la exploración de nuevas herramientas y
-            metodologías para mantenerme a la vanguardia en el dinámico mundo
-            del desarrollo web.
+            <strong className="text-[var(--color-accent-jedi-blue)]">
+              React, Node.js, Java y Spring Boot
+            </strong>
+            , me dedico a la mejora continua y a la exploración de nuevas
+            herramientas y metodologías para mantenerme a la vanguardia en el
+            dinámico mundo del desarrollo web.
           </motion.p>
         </motion.div>
       </motion.div>
@@ -175,11 +184,14 @@ const AboutPage = () => {
           variants={itemVariants}
         >
           Mi filosofía de trabajo se centra en la{" "}
-          <strong className="text-[var(--color-accent-jedi-green)]">calidad, la colaboración y la innovación</strong>. Creo
-          firmemente en escribir código limpio, modular y bien documentado que
-          sea fácil de mantener y escalar. La comunicación efectiva y el trabajo
-          en equipo son pilares fundamentales en cada proyecto en el que me
-          involucro, buscando siempre la mejor solución en conjunto.
+          <strong className="text-[var(--color-accent-jedi-green)]">
+            calidad, la colaboración y la innovación
+          </strong>
+          . Creo firmemente en escribir código limpio, modular y bien
+          documentado que sea fácil de mantener y escalar. La comunicación
+          efectiva y el trabajo en equipo son pilares fundamentales en cada
+          proyecto en el que me involucro, buscando siempre la mejor solución en
+          conjunto.
         </motion.p>
         <motion.p
           className="text-sm sm:text-base leading-relaxed text-[var(--color-text-primary)]/85"
@@ -285,14 +297,18 @@ const AboutPage = () => {
             to="/projects"
             className="group relative overflow-hidden inline-block font-mono font-bold py-3 px-6 sm:px-8 border-2 border-[var(--color-accent-jedi-blue)] text-[var(--color-accent-jedi-blue)] rounded-lg hover:text-[var(--color-background)] transition-all duration-500 bg-transparent hover:bg-[var(--color-accent-jedi-blue)] shadow-[0_0_15px_rgba(0,240,255,0.25)] hover:shadow-[0_0_30px_rgba(0,240,255,0.5)] w-full sm:w-auto text-center"
           >
-            <span className="relative z-10 tracking-wider text-sm sm:text-base">VER PROYECTOS</span>
+            <span className="relative z-10 tracking-wider text-sm sm:text-base">
+              VER PROYECTOS
+            </span>
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
           </Link>
           <Link
             to="/contact"
             className="group relative overflow-hidden inline-block font-mono font-bold py-3 px-6 sm:px-8 border-2 border-[var(--color-accent-jedi-green)] text-[var(--color-accent-jedi-green)] rounded-lg hover:text-[var(--color-background)] transition-all duration-500 bg-transparent hover:bg-[var(--color-accent-jedi-green)] shadow-[0_0_15px_rgba(0,255,159,0.25)] hover:shadow-[0_0_30px_rgba(0,255,159,0.5)] w-full sm:w-auto text-center"
           >
-            <span className="relative z-10 tracking-wider text-sm sm:text-base">CONTACTAR</span>
+            <span className="relative z-10 tracking-wider text-sm sm:text-base">
+              CONTACTAR
+            </span>
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
           </Link>
         </motion.div>
