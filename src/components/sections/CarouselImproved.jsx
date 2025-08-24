@@ -238,18 +238,26 @@ const Carousel = ({ slides }) => {
                           whileHover={{ scale: 1.05 }}
                           whileTap={{ scale: 0.95 }}
                         >
-                          <Button
-                            as={slide.secondaryButton.as || "button"}
-                            href={slide.secondaryButton.href}
-                            onClick={slide.secondaryButton.onClick}
-                            className="group relative overflow-hidden font-mono font-bold py-4 px-8 border-2 border-[var(--color-accent-jedi-green)] text-[var(--color-accent-jedi-green)] rounded-lg hover:text-[var(--color-background)] transition-all duration-500 bg-transparent hover:bg-[var(--color-accent-jedi-green)] shadow-[0_0_20px_rgba(0,255,159,0.3)] hover:shadow-[0_0_40px_rgba(0,255,159,0.6)]"
-                          >
-                            <span className="relative z-10">
-                              {slide.secondaryButton.text}
-                            </span>
-                            {/* Efecto de barrido */}
-                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-                          </Button>
+                          {slide.secondaryButton.component ? (
+                            <div className="group relative overflow-hidden font-mono font-bold py-0 px-0 rounded-lg">
+                              {/** Render custom component */}
+                              <slide.secondaryButton.component
+                                {...(slide.secondaryButton.props || {})}
+                              />
+                            </div>
+                          ) : (
+                            <Button
+                              as={slide.secondaryButton.as || "button"}
+                              href={slide.secondaryButton.href}
+                              onClick={slide.secondaryButton.onClick}
+                              className="group relative overflow-hidden font-mono font-bold py-4 px-8 border-2 border-[var(--color-accent-jedi-green)] text-[var(--color-accent-jedi-green)] rounded-lg hover:text-[var(--color-background)] transition-all duration-500 bg-transparent hover:bg-[var(--color-accent-jedi-green)] shadow-[0_0_20px_rgba(0,255,159,0.3)] hover:shadow-[0_0_40px_rgba(0,255,159,0.6)]"
+                            >
+                              <span className="relative z-10">
+                                {slide.secondaryButton.text}
+                              </span>
+                              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+                            </Button>
+                          )}
                         </motion.div>
                       )}
                     </motion.div>
