@@ -10,7 +10,8 @@ import {
   FaGithub,
   FaGlobe,
 } from "react-icons/fa";
-import { containerVariants, itemVariants } from "../styles/animations";
+import { itemVariants } from "../styles/animations";
+import HolographicContainer from "../components/ui/HolographicContainer";
 
 const channels = [
   {
@@ -59,15 +60,21 @@ const ContactOptionsPage = () => {
   });
 
   return (
-    <motion.div
-      className="page-wrapper flex flex-col items-center"
-      variants={containerVariants}
-      initial="hidden"
-      animate="visible"
+    <HolographicContainer
+      maxWidth="6xl"
+      particleCount={16}
+      gridColumns={8}
+      showGrid={true}
+      showParticles={true}
+      cornerVariant="blue"
+      innerPadding="py-8 sm:py-12 md:py-16"
+      className="flex flex-col items-center"
     >
       {/* Encabezado */}
       <motion.header
         variants={itemVariants}
+        initial="hidden"
+        animate="visible"
         className="w-full max-w-5xl mb-24 relative"
       >
         <div className="text-center mb-8">
@@ -96,12 +103,24 @@ const ContactOptionsPage = () => {
       </motion.header>
 
       {/* Formulario principal */}
-      <motion.div variants={itemVariants} className="w-full">
+      <motion.div
+        variants={itemVariants}
+        initial="hidden"
+        animate="visible"
+        transition={{ delay: 0.2 }}
+        className="w-full"
+      >
         <ContactFormSection />
       </motion.div>
 
       {/* Separador escaneo */}
-      <motion.div variants={itemVariants} className="w-full max-w-4xl my-24">
+      <motion.div
+        variants={itemVariants}
+        initial="hidden"
+        animate="visible"
+        transition={{ delay: 0.4 }}
+        className="w-full max-w-4xl my-24"
+      >
         <div className="relative h-px bg-gradient-to-r from-transparent via-[var(--color-accent-jedi-blue)] to-transparent overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-[scanSlide_3.2s_linear_infinite]" />
         </div>
@@ -110,6 +129,9 @@ const ContactOptionsPage = () => {
       {/* Canales alternativos */}
       <motion.section
         variants={itemVariants}
+        initial="hidden"
+        animate="visible"
+        transition={{ delay: 0.6 }}
         className="w-full max-w-6xl mb-24"
         aria-labelledby="alt-channels-title"
       >
@@ -133,7 +155,7 @@ const ContactOptionsPage = () => {
           [ FIN CANALES ]
         </div>
       </motion.section>
-    </motion.div>
+    </HolographicContainer>
   );
 };
 
