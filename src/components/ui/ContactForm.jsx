@@ -17,92 +17,128 @@ const ContactForm = () => {
   const debounceRef = useRef(null);
   const firstErrorRef = useRef(null);
 
+  // Limpiar timeout al desmontar el componente
+  useEffect(() => {
+    return () => {
+      if (debounceRef.current) {
+        clearTimeout(debounceRef.current);
+      }
+    };
+  }, []);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({ ...prevData, [name]: value }));
+    
+    // Actualizar formData
+    const updatedFormData = { ...formData, [name]: value };
+    setFormData(updatedFormData);
     setTouched((prev) => ({ ...prev, [name]: true }));
     setSubmitted(false);
+    
+    // Limpiar timeout anterior si existe
     if (debounceRef.current) clearTimeout(debounceRef.current);
+    
+    // Validación en tiempo real con debounce usando los datos actualizados
     debounceRef.current = setTimeout(() => {
-      // live validation solo de ese campo
-      validateForm({ field: name });
+      validateForm({ field: name, data: updatedFormData });
     }, 300);
   };
 
-  const validateForm = ({ field } = {}) => {
-    let newErrors = { ...errors };
-    let isValid = true;
+  const validateForm = ({ field, data } = {}) => {
+    // Usar los datos pasados como parámetro o el estado actual
+    const dataToValidate = data || formData;
+    let newErrors = {};
+    let currentFieldValid = true;
 
     const checkName = () => {
       const nameRegex = /^[a-zA-Z\s]+$/;
-      if (!formData.name.trim()) {
+      if (!dataToValidate.name.trim()) {
         newErrors.name = "El nombre es requerido.";
-        isValid = false;
-      } else if (!nameRegex.test(formData.name)) {
+        currentFieldValid = false;
+      } else if (!nameRegex.test(dataToValidate.name)) {
         newErrors.name = "El nombre solo puede contener letras y espacios.";
-        isValid = false;
-      } else {
-        delete newErrors.name;
+        currentFieldValid = false;
       }
     };
 
     const checkEmail = () => {
       const emailRegex = /^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,6}$/;
-      if (!formData.email.trim()) {
+      if (!dataToValidate.email.trim()) {
         newErrors.email = "El correo electrónico es requerido.";
-        isValid = false;
-      } else if (!emailRegex.test(formData.email)) {
+        currentFieldValid = false;
+      } else if (!emailRegex.test(dataToValidate.email)) {
         newErrors.email = "Formato de correo electrónico inválido.";
-        isValid = false;
-      } else {
-        delete newErrors.email;
+        currentFieldValid = false;
       }
     };
 
     const checkMessage = () => {
-      if (!formData.message.trim()) {
+      if (!dataToValidate.message.trim()) {
         newErrors.message = "El mensaje es requerido.";
-        isValid = false;
-      } else if (formData.message.length < 10) {
+        currentFieldValid = false;
+      } else if (dataToValidate.message.length < 10) {
         newErrors.message = "El mensaje debe tener al menos 10 caracteres.";
-        isValid = false;
-      } else {
-        delete newErrors.message;
+        currentFieldValid = false;
       }
     };
 
+    // Si estamos validando un campo específico
     if (field) {
-      if (field === "name") checkName();
-      if (field === "email") checkEmail();
-      if (field === "message") checkMessage();
+      // Mantener errores existentes de otros campos
+      newErrors = { ...errors };
+      
+      if (field === "name") {
+        delete newErrors.name; // Limpiar error anterior del campo
+        checkName();
+      }
+      if (field === "email") {
+        delete newErrors.email; // Limpiar error anterior del campo
+        checkEmail();
+      }
+      if (field === "message") {
+        delete newErrors.message; // Limpiar error anterior del campo
+        checkMessage();
+      }
+      
       setErrors(newErrors);
-      return Object.keys(newErrors).length === 0;
+      return currentFieldValid;
     }
 
+    // Validación completa del formulario
     checkName();
     checkEmail();
     checkMessage();
 
+    // Verificar si hay errores en cualquier campo
+    const isValid = Object.keys(newErrors).length === 0;
     setErrors(newErrors);
     return isValid;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setSubmitted(false);
 
-    if (!validateForm()) {
+    // Validar todo el formulario
+    const isFormValid = validateForm();
+    
+    if (!isFormValid) {
       toast.error("Por favor, corrige los errores en el formulario.");
-      // focus primer error
-      const order = ["name", "email", "message"];
-      for (const f of order) {
-        if (errors[f] || !formData[f].trim()) {
-          const el = document.getElementById(f);
-          if (el) {
-            el.focus();
-            break;
+      
+      // Enfocar en el primer campo con error después de un pequeño delay
+      setTimeout(() => {
+        const order = ["name", "email", "message"];
+        for (const fieldName of order) {
+          if (errors[fieldName]) {
+            const el = document.getElementById(fieldName);
+            if (el) {
+              el.focus();
+              el.scrollIntoView({ behavior: "smooth", block: "center" });
+              break;
+            }
           }
         }
-      }
+      }, 100);
       return;
     }
 
