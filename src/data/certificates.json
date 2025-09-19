@@ -24,6 +24,19 @@
     "pdfUrl": "/certificates/java.pdf",
     "skills": ["Variables", "Listas", "Arraylist", "Ciclos", "Herencia","Funciones"],
     "description": "Curso completo de conceptos basicos y avanzados eseciales para el lenguaje"
+  },
+  {
+    "id": 3,
+    "title": "Full Stack Empresarial con Spring Boot y Angular",
+    "provider": "DEV SENIOR",
+    "date": "2025",
+    "category": "Programming",
+    "level": "Intermediate",
+    "duration": "30 horas",
+    "image": "/certificates/angular.png",
+    "pdfUrl": "/certificates/angular.pdf",
+    "skills": ["Spring Boot", "Angular", "APIs", "Postman", "Git", "MVC"],
+    "description": "Curso completo de conceptos basicos y avanzados para los frameworks Angular y Spring Boot."
   }
   
 ]
