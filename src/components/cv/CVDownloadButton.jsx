@@ -39,7 +39,7 @@ const CVDownloadButton = ({
         {device.isMobile ? "Descargar CV" : "Ver Curriculum"}
       </span>
       <span className="sm:hidden">
-        {device.isMobile ? "Descargar" : "Ver CV"}
+        {device.isMobile ? "Descargar CV" : "Ver CV"}
       </span>
       <FaFilePdf className="w-4 h-4 opacity-70" />
     </Button>

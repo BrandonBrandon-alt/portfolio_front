@@ -297,6 +297,7 @@ const Hero = () => {
           </div>
         </motion.div>
 
+
         {/* Descripción */}
         <motion.p
           className="text-base sm:text-lg md:text-xl font-sans text-[var(--color-text-primary)]/80 mb-10 md:mb-12 max-w-3xl md:max-w-4xl mx-auto leading-relaxed px-1"

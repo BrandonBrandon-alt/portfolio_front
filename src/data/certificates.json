@@ -34,9 +34,8 @@
     "level": "Intermediate",
     "duration": "30 horas",
     "image": "/certificates/angular.png",
-    "pdfUrl": "/certificates/angular.pdf",
+    "pdfUrl": "/certificates/CertificadoAngular.pdf",
     "skills": ["Spring Boot", "Angular", "APIs", "Postman", "Git", "MVC"],
     "description": "Curso completo de conceptos basicos y avanzados para los frameworks Angular y Spring Boot."
   }
-  
 ]

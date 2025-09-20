@@ -1,5 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import Button from "../ui/Button";
 import {
   SiAxios,
   SiCypress,
@@ -22,6 +24,8 @@ import {
   SiTailwindcss,
   SiVite,
   SiVitest,
+  SiExpress,
+  SiNextdotjs,
 } from "react-icons/si";
 import {
   FaAngular,
@@ -33,9 +37,11 @@ import {
   FaNodeJs,
   FaPython,
   FaReact,
+  FaHtml5,
 } from "react-icons/fa";
 
-const skills = [
+const allSkills = [
+  { name: "HTML", icon: FaHtml5, category: "Frontend" },
   { name: "React", icon: FaReact, category: "Frontend" },
   { name: "Node.js", icon: FaNodeJs, category: "Backend" },
   { name: "Python", icon: FaPython, category: "Backend" },
@@ -66,6 +72,25 @@ const skills = [
   { name: "Axios", icon: SiAxios, category: "Frontend" },
   { name: "CSS", icon: FaCss3, category: "Frontend" },
   { name: "SonarQube", icon: SiSonarqube, category: "Tools" },
+];
+
+const teaserSkills = [
+  { name: "JavaScript", icon: SiJavascript, category: "Frontend" },
+  { name: "HTML", icon: FaHtml5, category: "Frontend" },
+  { name: "CSS", icon: FaCss3, category: "Frontend" },
+  { name: "React", icon: FaReact, category: "Frontend" },
+  { name: "Next.js", icon: SiNextdotjs, category: "Frontend" },
+  { name: "Angular", icon: FaAngular, category: "Frontend" },
+  { name: "Tailwind CSS", icon: SiTailwindcss, category: "Frontend" },
+  { name: "Node.js", icon: FaNodeJs, category: "Backend" },
+  { name: "Express", icon: SiExpress, category: "Backend" },
+  { name: "Java", icon: FaJava, category: "Backend" },
+  { name: "Spring Boot", icon: SiSpringboot, category: "Backend" },
+  { name: "Python", icon: FaPython, category: "Backend" },
+  { name: "PostgreSQL", icon: SiPostgresql, category: "Database" },
+  { name: "MongoDB", icon: SiMongodb, category: "Database" },
+  { name: "Docker", icon: FaDocker, category: "DevOps" },
+  { name: "Git", icon: FaGitAlt, category: "Tools" },
 ];
 
 // Colores oficiales aproximados de cada tecnología
@@ -100,9 +125,13 @@ const brandColors = {
   Axios: "#5A29E4",
   CSS: "#264DE4",
   SonarQube: "#4E9BCD",
+  "Next.js": "#1a1a1a",
+  Express: "#68A063",
+  HTML: "#E34F26",
 };
 
-const SkillsSection = ({ isStandalonePage = false }) => {
+const SkillsSection = ({ isTeaser = false, isStandalonePage = false }) => {
+  const skillsToShow = isTeaser ? teaserSkills : allSkills;
   const sectionClasses = isStandalonePage
     ? "py-16 sm:py-20 px-4 sm:px-6 container mx-auto text-center relative"
     : "py-16 sm:py-20 px-4 sm:px-6 container mx-auto text-center relative";
@@ -189,7 +218,7 @@ const SkillsSection = ({ isStandalonePage = false }) => {
 
         {/* Grid de habilidades */}
         <div className="relative z-10 p-4 sm:p-6 md:p-8 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-4 md:gap-6 max-h-[500px] sm:max-h-[600px] overflow-y-auto">
-          {skills.map((skill, index) => {
+          {skillsToShow.map((skill, index) => {
             const IconComponent = skill.icon;
             const brand = brandColors[skill.name];
             const fallbackBlue = index % 2 === 0; // mantiene estética si no hay brand
@@ -321,6 +350,25 @@ const SkillsSection = ({ isStandalonePage = false }) => {
         {/* Overlay interno eliminado (global cubre el efecto) */}
       </motion.div>
 
+      {isTeaser && (
+        <motion.div
+          className="mt-10 flex justify-center"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.2 }}
+        >
+          <Link to="/skills">
+            <Button
+              className="group relative inline-flex items-center gap-3 font-mono font-bold tracking-wider text-base bg-[linear-gradient(120deg,rgba(0,240,255,0.08),rgba(0,255,159,0.08))] hover:shadow-[0_0_30px_-6px_rgba(0,255,159,0.5)] hover:border-[var(--color-accent-jedi-green)]/60 overflow-hidden"
+              aria-label="Ver todas las habilidades"
+            >
+              <span className="relative z-10">VER MATRIZ COMPLETA</span>
+              <span className="absolute inset-0 -translate-x-full skew-x-[-20deg] bg-gradient-to-r from-transparent via-white/25 to-transparent group-hover:translate-x-full transition-transform duration-[1100ms]" />
+            </Button>
+          </Link>
+        </motion.div>
+      )}
+
       {/* Indicador de estadísticas */}
       <motion.div
         className="mt-6 sm:mt-8 text-center"
@@ -331,7 +379,7 @@ const SkillsSection = ({ isStandalonePage = false }) => {
         <div className="inline-flex items-center gap-2 sm:gap-4 font-mono text-xs sm:text-sm text-[var(--color-text-primary)]/60 flex-wrap justify-center">
           <span className="flex items-center gap-1 sm:gap-2">
             <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-[var(--color-accent-jedi-green)] rounded-full animate-pulse" />
-            {skills.length} TECNOLOGÍAS ACTIVAS
+            {skillsToShow.length} TECNOLOGÍAS ACTIVAS
           </span>
           <span className="text-[var(--color-accent-jedi-blue)] hidden sm:inline">
             |

@@ -61,13 +61,13 @@ const HomePageContent = () => {
         <AboutTeaser />
       </div>
       <div className="py-16">
-        <Carousel slides={ctaSlides} />
-      </div>
-      <div className="py-16">
-        <SkillsSection />
+        <SkillsSection isTeaser={true} />
       </div>
       <div className="py-16">
         <ProjectList />
+      </div>
+      <div className="py-16">
+        <Carousel slides={ctaSlides} />
       </div>
     </>
   );
