@@ -42,14 +42,7 @@ const channels = [
     icon: <FaGithub />,
     tone: "#ffffff",
     description: "Código fuente, contribuciones y proyectos activos.",
-  },
-  {
-    label: "Portafolio",
-    href: "/projects",
-    icon: <FaGlobe />,
-    tone: "#00f0ff",
-    description: "Explora más trabajos y casos de estudio en detalle.",
-  },
+  }
 ];
 
 const ContactOptionsPage = () => {

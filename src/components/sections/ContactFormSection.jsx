@@ -44,7 +44,7 @@ const ContactFormSection = () => {
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.9, duration: 0.6, ease: "easeOut" }}
       >
-        <div className="bg-[var(--color-background)]/40 backdrop-blur-md rounded-xl sm:rounded-2xl border border-white/10 p-6 sm:p-8 md:p-10 shadow-[0_0_20px_-4px_rgba(0,255,159,0.15)]">
+        
           <div className="flex items-center justify-between mb-6 sm:mb-8">
             <span className="text-[10px] sm:text-xs font-mono tracking-wider text-[var(--color-accent-jedi-green)] bg-[var(--color-accent-jedi-green)]/10 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full border border-[var(--color-accent-jedi-green)]/30">
               FORM_CHANNEL
@@ -54,7 +54,7 @@ const ContactFormSection = () => {
             </span>
           </div>
           <ContactForm />
-        </div>
+       
       </motion.div>
 
       {/* Indicador inferior */}
