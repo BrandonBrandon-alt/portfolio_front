@@ -80,6 +80,36 @@
   },
   {
     "id": 3,
+    "title": "Analizador Léxico para TypeScript",
+    "description": "Analizador léxico TypeScript en Python con interfaz gráfica educativa y alta precisión.",
+    "imageUrl": "/images/project-ecommerce.jpg",
+    "technologies": [
+      "Python",
+      "Tkinter",
+      "Pytest"
+    ],
+    "myRole": "Desarrollador Principal",
+    "teamSize": "1 desarrollador (proyecto personal)",
+    "duration": "1 meses",
+    "myContribution": [
+      "Diseño e implementación completa del algoritmo de análisis léxico",
+      "Desarrollo de interfaz gráfica con Tkinter para visualización",
+      "Implementación de reconocimiento de tokens TypeScript",
+      "Testing exhaustivo con Pytest",
+      "Documentación técnica completa"
+    ],
+    "challenges": "Implementación de algoritmos de reconocimiento de patrones complejos, manejo eficiente de archivos grandes de código, y creación de interfaz intuitiva para visualización de tokens",
+    "results": [
+      "100% tokens estándar",
+      "Visualización tiempo real",
+      "Arquitectura extensible",
+      "95% cobertura tests"
+    ],
+    "projectType": "Personal - Académico",
+    "githubUrl": "https://github.com/Twolifelaw/TLF_proyecto.git"
+  },
+  {
+    "id": 4,
     "title": "Exami",
     "description": "Gestión de exámenes: generación dinámica, banco preguntas, scoring y analíticas (React + Spring Boot + Oracle).",
     "imageUrl": "/exami.png",
@@ -117,35 +147,5 @@
     "projectType": "Universitario - Colaborativo",
     "githubUrl": "https://github.com/CamiloCuenca/Exami.git",
     "frontendUrl": "https://github.com/CamiloCuenca/exami-front.git"
-  },
-  {
-    "id": 4,
-    "title": "Analizador Léxico para TypeScript",
-    "description": "Analizador léxico TypeScript en Python con interfaz gráfica educativa y alta precisión.",
-    "imageUrl": "/images/project-ecommerce.jpg",
-    "technologies": [
-      "Python",
-      "Tkinter",
-      "Pytest"
-    ],
-    "myRole": "Desarrollador Principal",
-    "teamSize": "1 desarrollador (proyecto personal)",
-    "duration": "1 meses",
-    "myContribution": [
-      "Diseño e implementación completa del algoritmo de análisis léxico",
-      "Desarrollo de interfaz gráfica con Tkinter para visualización",
-      "Implementación de reconocimiento de tokens TypeScript",
-      "Testing exhaustivo con Pytest",
-      "Documentación técnica completa"
-    ],
-    "challenges": "Implementación de algoritmos de reconocimiento de patrones complejos, manejo eficiente de archivos grandes de código, y creación de interfaz intuitiva para visualización de tokens",
-    "results": [
-      "100% tokens estándar",
-      "Visualización tiempo real",
-      "Arquitectura extensible",
-      "95% cobertura tests"
-    ],
-    "projectType": "Personal - Académico",
-    "githubUrl": "https://github.com/Twolifelaw/TLF_proyecto.git"
   }
 ]
