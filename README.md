@@ -1,88 +1,88 @@
-# Portfolio Web
+# Portafolio Web
 
-A modern, interactive portfolio website built with React, Three.js, and Tailwind CSS. This project showcases a dynamic user interface with 3D elements, smooth animations, and a responsive design.
+Un sitio web de portafolio moderno e interactivo construido con React, Three.js y Tailwind CSS. Este proyecto muestra una interfaz de usuario dinámica con elementos 3D, animaciones fluidas y un diseño totalmente responsivo.
 
-## Features
+## Características
 
--   **3D Graphics**: Immersive 3D elements powered by [Three.js](https://threejs.org/) and [React Three Fiber](https://docs.pmnd.rs/react-three-fiber).
--   **Animations**: Smooth transitions and gesture-based interactions using [Framer Motion](https://www.framer.com/motion/).
--   **Responsive Design**: Fully responsive layout built with [Tailwind CSS](https://tailwindcss.com/).
--   **Interactive Backgrounds**: Particle effects using [tsparticles](https://particles.js.org/).
--   **Contact Form**: Integrated with [EmailJS](https://www.emailjs.com/) for direct messaging.
--   **Modern Tooling**: Fast development experience with [Vite](https://vitejs.dev/).
+-   **Gráficos 3D**: Elementos 3D inmersivos impulsados por [Three.js](https://threejs.org/) y [React Three Fiber](https://docs.pmnd.rs/react-three-fiber).
+-   **Animaciones**: Transiciones suaves e interacciones basadas en gestos usando [Framer Motion](https://www.framer.com/motion/).
+-   **Diseño Responsivo**: Diseño totalmente adaptable construido con [Tailwind CSS](https://tailwindcss.com/).
+-   **Fondos Interactivos**: Efectos de partículas usando [tsparticles](https://particles.js.org/).
+-   **Formulario de Contacto**: Integrado con [EmailJS](https://www.emailjs.com/) para mensajería directa.
+-   **Herramientas Modernas**: Experiencia de desarrollo rápida con [Vite](https://vitejs.dev/).
 
-## Tech Stack
+## Tecnologías
 
--   **Core**: [React](https://react.dev/), [Vite](https://vitejs.dev/)
--   **Styling**: [Tailwind CSS](https://tailwindcss.com/), [PostCSS](https://postcss.org/)
--   **3D & Graphics**: Three.js, React Three Fiber, React Three Drei
--   **Animations**: Framer Motion
--   **Routing**: [React Router](https://reactrouter.com/)
--   **Icons**: [React Icons](https://react-icons.github.io/react-icons/)
--   **Utilities**: Axios, React Toastify
+-   **Núcleo**: [React](https://react.dev/), [Vite](https://vitejs.dev/)
+-   **Estilos**: [Tailwind CSS](https://tailwindcss.com/), [PostCSS](https://postcss.org/)
+-   **3D y Gráficos**: Three.js, React Three Fiber, React Three Drei
+-   **Animaciones**: Framer Motion
+-   **Enrutamiento**: [React Router](https://reactrouter.com/)
+-   **Iconos**: [React Icons](https://react-icons.github.io/react-icons/)
+-   **Utilidades**: Axios, React Toastify
 
-## Getting Started
+## Comenzando
 
-Follow these steps to set up the project locally.
+Sigue estos pasos para configurar el proyecto localmente.
 
-### Prerequisites
+### Requisitos Previos
 
--   Node.js (v18 or higher recommended)
--   npm or yarn
+-   Node.js (v18 o superior recomendado)
+-   npm o yarn
 
-### Installation
+### Instalación
 
-1.  **Clone the repository**
+1.  **Clonar el repositorio**
 
     ```bash
     git clone https://github.com/BrandonBrandon-alt/portfolio_front.git
     cd portfolio_front
     ```
 
-2.  **Install dependencies**
+2.  **Instalar dependencias**
 
     ```bash
     npm install
     ```
 
-3.  **Set up Environment Variables**
+3.  **Configurar Variables de Entorno**
 
-    Create a `.env` file in the root directory and add your necessary environment variables (e.g., EmailJS keys).
+    Crea un archivo `.env` en el directorio raíz y agrega tus variables de entorno necesarias (por ejemplo, claves de EmailJS).
 
     ```env
-    VITE_EMAILJS_SERVICE_ID=your_service_id
-    VITE_EMAILJS_TEMPLATE_ID=your_template_id
-    VITE_EMAILJS_PUBLIC_KEY=your_public_key
+    VITE_EMAILJS_SERVICE_ID=tu_service_id
+    VITE_EMAILJS_TEMPLATE_ID=tu_template_id
+    VITE_EMAILJS_PUBLIC_KEY=tu_public_key
     ```
 
-4.  **Run the development server**
+4.  **Iniciar el servidor de desarrollo**
 
     ```bash
     npm run dev
     ```
 
-    The application will be available at `http://localhost:5173`.
+    La aplicación estará disponible en `http://localhost:5173`.
 
 ## Scripts
 
--   `npm run dev`: Starts the development server.
--   `npm run build`: Builds the app for production.
--   `npm run lint`: Runs ESLint to check for code quality issues.
--   `npm run preview`: Locally preview the production build.
+-   `npm run dev`: Inicia el servidor de desarrollo.
+-   `npm run build`: Construye la aplicación para producción.
+-   `npm run lint`: Ejecuta ESLint para verificar la calidad del código.
+-   `npm run preview`: Previsualiza localmente la compilación de producción.
 
-## Project Structure
+## Estructura del Proyecto
 
 ```
 src/
-├── assets/         # Static assets (images, models)
-├── components/     # Reusable UI components
-├── pages/          # Application pages/routes
-├── styles/         # Global styles and Tailwind config
-├── utils/          # Helper functions and hooks
-├── App.jsx         # Main application component
-└── main.jsx        # Entry point
+├── assets/         # Activos estáticos (imágenes, modelos)
+├── components/     # Componentes de UI reutilizables
+├── pages/          # Páginas/rutas de la aplicación
+├── styles/         # Estilos globales y configuración de Tailwind
+├── utils/          # Funciones auxiliares y hooks
+├── App.jsx         # Componente principal de la aplicación
+└── main.jsx        # Punto de entrada
 ```
 
-## License
+## Licencia
 
-This project is open source and available under the [MIT License](LICENSE).
+Este proyecto es de código abierto y está disponible bajo la [Licencia MIT](LICENSE).
