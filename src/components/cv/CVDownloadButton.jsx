@@ -7,8 +7,8 @@ import Button from "../ui/Button";
 
 const CVDownloadButton = ({
   // Ajustado: el PDF real existente es /hoja_brandon.pdf en public/
-  cvUrl = "/hoja_brandon.pdf",
-  filename = "Brandon_Montealegre_CV.pdf",
+  cvUrl = "hojaVida.pdf",
+  filename = "hojaVida.pdf",
   className = "",
 }) => {
   const { processPDF, loading } = usePDF();
